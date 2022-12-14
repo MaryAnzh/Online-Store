@@ -1,0 +1,9 @@
+@import './utils/reset.scss';
+@import './utils/variable';
+
+body {
+    background: $mainBackground;
+    h2 {
+        color: white;
+    }
+}
