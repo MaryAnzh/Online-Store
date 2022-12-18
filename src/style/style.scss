@@ -3,11 +3,11 @@
 
 
 body {
-    background: $mainBackground;
+  background: $main-background;
 
-    h2 {
-        color: white;
-    }
+  h2 {
+    color: white;
+  }
 }
 
 @import './common/nav.scss';
