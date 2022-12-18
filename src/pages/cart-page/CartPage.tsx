@@ -1,5 +1,5 @@
 import React from 'react'
-import './CartPage.scss'
+import styles from './CartPage.scss'
 
 
 export const CartPage = (): JSX.Element => (

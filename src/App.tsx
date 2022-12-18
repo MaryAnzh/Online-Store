@@ -1,5 +1,5 @@
 import React from 'react'
-import './Apps.scss'
+import styles from './Apps.scss'
 import {
     BrowserRouter as Router,
     Routes,
@@ -7,12 +7,13 @@ import {
     Link,
     RouteMatch,
     useParams
-} from 'react-router-dom';
-import { ItemsPage } from './pages/items-page/ItemsPage';
-import { CartPage } from './pages/cart-page/CartPage';
-import { NotFoundPage } from './pages/not-found-page/NotFoundPage';
-import { Header } from './containers/header/Header';
-import { Footer } from './containers/footer/Footer';
+} from 'react-router-dom'
+import {ItemsPage} from './pages/items-page/ItemsPage'
+import {CartPage} from './pages/cart-page/CartPage'
+import {NotFoundPage} from './pages/not-found-page/NotFoundPage'
+import {Header} from './containers/header/Header'
+import {Footer} from './containers/footer/Footer'
+
 
 export const App = () => (
     <Router>
@@ -31,10 +32,10 @@ export const App = () => (
 
         <main>
             <Routes>
-                <Route path="/" element={<ItemsPage />}></Route>
-                <Route path="/cart" element={<CartPage />}></Route>
-                <Route path="/*" element={<NotFoundPage />}></Route>
+                <Route path="/" element={<ItemsPage/>}></Route>
+                <Route path="/cart" element={<CartPage/>}></Route>
+                <Route path="/*" element={<NotFoundPage/>}></Route>
             </Routes>
         </main>
     </Router>
-);
+)

@@ -1,5 +1,5 @@
 import React from 'react'
-import './Header.scss'
+import styles from './Header.scss'
 
 
 export const Header = (): JSX.Element => (

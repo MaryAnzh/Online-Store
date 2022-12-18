@@ -1,5 +1,5 @@
 import React from 'react'
-import './ItemBuyModal.scss'
+import styles from './ItemBuyModal.scss'
 
 
 export const ItemBuyModal = (): JSX.Element => (

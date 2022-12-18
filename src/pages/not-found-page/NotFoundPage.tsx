@@ -1,5 +1,5 @@
 import React from 'react'
-import './NotFoundPage.scss'
+import styles from './NotFoundPage.scss'
 
 
 export const NotFoundPage = (): JSX.Element => (

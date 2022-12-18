@@ -1,5 +1,5 @@
 import React from 'react'
-import './ItemsPage.scss'
+import styles from './ItemsPage.scss'
 
 
 export const ItemsPage = (): JSX.Element => (
