@@ -1,5 +1,5 @@
 import React from 'react'
-import './Footer.scss'
+import styles from './Footer.scss'
 
 
 export const Footer = (): JSX.Element => (
