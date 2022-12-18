@@ -1,4 +1,5 @@
 import React from 'react'
+import { catalog } from '../../core/data/catalog.data';
 import styles from './ItemsPage.scss'
 
 

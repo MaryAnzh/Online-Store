@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import {App} from './App'
+import { catalog } from './core/data/catalog.data'
 
 
 const root = ReactDOM.createRoot(
@@ -13,3 +14,5 @@ root.render(
         <App/>
     </React.StrictMode>
 )
+
+console.log(catalog);
