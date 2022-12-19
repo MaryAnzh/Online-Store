@@ -52,7 +52,6 @@ fieldset,
 form,
 label,
 legend,
-
 table,
 caption,
 tbody,
@@ -66,7 +65,6 @@ aside,
 canvas,
 details,
 embed,
-
 figure,
 figcaption,
 footer,
@@ -78,16 +76,15 @@ output,
 ruby,
 section,
 summary,
-
 time,
 mark,
 audio,
 video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
 }
 
 article,
@@ -101,47 +98,47 @@ hgroup,
 menu,
 nav,
 section {
-	display: block;
+  display: block;
 }
 
 body {
-	line-height: 1.2;
+  line-height: 1.2;
 }
 
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 ol {
-	padding-left: 0;
-	list-style: none;
+  padding-left: 0;
+  list-style: none;
 }
 
 ul {
-	padding-left: 0;
-	list-style: none;
+  padding-left: 0;
+  list-style: none;
 }
 
 blockquote,
 q {
-	quotes: none;
+  quotes: none;
 }
 
 blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-	content: '';
-	content: none;
+  content: '';
+  content: none;
 }
 
 a {
-	color: black;
-	text-decoration: none;
+  color: black;
+  text-decoration: none;
 }
 
 button {
-	border: none;
-	outline: none;
+  border: none;
+  outline: none;
 }

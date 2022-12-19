@@ -1,13 +1,7 @@
 @import './utils/reset.scss';
 @import './utils/variable';
 
-
 body {
-    background: $mainBackground;
-
-    h2 {
-        color: white;
-    }
+  background: $main-background;
+  font-family: 'Roboto', sans-serif;
 }
-
-@import './common/nav.scss';
