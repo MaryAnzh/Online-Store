@@ -10,14 +10,18 @@ import { Footer } from './containers/footer/Footer'
 
 export const App = (): JSX.Element => (
     <Router>
-        < Header />
-        <main>
-            <Routes>
-                <Route path="/" element={<ItemsPage />}></Route>
-                <Route path="/cart" element={<CartPage />}></Route>
-                <Route path="/*" element={<NotFoundPage />}></Route>
-            </Routes>
-        </main>
-        < Footer />
+        <section className='wrapper'>
+            < Header />
+            <main className='wrapper__main'>
+                <Routes>
+                    <Route path="/" element={<ItemsPage />}></Route>
+                    <Route path="/cart" element={<CartPage />}></Route>
+                    <Route path="/*" element={<NotFoundPage />}></Route>
+                </Routes>
+            </main>
+            < Footer />
+
+        </section>
+
     </Router>
 )

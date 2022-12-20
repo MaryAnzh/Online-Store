@@ -12,7 +12,7 @@
         align-items: flex-end;
 
         &__catalog {
-            width: 300px;
+            width: 160px;
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
@@ -20,6 +20,12 @@
             &__logo {
                 font-size: 30px;
                 font-weight: bold;
+                display: flex;
+                align-items: flex-end;
+                a {
+                    transform: translateY(5px);
+                }
+
             }
 
         }
