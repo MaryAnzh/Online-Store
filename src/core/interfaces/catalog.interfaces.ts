@@ -8,8 +8,8 @@ export interface ICatalog {
 export interface IItem {
     id: number,
     title: string,
-    "description": string,
-    "price": number,
+    description: string,
+    price: number,
     discountPercentage: number,
     rating: number,
     stock: number,
