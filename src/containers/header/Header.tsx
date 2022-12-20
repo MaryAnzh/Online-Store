@@ -4,17 +4,18 @@ import Style from './Header.scss';
 
 export const Header = (): JSX.Element => (
     <header className='header' style={Style}>
-        <h3 className='active'>header</h3>
-        <nav>
-            <ul>
-                <li>
-                    <Link to="/">Catalog</Link>
-                </li>
-                <li>
-                    <Link to="/cart">Cart</Link>
-                </li>
-            </ul>
-        </nav>
+        <div className='header__wrapper'>
+            <div className='header__wrapper__catalog'>
+                <div className='header__wrapper__catalog__logo'>
+                    <Link to="/">LOGO</Link>
+                </div>
+                <Link to="/">Catalog</Link>
+            </div>
+            <div className='header__wrapper__cart'>
+                <Link to="/cart">Cart</Link>
+            </div>
+        </div>
+
     </header>
 )
 
