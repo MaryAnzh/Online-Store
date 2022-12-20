@@ -20,8 +20,6 @@ export const App = (): JSX.Element => (
                 </ul>
             </nav>
         </header>
-        <Checkbox onChange={() => {
-        }}/>
         <main>
             <Routes>
                 <Route path="/" element={<ItemsPage/>}></Route>
