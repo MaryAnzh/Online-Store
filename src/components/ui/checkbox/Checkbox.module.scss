@@ -1,0 +1,54 @@
+@import "../../../style/utils/variable";
+
+.wrapper {
+  transition: 0.3s all;
+
+  .checkbox {
+    transition: 0.3s all;
+    -webkit-appearance: none;
+    appearance: none;
+    -moz-appearance: none;
+
+    width: 17px;
+    height: 17px;
+    border-radius: 3px;
+    border: 2px solid $primary-blue;
+    outline: none;
+    cursor: pointer;
+
+    &:checked {
+      background-color: $primary-blue;
+      position: relative;
+      transition: 0.3s all;
+    }
+
+    &:checked::before {
+      transition: 0.3s all;
+      content: "✓";
+      text-align: center;
+      margin: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      color: #fff;
+      font-weight: 900;
+      font-size: 10px;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &:not(:checked):hover {
+      background-color: rgba($primary-blue, 0.1);
+    }
+
+    &:active {
+      transform: scale(0.8);
+    }
+  }
+}
+
+
