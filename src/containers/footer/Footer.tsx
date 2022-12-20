@@ -1,7 +1,8 @@
 import React from 'react'
-import styles from './Footer.scss'
-
+import Style from './Footer.scss'
 
 export const Footer = (): JSX.Element => (
-    <h2>Footer work</h2>
+    <footer style={Style}>
+        <h3 className='active'>Footer work</h3>
+    </footer>
 )

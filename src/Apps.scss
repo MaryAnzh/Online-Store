@@ -1,1 +1,6 @@
-@import './style/style.scss';
+@import 'style/utils/reset';
+@import 'style/utils/variable';
+
+a {
+    text-decoration: none;
+}
