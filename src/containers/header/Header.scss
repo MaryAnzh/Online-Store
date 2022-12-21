@@ -81,6 +81,10 @@
                 color: $contrast-calor;
             }
 
+            &__count {
+                color: $contrast-calor;
+            }
+
             &:hover {
                 background: rgba($color: $contrast-calor, $alpha: 0.5);
 
@@ -91,6 +95,10 @@
 
                 svg {
                     fill: white;
+                }
+
+                p {
+                    color: white;
                 }
 
             }

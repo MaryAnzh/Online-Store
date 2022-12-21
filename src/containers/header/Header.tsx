@@ -27,8 +27,8 @@ export const Header = (): JSX.Element => (
                         <rect width="12" height="4" />
                     </svg>
                 </div>
-
                 <Link to="/cart">Cart</Link>
+                <p className='header__wrapper__cart__count'>0</p>
             </div>
         </div>
 
