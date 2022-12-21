@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Style from './Header.scss';
+import './Header.scss';
 
 export const Header = (): JSX.Element => (
-    <header className='header' style={Style}>
+    <header className='header'>
         <div className='header__wrapper'>
             <div className='header__wrapper__catalog'>
                 <div className='header__wrapper__catalog__logo'>
