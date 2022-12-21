@@ -1,0 +1,50 @@
+@import './../../style/utils/variable';
+
+.catalog {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    &__wrap {
+        max-width: 1200px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        &__info-wrap {
+            width: 100%;
+            padding: 8px;
+            display: flex;
+            justify-content: center;
+            background: #EFDBFF;
+            border-radius: 10px;
+
+            &__info {
+                max-width: 1050px;
+                width: 100%;
+                padding: 10px;
+                color: $main-font-color;
+
+                &__title {
+
+                    max-width: 360px;
+                    width: 100%;
+                    padding: 10px 0;
+                    font-weight: 700;
+                    font-size: 2.4375em;
+                    line-height: 1.5em;
+                }
+
+                &__text {
+                    max-width: 360px;
+                    width: 100%;
+                    font-weight: 400;
+                    font-size: 1.5em;
+                    line-height: 28px;
+                }
+            }
+
+
+        }
+    }
+}
