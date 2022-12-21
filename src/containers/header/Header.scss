@@ -1,3 +1,6 @@
+@import '../../style/utils/variable';
+
+
 .header {
     width: 100%;
     padding: 20px;
@@ -22,12 +25,75 @@
                 font-weight: bold;
                 display: flex;
                 align-items: flex-end;
+
                 a {
                     transform: translateY(5px);
                 }
-
             }
 
+            &__link {
+                padding-left: 5px;
+                font-family: 'SF Pro Display';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 1.2em;
+                line-height: 24px;
+                color: $main-font-color;
+                transition: .3s;
+
+                &:hover {
+                    color: $contrast-calor;
+                }
+            }
+        }
+
+        &__cart {
+            padding: 8px 16px;
+            width: 113px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border-radius: 2px;
+            border: 1px solid $contrast-calor;
+            background: #FFFFFF;
+            cursor: pointer;
+            transition: .3s;
+
+            &__icon {
+                width: 15px;
+                height: 17;
+                display: flex;
+                align-items: center;
+
+                svg {
+                    width: 100%;
+                    fill: $contrast-calor;
+                }
+            }
+
+            a {
+                font-family: 'SF Pro Display';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 1em;
+                line-height: 24px;
+                color: $contrast-calor;
+            }
+
+            &:hover {
+                background: rgba($color: $contrast-calor, $alpha: 0.5);
+
+                a {
+                    color: white;
+                }
+
+
+                svg {
+                    fill: white;
+                }
+
+            }
         }
     }
 
