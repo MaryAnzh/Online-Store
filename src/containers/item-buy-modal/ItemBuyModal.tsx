@@ -13,17 +13,21 @@ export const ItemBuyModal = (props: IItemBuyModal): JSX.Element => {
         event.currentTarget === event.target && props.closeCallback()
     }, [])
 
+<<<<<<< HEAD
     const inputName: React.RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(null)
     const inputTelephone: React.RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(null)
     const inputEmail: React.RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(null)
 
 
+=======
+>>>>>>> 5528c709ce294c5e50faafae013205caf76f5c6d
     if (!props.show) return <></>
 
     return ReactDOM.createPortal(
         <div className={styles.wrapper} onClick={backdropClickHandler}>
             <dialog open={true} className={styles.dialog}>
                 <h1 className={styles.title}>Personal details</h1>
+<<<<<<< HEAD
                 <form action="#" onSubmit={e => e.preventDefault()} className={styles.form}>
                    <div className={styles.formGroup}>
                        <label className={styles.label}>Name & Surname</label>
@@ -66,6 +70,9 @@ export const ItemBuyModal = (props: IItemBuyModal): JSX.Element => {
                         <small className={styles.note}>Entered string doesn't seem to be a real email address</small>
                     </div>
                 </form>
+=======
+
+>>>>>>> 5528c709ce294c5e50faafae013205caf76f5c6d
             </dialog>
         </div>,
         document.getElementById('modal-root') as HTMLDivElement
