@@ -1,3 +1,4 @@
+import React from 'react'
 import './Apps.scss';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { ItemsPage } from './pages/items-page/ItemsPage'
@@ -21,5 +22,6 @@ export const App = (): JSX.Element => (
             < Footer />
 
         </section>
+
     </Router>
 )
