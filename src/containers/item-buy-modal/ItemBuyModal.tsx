@@ -1,7 +1,27 @@
 import React from 'react'
-import styles from './ItemBuyModal.scss'
+import styles from './ItemBuyModal.module.scss'
+import ReactDOM from 'react-dom'
 
 
-export const ItemBuyModal = (): JSX.Element => (
-    <h2>Header work</h2>
-)
+interface IItemBuyModal {
+    show: boolean
+    closeCallback: () => void
+}
+
+export const ItemBuyModal = (props: IItemBuyModal): JSX.Element => {
+    const backdropClickHandler = React.useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+        event.currentTarget === event.target && props.closeCallback()
+    }, [])
+
+    if (!props.show) return <></>
+
+    return ReactDOM.createPortal(
+        <div className={styles.wrapper} onClick={backdropClickHandler}>
+            <dialog open={true} className={styles.dialog}>
+                <h1 className={styles.title}>Personal details</h1>
+
+            </dialog>
+        </div>,
+        document.getElementById('modal-root') as HTMLDivElement
+    )
+}
