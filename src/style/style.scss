@@ -2,10 +2,12 @@
 @import './utils/variable';
 
 body {
-  background: $main-background;
   font-family: 'Roboto', sans-serif;
+  background: no-repeat;
 }
 
 body * {
   font-family: 'Roboto', sans-serif;
 }
+
+

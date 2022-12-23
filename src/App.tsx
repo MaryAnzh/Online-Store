@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
 import {ItemsPage} from './pages/items-page/ItemsPage'
 import {CartPage} from './pages/cart-page/CartPage'
 import {NotFoundPage} from './pages/not-found-page/NotFoundPage'
-import {Checkbox} from './components/ui/checkbox/Checkbox'
+import {ItemBuyModal} from './containers/item-buy-modal/ItemBuyModal'
 
 
 export const App = (): JSX.Element => (
@@ -20,11 +20,14 @@ export const App = (): JSX.Element => (
                 </ul>
             </nav>
         </header>
+
+        <ItemBuyModal show={true} closeCallback={() => {}}/>
+
         <main>
             <Routes>
-                <Route path="/" element={<ItemsPage/>}></Route>
-                <Route path="/cart" element={<CartPage/>}></Route>
-                <Route path="/*" element={<NotFoundPage/>}></Route>
+                <Route path="/" element={<ItemsPage/>}/>
+                <Route path="/cart" element={<CartPage/>}/>
+                <Route path="/*" element={<NotFoundPage/>}/>
             </Routes>
         </main>
     </Router>
