@@ -7,11 +7,13 @@ import { NotFoundPage } from './pages/not-found-page/NotFoundPage'
 import { Checkbox } from './components/ui/checkbox/Checkbox'
 import { Header } from './containers/header/Header'
 import { Footer } from './containers/footer/Footer'
+import {ItemBuyModal} from './containers/item-buy-modal/ItemBuyModal'
 
 export const App = (): JSX.Element => (
     <Router>
         <section className='wrapper'>
             < Header />
+            <ItemBuyModal show={true} closeCallback={() => {}}/>
             <main className='wrapper__main'>
                 <Routes>
                     <Route path="/" element={<ItemsPage />}></Route>
