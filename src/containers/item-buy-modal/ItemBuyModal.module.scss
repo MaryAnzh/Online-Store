@@ -18,10 +18,7 @@
 .dialog {
   margin: auto;
   background-color: #FFF;
-  padding-top: 40px;
-  padding-left: 45px;
-  padding-right: 45px;
-  padding-bottom: 41px;
+  padding: 40px 45px 41px;
   border-radius: 5px;
   outline: none;
   border: none;
@@ -31,6 +28,10 @@
 
   max-width: 780px;
   width: 100%;
+
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in-out;
+  animation-name: modalAppears;
 }
 
 .title {
@@ -44,3 +45,14 @@
   margin-bottom: 46px;
 }
 
+@keyframes modalAppears {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,70 +1,11 @@
+@import "../../style/utils/variable";
+
 .form {
   display: flex;
   flex-direction: column;
   width: 100%;
 
-  .formGroup {
-    display: flex;
-    flex-direction: column;
 
-    .label {
-      font-size: 20px;
-      font-family: 'Roboto', sans-serif;
-      color: $primary-black;
-      font-weight: 400;
-      margin-bottom: 3px;
-    }
-
-    .note {
-      color: $red-accent-color;
-      margin-top: 5px;
-      font-size: 11px;
-      opacity: 0;
-      transition: 0.3s all;
-      font-weight: 400;
-      font-family: 'Roboto', sans-serif;
-    }
-
-    .input {
-      transition: 0.3s all;
-      background: #FFFFFF;
-      border: 1px solid #D9D9D9;
-      border-radius: 2px;
-
-      font-family: 'SF Pro Display', sans-serif;
-      font-style: normal;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 24px;
-
-      display: flex;
-      align-items: center;
-
-      color: $primary-black;
-
-      padding: 7px 10px;
-
-      outline: none;
-
-      width: 100%;
-
-
-      &:not(:placeholder-shown):not(:focus):invalid {
-        border: 1px solid $red-accent-color;
-      }
-
-      &:not(:placeholder-shown):invalid + .note {
-        opacity: 1;
-      }
-
-
-      &::placeholder {
-        color: #BFBFBF;
-      }
-    }
-
-    &:not(:first-child) {
-      margin-top: 7px;
-    }
-  }
 }
+
+

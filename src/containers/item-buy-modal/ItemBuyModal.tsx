@@ -5,23 +5,18 @@ import {PersonalDataForm} from '../../components/personal-data-form/PersonalData
 
 
 interface IItemBuyModal {
-    show: boolean
     closeCallback: () => void
 }
 
 export const ItemBuyModal = (props: IItemBuyModal): JSX.Element => {
-    const backdropClickHandler = React.useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+    const backdropClickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
         event.currentTarget === event.target && props.closeCallback()
-    }, [])
-
-
-    if (!props.show) return <></>
+    }
 
     return ReactDOM.createPortal(
         <div className={styles.wrapper} onClick={backdropClickHandler}>
-            <dialog open={true} className={styles.dialog}>
+            <dialog className={styles.dialog} open>
                 <h1 className={styles.title}>Personal details</h1>
-
                 <PersonalDataForm/>
             </dialog>
         </div>,

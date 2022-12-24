@@ -15,9 +15,8 @@ export const Checkbox = (props: ICheckboxProps): JSX.Element => {
     }
 
     return (
-        
+
         <label className={`${styles.wrapper} ${props.className}`} style={props.styles}>
-            <h3 className='active'>Input</h3>
             <input type="checkbox" className={styles.checkbox} onChange={changeHandler}/>
         </label>
     )
