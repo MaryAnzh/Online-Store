@@ -1,0 +1,46 @@
+@import "../../style/utils/variable";
+
+.wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, .4);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.dialog {
+  margin: auto;
+  background-color: #FFF;
+  padding-top: 40px;
+  padding-left: 45px;
+  padding-right: 45px;
+  padding-bottom: 41px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  max-width: 780px;
+  width: 100%;
+}
+
+.title {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 42px;
+  color: #000000;
+
+  margin-bottom: 46px;
+}
+
