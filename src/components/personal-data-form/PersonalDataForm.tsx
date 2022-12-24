@@ -1,17 +1,18 @@
 import styles from './PersonalDataForm.module.scss'
 import React from 'react'
 import {FormGroup, FormGroupType} from './form-group/FormGroup'
+import {CardDetails} from './card-details/CardDetails'
 
 
-interface ICardDetails {
-    // TODO
-}
+
 
 interface IFormData {
     name: string
     telephone: string
     email: string
-    card: ICardDetails
+    cardNumber: string
+    cardCvv: string
+    cardExpirationDate: string
 }
 
 interface IPersonalDataFormProps {
@@ -24,6 +25,10 @@ export const PersonalDataForm = (props: IPersonalDataFormProps): JSX.Element => 
     const [email, setEmail] = React.useState<string>('')
     const [address, setAddress] = React.useState<string>('')
     const [phone, setPhone] = React.useState<string>('')
+
+    const [cardNumber, setCardNumber] = React.useState<string>('')
+    const [cardCvv, setCardSvv] = React.useState<string>('')
+    const [cardExpirationDate, setCardExpirationDate] = React.useState<string>('')
 
     const cancelSubmit = (event: React.FormEvent<HTMLFormElement>): void => event.preventDefault()
 
@@ -58,7 +63,13 @@ export const PersonalDataForm = (props: IPersonalDataFormProps): JSX.Element => 
                        invalidText="Entered string doesn't seem to be a real email address"
             />
 
-            {/* HERE WILL BE CARD COMPONENT */}
+            <CardDetails cardNumber={cardNumber}
+                         cvv={cardCvv}
+                         expirationDate={cardExpirationDate}
+                         onCardNumberChange={setCardNumber}
+                         onExpirationDateChange={setCardExpirationDate}
+                         onCvvChange={setCardSvv}
+            />
         </form>
     )
 }
