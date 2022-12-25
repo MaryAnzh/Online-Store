@@ -8,18 +8,14 @@ interface IItemBuyModal {
     closeCallback: () => void
 }
 
-export const ItemBuyModal = (props: IItemBuyModal): JSX.Element => {
-    const backdropClickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
-        event.currentTarget === event.target && props.closeCallback()
-    }
+export const ItemBuyModal = (props: IItemBuyModal): JSX.Element => ReactDOM.createPortal(
+    <div className={styles.wrapper}>
+        <dialog className={styles.dialog} open>
+            <h1 className={styles.title}>Personal details</h1>
+            <PersonalDataForm/>
+            <button className={styles.close} onClick={props.closeCallback}>&times;</button>
+        </dialog>
+    </div>,
+    document.getElementById('modal-root') as HTMLDivElement
+)
 
-    return ReactDOM.createPortal(
-        <div className={styles.wrapper} onClick={backdropClickHandler}>
-            <dialog className={styles.dialog} open>
-                <h1 className={styles.title}>Personal details</h1>
-                <PersonalDataForm/>
-            </dialog>
-        </div>,
-        document.getElementById('modal-root') as HTMLDivElement
-    )
-}
