@@ -49,7 +49,6 @@
 
         &__cart {
             padding: 8px 16px;
-            width: 113px;
             height: 40px;
             display: flex;
             align-items: center;
@@ -58,13 +57,15 @@
             border: 1px solid $contrast-calor;
             background: #FFFFFF;
             cursor: pointer;
-            transition: .3s;
+            transition: .3s all;
+            color: $primary-blue;
 
             &__icon {
                 width: 15px;
-                height: 17;
+                height: 17px;
                 display: flex;
                 align-items: center;
+                margin-right: 4px;
 
                 svg {
                     width: 100%;
@@ -73,7 +74,7 @@
             }
 
             a {
-                font-family: 'SF Pro Display';
+                font-family: 'SF Pro Display', sans-serif;
                 font-style: normal;
                 font-weight: 400;
                 font-size: 1em;
@@ -86,12 +87,12 @@
             }
 
             &:hover {
-                background: rgba($color: $contrast-calor, $alpha: 0.5);
+                background-color: $primary-blue;
+                color: white;
 
                 a {
                     color: white;
                 }
-
 
                 svg {
                     fill: white;
@@ -100,7 +101,10 @@
                 p {
                     color: white;
                 }
+            }
 
+            &:active {
+                transform: scale(0.9);
             }
         }
     }

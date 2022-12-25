@@ -13,7 +13,7 @@ export const Header = (): JSX.Element => (
                     <Link to="/">Catalog</Link>
                 </div>
             </div>
-            <div className='header__wrapper__cart'>
+            <Link to="/cart" className='header__wrapper__cart'>
                 <div className='header__wrapper__cart__icon'>
                     <svg xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 56.8 51.9">
@@ -27,9 +27,8 @@ export const Header = (): JSX.Element => (
                         <rect width="12" height="4" />
                     </svg>
                 </div>
-                <Link to="/cart">Cart</Link>
                 <p className='header__wrapper__cart__count'>0</p>
-            </div>
+            </Link>
         </div>
 
     </header>

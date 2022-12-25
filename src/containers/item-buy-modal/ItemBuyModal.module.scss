@@ -12,16 +12,15 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
+
+  overflow-y: auto;
+
 }
 
 .dialog {
   margin: auto;
   background-color: #FFF;
-  padding-top: 40px;
-  padding-left: 45px;
-  padding-right: 45px;
-  padding-bottom: 41px;
+  padding: 30px 35px 31px;
   border-radius: 5px;
   outline: none;
   border: none;
@@ -31,16 +30,53 @@
 
   max-width: 780px;
   width: 100%;
+
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in-out;
+  animation-name: modalAppears;
+
+  position: relative;
+
+
+}
+
+.close {
+  position: absolute;
+  right: 30px;
+  top: 10px;
+  outline: none;
+  background-color: transparent;
+  font-weight: 400;
+  color: $red-accent-color;
+  cursor: pointer;
+  font-size: 50px;
+
 }
 
 .title {
   font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 700;
-  font-size: 36px;
-  line-height: 42px;
+  font-size: 30px;
   color: #000000;
 
-  margin-bottom: 46px;
+  margin-bottom: 20px;
 }
 
+@keyframes modalAppears {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 790px) {
+  .dialog {
+    width: 95%;
+  }
+}

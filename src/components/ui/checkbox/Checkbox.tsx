@@ -6,7 +6,6 @@ interface ICheckboxProps {
     initialChecked?: boolean
     onChange: (checked: boolean) => void
     styles?: React.CSSProperties
-    className?: string
 }
 
 export const Checkbox = (props: ICheckboxProps): JSX.Element => {
@@ -15,9 +14,7 @@ export const Checkbox = (props: ICheckboxProps): JSX.Element => {
     }
 
     return (
-        
-        <label className={`${styles.wrapper} ${props.className}`} style={props.styles}>
-            <h3 className='active'>Input</h3>
+        <label className={styles.wrapper} style={props.styles}>
             <input type="checkbox" className={styles.checkbox} onChange={changeHandler}/>
         </label>
     )

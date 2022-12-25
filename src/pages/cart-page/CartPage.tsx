@@ -1,17 +1,18 @@
 import React from 'react'
-import styles from './CartPage.scss'
 import {ItemBuyModal} from '../../containers/item-buy-modal/ItemBuyModal'
 
 
 export const CartPage = (): JSX.Element => {
-    const [showModal, setShowModal] = React.useState<boolean>(true)
+    const [isModalShown, setIsModalShown] = React.useState<boolean>(false)
+
+    const closeModal = (): void => setIsModalShown(false)
+    const openModal = (): void => setIsModalShown(true)
 
     return (
         <>
-            <h2>CartPage work</h2>
-            <ItemBuyModal show={showModal}
-                          closeCallback={() => setShowModal(false)}
-            />
+            <h2>CartPage works</h2>
+            <button onClick={openModal}>Show modal</button>
+            {isModalShown && <ItemBuyModal closeCallback={closeModal}/>}
         </>
     )
 }
