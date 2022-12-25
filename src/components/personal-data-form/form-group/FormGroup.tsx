@@ -34,7 +34,7 @@ export const FormGroup = (props: IFormGroupProps) => {
 }
 
 type Accordance = {
-    [KeyType in FormGroupType]?: string
+    [_ in FormGroupType]?: string
 }
 
 const PATTERN_FOR_TYPE: Accordance = {
