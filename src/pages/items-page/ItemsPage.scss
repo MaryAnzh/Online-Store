@@ -10,6 +10,7 @@
         width: 100%;
         display: flex;
         flex-direction: column;
+        align-items: center;
 
         &__info-wrap {
             width: 100%;
@@ -94,6 +95,31 @@
                     border: ipx sold $contrast-calor;
                 }
             }
+        }
+
+        &__items {
+            max-width: 1200px;
+            width: 100%;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+
+            &__title {
+                padding-left: 20px;
+                font-family: 'Roboto';
+                font-weight: 700;
+                font-size: 36px;
+                line-height: 56px;
+                color: #000000;
+            }
+
+            &__items-wrap {
+                display: flex;
+                align-self: center;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+
         }
     }
 }

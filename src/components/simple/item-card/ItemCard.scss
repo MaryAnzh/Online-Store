@@ -1,0 +1,10 @@
+@import '../../../style/utils/variable';
+
+.item-card {
+    width: 340px;
+    height: 200px;
+    margin-top: 30px;
+    border: 1px solid $contrast-calor;
+    border-radius: 4px;
+    background: rgb(230, 228, 228);
+}
