@@ -1,0 +1,183 @@
+@import "../../style/utils/variable";
+
+.cartSummary {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 15px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  border-radius: 10px;
+  width: fit-content;
+
+  max-width: 460px;
+}
+
+.title {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+
+  color: #000000;
+
+  padding-bottom: 5px;
+
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+
+  margin-bottom: 10px;
+}
+
+.info {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+
+  color: #000000;
+  border-bottom: 1px solid rgba(0, 0, 0, .25);
+  padding: 10px 0;
+  display: block;
+}
+
+.promosActivated {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+}
+
+.promoActivated {
+  display: grid;
+  grid-template-columns: 4fr 2fr 1fr;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  justify-items: left;
+  width: 100%;
+  padding: 5px 7px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, .2);
+
+  animation-name: promoAppears;
+  animation-timing-function: ease-in-out;
+  animation-duration: 0.2s;
+
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
+}
+
+@keyframes promoAppears {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.promoName {
+  font-weight: 500;
+  font-size: 18px;
+  font-style: italic;
+}
+
+.promoDiscount {
+  font-weight: 900;
+  font-size: 18px;
+  padding: 5px;
+  background-color: $primary-blue;
+  color: white;
+  border-radius: 5px;
+}
+
+.dropPromo {
+  background-color: $red-accent-color;
+  color: white;
+  width: 20px;
+  height: 20px;
+  line-height: 100%;
+  font-size: 20px;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: 0.2s all;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.8);
+  }
+}
+.enterPromo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: 20px;
+}
+
+.enterPromoInput {
+  padding: 5px 7px;
+  color: $usual-text-color;
+  font-size: 17px;
+  width: 100%;
+  font-family: 'SF Pro Display', sans-serif;
+  outline: none;
+  border: none;
+  border: 1px solid $primary-blue;
+  border-radius: 5px;
+}
+
+.enterPromoButton {
+  border: 2px solid $primary-blue;
+  color: $primary-blue;
+  padding: 0;
+  outline: none;
+  background-color: transparent;
+  padding: 5px 10px;
+  font-size: 20px;
+  border-radius: 7px;
+  margin: auto;
+  cursor: pointer;
+
+  transition: 0.2s all;
+
+  margin-left: 10px;
+
+  &:hover {
+    background-color: $primary-blue;
+    color: white;
+  }
+
+  &:active {
+    transform: scale(0.8);
+  }
+}
+
+.buy {
+  margin-top: 20px;
+  background-color: $primary-blue;
+  color: white;
+  font-weight: 700;
+  font-size: 22px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 7px 0;
+  transition: 0.2s all;
+  box-shadow: 0 0 0;
+
+  &:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  }
+  &:active {
+    transform: scale(0.8);
+  }
+}
