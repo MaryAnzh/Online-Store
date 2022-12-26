@@ -1,7 +1,7 @@
 import React from 'react'
 import { catalog } from '../../core/data/catalog.data';
 import './ItemsPage.scss'
-
+import { ItemCard } from '../../components/simple/item-card/ItemCard';
 
 export const ItemsPage = (): JSX.Element => (
     <section className='catalog'>
@@ -25,8 +25,8 @@ export const ItemsPage = (): JSX.Element => (
                 </div>
                 <div className='catalog__wrap__tools-wrap__search'>
                     <input
-                    className='catalog__wrap__tools-wrap__search__input'
-                    type='text' />
+                        className='catalog__wrap__tools-wrap__search__input'
+                        type='text' />
                     <button className='blue-button'>Search</button>
                 </div>
 
