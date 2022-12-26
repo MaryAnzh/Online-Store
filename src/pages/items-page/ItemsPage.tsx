@@ -37,7 +37,9 @@ export const ItemsPage = (): JSX.Element => {
                     </div>
                 </section>
                 <section className='catalog__wrap__items'>
-                    <h3 className='catalog__wrap__items__title'>Товары по категориям</h3>
+                    <h3 className='catalog__wrap__items__title'>
+                        Products
+                    </h3>
 
                     <div className='catalog__wrap__items__items-wrap'>
                         {itemsList}
