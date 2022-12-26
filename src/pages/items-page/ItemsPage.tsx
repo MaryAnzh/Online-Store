@@ -7,17 +7,18 @@ import { IItem } from '../../core/interfaces/catalog.interfaces';
 export const ItemsPage = (): JSX.Element => {
     const itemCatalog: IItem[] = [...catalog.products];
     const itemsList: JSX.Element[] = itemCatalog.map(elem => <ItemCard item={elem} />);
-
+    const category =
+        console.log();
     return (
         <section className='catalog'>
             <div className='catalog__wrap'>
                 <section className='catalog__wrap__info-wrap'>
                     <div className='catalog__wrap__info-wrap__info'>
                         <h3 className='catalog__wrap__info-wrap__info__title'>
-                            Добро пожаловать в Online Stor
+                            Welcome to Online Stor
                         </h3>
                         <p className='catalog__wrap__info-wrap__info__text'>
-                            Большой выбор товаров, на любой вкус и кошелек.
+                            A big choose of products, for every taste and wallet.
                         </p>
                     </div>
                 </section>
@@ -36,7 +37,7 @@ export const ItemsPage = (): JSX.Element => {
                     </div>
                 </section>
                 <section className='catalog__wrap__items'>
-                    <h3 className='catalog__wrap__items__title'>Товары</h3>
+                    <h3 className='catalog__wrap__items__title'>Товары по категориям</h3>
 
                     <div className='catalog__wrap__items__items-wrap'>
                         {itemsList}

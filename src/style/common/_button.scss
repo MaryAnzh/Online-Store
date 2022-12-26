@@ -11,4 +11,9 @@
     line-height: 24px;
     color: white;
     cursor: pointer;
+    transition: .3s;
+
+    &:hover {
+        background: $contrast-calor-hover;
+    }
 }
