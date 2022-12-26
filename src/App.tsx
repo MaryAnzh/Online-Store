@@ -4,8 +4,8 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import {ItemsPage} from './pages/items-page/ItemsPage'
 import {CartPage} from './pages/cart-page/CartPage'
 import {NotFoundPage} from './pages/not-found-page/NotFoundPage'
-import {Header} from './containers/header/Header'
-import {Footer} from './containers/footer/Footer'
+import {Header} from './components/common/header/Header'
+import {Footer} from './components/common/footer/Footer'
 
 export const App = (): JSX.Element => (
     <Router>

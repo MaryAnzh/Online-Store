@@ -1,6 +1,6 @@
 import styles from './CardDetails.module.scss'
-import chipImage from '../../../assets/chip.png'
-import globusImage from '../../../assets/globe.png'
+import chipImage from '../../../../assets/chip.png'
+import globusImage from '../../../../assets/globe.png'
 import React from 'react'
 
 interface ICardDetailsProps {

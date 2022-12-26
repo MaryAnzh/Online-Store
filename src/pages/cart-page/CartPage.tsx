@@ -1,6 +1,6 @@
 import React from 'react'
 import {ItemBuyModal} from '../../containers/item-buy-modal/ItemBuyModal'
-import {CartSummary} from '../../components/cart-summary/CartSummary'
+import {CartSummary} from '../../components/smart/cart-summary/CartSummary'
 import {promoCodes} from '../../core/data/promoCode.data'
 
 
