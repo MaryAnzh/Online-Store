@@ -1,7 +1,7 @@
 import styles from './CartSummary.module.scss'
-import {IPromoCode} from '../../core/interfaces/promoCode.interfaces'
+import {IPromoCode} from '../../../core/interfaces/promoCode.interfaces'
 import React from 'react'
-import {ItemBuyModal} from '../../containers/item-buy-modal/ItemBuyModal'
+import {ItemBuyModal} from '../../../containers/item-buy-modal/ItemBuyModal'
 
 
 interface ICartSummaryProps {
