@@ -1,18 +1,16 @@
 import React from 'react'
 import {ItemBuyModal} from '../../containers/item-buy-modal/ItemBuyModal'
+import {CartSummary} from '../../components/cart-summary/CartSummary'
+import {promoCodes} from '../../core/data/promoCode.data'
 
 
 export const CartPage = (): JSX.Element => {
-    const [isModalShown, setIsModalShown] = React.useState<boolean>(false)
 
-    const closeModal = (): void => setIsModalShown(false)
-    const openModal = (): void => setIsModalShown(true)
 
     return (
         <>
             <h2>CartPage works</h2>
-            <button onClick={openModal}>Show modal</button>
-            {isModalShown && <ItemBuyModal closeCallback={closeModal}/>}
+            <div style={{width: 'fit-content',marginLeft: 'auto'}}><CartSummary itemsCount={10} totalPrice={1000} workingPromoCodes={promoCodes}/></div>
         </>
     )
 }
