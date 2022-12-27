@@ -6,6 +6,7 @@ import {CartPage} from './pages/cart-page/CartPage'
 import {NotFoundPage} from './pages/not-found-page/NotFoundPage'
 import {Header} from './components/common/header/Header'
 import {Footer} from './components/common/footer/Footer'
+import { ItemPage } from './pages/item-page/ItemPage'
 
 export const App = (): JSX.Element => (
     <Router>
@@ -16,6 +17,7 @@ export const App = (): JSX.Element => (
                     <Route path="/" element={<ItemsPage/>}/>
                     <Route path="/cart" element={<CartPage/>}/>
                     <Route path="/*" element={<NotFoundPage/>}/>
+                    <Route path="/:id" element={<ItemPage />} />
                 </Routes>
             </main>
             < Footer/>

@@ -2,6 +2,7 @@ import React from 'react'
 import './ItemCard.scss';
 import { IItem } from '../../../core/interfaces/catalog.interfaces';
 import { ReactComponent as CartLogo } from '../../../assets/cart.svg';
+import { Link } from 'react-router-dom';
 
 
 type ItemTypeProps = {
@@ -13,9 +14,11 @@ export const ItemCard = (props: ItemTypeProps): JSX.Element => {
     return (
         <section className='item-card'>
             <div className='item-card__image-wrap'>
-                <img
-                    className='item-card__image-wrap__image'
-                    src={props.item.thumbnail} alt={props.item.title} />
+                <Link to={`/${props.item.id}`} className='item-card__image-wrap__link'>
+                    <img
+                        className='item-card__image-wrap__link__image'
+                        src={props.item.thumbnail} alt={props.item.title} />
+                </Link>
             </div>
 
             <div className='item-card__info'>
