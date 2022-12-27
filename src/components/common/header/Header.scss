@@ -41,7 +41,7 @@
                 transition: .3s;
 
                 &:hover {
-                    color: $contrast-calor;
+                    color: $contrast-color;
                 }
             }
         }
@@ -53,7 +53,7 @@
             align-items: center;
             justify-content: space-around;
             border-radius: 2px;
-            border: 1px solid $contrast-calor;
+            border: 1px solid $contrast-color;
             background: #FFFFFF;
             cursor: pointer;
             transition: .3s all;
@@ -68,7 +68,7 @@
 
                 svg {
                     width: 100%;
-                    fill: $contrast-calor;
+                    fill: $contrast-color;
                 }
             }
 
@@ -78,11 +78,11 @@
                 font-weight: 400;
                 font-size: 1em;
                 line-height: 24px;
-                color: $contrast-calor;
+                color: $contrast-color;
             }
 
             &__count {
-                color: $contrast-calor;
+                color: $contrast-color;
             }
 
             &:hover {

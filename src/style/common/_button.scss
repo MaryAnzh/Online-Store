@@ -1,7 +1,7 @@
 .blue-button {
     width: 96px;
     height: 40px;
-    background: $contrast-calor;
+    background: $contrast-color;
     border-radius: 2px;
 
     font-family: 'SF Pro Display';
@@ -11,4 +11,9 @@
     line-height: 24px;
     color: white;
     cursor: pointer;
+    transition: .3s;
+
+    &:hover {
+        background: $contrast-color-hover;
+    }
 }
