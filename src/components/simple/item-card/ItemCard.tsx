@@ -14,7 +14,7 @@ export const ItemCard = (props: ItemTypeProps): JSX.Element => {
     return (
         <section className='item-card'>
             <div className='item-card__image-wrap'>
-                <Link to={`/${props.item.id}`} className='item-card__image-wrap__link'>
+                <Link to={`/products/${props.item.id}`} className='item-card__image-wrap__link'>
                     <img
                         className='item-card__image-wrap__link__image'
                         src={props.item.thumbnail} alt={props.item.title} />

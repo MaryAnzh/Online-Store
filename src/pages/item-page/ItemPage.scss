@@ -1,0 +1,12 @@
+.item {
+    width: 100%;
+    padding: 20px;
+    font-family: 'Roboto';
+
+    &__error {
+        text-align: center;
+        font-size: 45px;
+        font-weight: 500;
+    }
+
+}
