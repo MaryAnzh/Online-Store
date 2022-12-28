@@ -2,7 +2,6 @@ import React from 'react'
 import './ItemPage.scss'
 import { useParams } from 'react-router-dom'
 import { catalog } from '../../core/data/catalog.data';
-import { NotFoundPage } from '../not-found-page/NotFoundPage';
 
 export const ItemPage = (): JSX.Element => {
     const params = useParams();
@@ -10,14 +9,21 @@ export const ItemPage = (): JSX.Element => {
     const products = catalog.products.find((el) => `${el.id}` === prodId);
     if (products === undefined) {
         return (
-            <div className='item'>
+            <section className='item'>
                 <h2>Products not found</h2>
-            </div>
+            </section>
         )
     }
     return (
-        <div className='item'>
-            <h2>{products.title}</h2>
-        </div>
+        <section className='item'>
+            <div className='item__wrap'>
+                <h2 className='item__wrap__title'>{products.title}</h2>
+                <div className='item__wrap__info'>
+                    <div className='item__wrap__info__about'></div>
+                    <div className='item__wrap__info__price'></div>
+                </div>
+            </div>
+
+        </section>
     )
 }
