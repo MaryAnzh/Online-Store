@@ -12,7 +12,9 @@ type ItemTypeProps = {
 export const ItemCard = (props: ItemTypeProps): JSX.Element => {
 
     return (
-        <section className='item-card'>
+        <div 
+        key={`products_${props.item.id}`}
+        className='item-card'>
             <div className='item-card__image-wrap'>
                 <Link to={`/products/${props.item.id}`} className='item-card__image-wrap__link'>
                     <img
@@ -44,5 +46,5 @@ export const ItemCard = (props: ItemTypeProps): JSX.Element => {
                     {props.item.price} &#36;
                 </p>
             </div>
-        </section>)
+        </div>)
 }

@@ -17,6 +17,7 @@
         width: 100%;
 
         &__title {
+            margin-bottom: 20px;
             font-weight: 500;
             font-size: 32px;
             line-height: 56px;
@@ -27,26 +28,31 @@
             width: 100%;
             display: flex;
 
-            @media (max-width: 740px) {
-                flex-wrap: wrap;
+            @media (max-width: 940px) {
+                flex-direction: column;
+                align-items: center;
             }
 
-            &__about {
-                width: 50%;
-                padding: 10px 0;
-                background: pink;
+            &__img-wrap {
+                max-width: 500px;
+                width: 100%;
+                height: 500px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
 
-                @media (max-width: 740px) {
-                    width: 100%;
+                &__image {
+                    max-width: 100%;
+                    max-height: 100%;
                 }
             }
 
-            &__price {
-                width: 50%;
+            &__about {
+                width: calc(100% - 500px);
                 padding: 10px 0;
-                background: lightblue;
+                background: white;
 
-                @media (max-width: 740px) {
+                @media (max-width: 940px) {
                     width: 100%;
                 }
             }
