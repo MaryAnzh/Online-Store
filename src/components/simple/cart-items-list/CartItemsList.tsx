@@ -15,13 +15,12 @@ export const CartItemsList = (props: ICartItemsListProps): JSX.Element => {
     return (
         <div className={styles.cartItemsList}>
             {
-                props.selectedItems.map((item: IItem, index: number): JSX.Element => (
+                props.selectedItems.map((item: ICartItem, index: number): JSX.Element => (
                     <CartItemRow item={item}
                                  number={index + 1}
                                  key={item.id}
-                                 count={1}
-                                 onDecreaseCount={() => {}}
-                                 onIncreaseCount={() => {}}
+                                 onDecreaseCount={props.onDecreaseCount}
+                                 onIncreaseCount={props.onIncreaseCount}
                     />
                 ))
             }
