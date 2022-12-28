@@ -75,6 +75,7 @@
                 &__preview {
                     width: 80px;
                     height: 100%;
+                    align-self: flex-start;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
@@ -89,6 +90,8 @@
                         border-radius: 7px;
                         background: white;
                         transition: .3s;
+                        margin-bottom: 10px;
+                        overflow: hidden;
                         cursor: pointer;
 
                         img {
