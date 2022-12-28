@@ -38,23 +38,56 @@
                 height: 40vh;
                 padding: 10px;
                 display: flex;
-                flex-direction: column;
                 align-items: center;
                 justify-content: space-between;
                 border-radius: 7px;
                 overflow: hidden;
-                border: 2px solid gray;
-
-                &__image {
-                    max-width: 100%;
-                    max-height: calc(100% - 80px);
-                }
+                background: white;
 
                 &__preview {
-                    width: 100%;
-                    height: 80px;
-                    background: gray;
+                    width: 80px;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    &__item {
+                        width: 70px;
+                        height: 60px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border: 1px solid gray;
+                        border-radius: 7px;
+                        background: white;
+                        transition: .3s;
+                        cursor: pointer;
+
+                        img {
+                            max-width: 100%;
+                            max-height: 100%;
+                        }
+
+                        &:hover {
+                            box-shadow: 0px 0px 6px rgba($color: gray, $alpha: 0.5);
+                        }
+                    }
                 }
+
+                &__image {
+
+                    width: calc(100% - 90px);
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    img {
+                        object-fit: contain;
+                    }
+                }
+
             }
 
             &__about {

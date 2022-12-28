@@ -16,6 +16,17 @@ export const ItemPage = (): JSX.Element => {
             </section>
         )
     }
+    const images = [...products.images];
+    console.log(images);
+    images.reverse();
+    const preview: JSX.Element[] = images.map((el, i) => {
+        return (
+            <li key={`image_${i}`}
+                className='item__wrap__info__img-wrap__preview__item'>
+                <img src={el} alt={products.title} />
+            </li>
+        );
+    })
 
     return (
         <section className='item'>
@@ -23,11 +34,15 @@ export const ItemPage = (): JSX.Element => {
                 <h2 className='item__wrap__title'>{products.title}</h2>
                 <div className='item__wrap__info'>
                     <div className='item__wrap__info__img-wrap'>
-                        <img
-                            className='item__wrap__info__img-wrap__image'
-                            src={products.thumbnail}
-                            alt={products.title} />
-                            <div className='item__wrap__info__img-wrap__preview'></div>
+                        <ul className='item__wrap__info__img-wrap__preview'>
+                            {preview}
+                        </ul>
+                        <div className='item__wrap__info__img-wrap__image'>
+                            <img
+                                className='item__wrap__info__img-wrap__image'
+                                src={products.thumbnail}
+                                alt={products.title} />
+                        </div>
                     </div>
                     <div className='item__wrap__info__about'>
                         <div className='item__wrap__info__about__block'>
