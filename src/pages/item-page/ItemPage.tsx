@@ -27,6 +27,7 @@ export const ItemPage = (): JSX.Element => {
                             className='item__wrap__info__img-wrap__image'
                             src={products.thumbnail}
                             alt={products.title} />
+                            <div className='item__wrap__info__img-wrap__preview'></div>
                     </div>
                     <div className='item__wrap__info__about'>
                         <div className='item__wrap__info__about__block'>
