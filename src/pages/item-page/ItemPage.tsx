@@ -16,17 +16,25 @@ export const ItemPage = (): JSX.Element => {
             </section>
         )
     }
+
+    const onClick = (e: React.MouseEvent<HTMLElement>): void => {
+        console.log(e.target);
+    };
+
     const images = [...products.images];
-    console.log(images);
     images.reverse();
     const preview: JSX.Element[] = images.map((el, i) => {
+        const active = i === 0 ? 'item-active' : '';
         return (
             <li key={`image_${i}`}
-                className='item__wrap__info__img-wrap__preview__item'>
+                className={`item__wrap__info__img-wrap__preview__item ${active}`}
+                onClick={(e) => onClick(e)}>
                 <img src={el} alt={products.title} />
             </li>
         );
     })
+
+
 
     return (
         <section className='item'>
@@ -40,7 +48,7 @@ export const ItemPage = (): JSX.Element => {
                         <div className='item__wrap__info__img-wrap__image'>
                             <img
                                 className='item__wrap__info__img-wrap__image'
-                                src={products.thumbnail}
+                                src={images[0]}
                                 alt={products.title} />
                         </div>
                     </div>
