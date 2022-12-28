@@ -144,16 +144,36 @@
   font-size: 20px;
   line-height: 32px;
 
-
+  margin-top: 5px;
   color: #000000;
 }
 
-@media (max-width: 1200px){
 
-}
 
 @media (max-width: 999px) {
 
+  .cartItem {
+    padding: 7px;
+  }
+  .picture {
+    width: 85px;
+    border-radius: 5px;
+  }
+
+  .number {
+    width: 25px;
+    height: 25px;
+    font-size: 11px;
+  }
+
+  .totalPrice {
+    font-size: 17px;
+  }
+
+  .changeCountBtn {
+    width: 25px;
+    height: 25px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -161,6 +181,80 @@
 }
 
 @media (max-width: 639px) {
+  .description {
+    max-width: 135px;
+  }
+
+  .title {
+    font-size: 14px;
+    line-height: 100%;
+    text-wrap: normal;
+  }
+
+  .totalPrice {
+    font-size: 18px;
+  }
+
+  .picture {
+    width: 100%;
+    max-height: 200px;
+    margin: auto;
+  }
+
+  .cartItem {
+    width: 100% !important;
+    position: relative;
+    flex-direction: column;
+    margin: 0;
+    padding: 3px;
+  }
+  .number {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 27px;
+    height: 27px;
+    font-size: 18px;
+  }
+
+  .conclusion {
+    width: 100%;
+    align-items: center;
+  }
+
+  .information {
+    width: 100%;
+    margin: auto;
+  }
+
+  .informationRow {
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+  }
+  .countBlock {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  .changeCountBtn {
+    width: auto;
+    padding: 0 14px;
+  }
+
+
+  .count {
+    margin: 0;
+  }
 
 }
 

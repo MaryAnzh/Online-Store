@@ -183,3 +183,19 @@
     transform: scale(0.8);
   }
 }
+
+
+@media (max-width: 639px) {
+  .buy {
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  .title {
+    font-size: 25px;
+  }
+
+  .info {
+    font-size: 17px;
+  }
+}
