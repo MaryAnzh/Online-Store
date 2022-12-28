@@ -1,6 +1,6 @@
 import React from 'react'
 import './ItemPage.scss'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { catalog } from '../../core/data/catalog.data';
 import { ReactComponent as CartLogo } from '../../assets/cart.svg';
 
@@ -34,11 +34,17 @@ export const ItemPage = (): JSX.Element => {
         );
     })
 
-
-
     return (
         <section className='item'>
             <div className='item__wrap'>
+                <ul className='item__wrap__breadcrumb'>
+                    <li className='item__wrap__breadcrumb__crumb'>
+                        <Link to={'./'}>Catalog
+                            <span>/</span> </Link>
+                    </li>
+                    <li className='item__wrap__breadcrumb__crumb'>{products.category}
+                        <span>/</span> </li>
+                </ul>
                 <h2 className='item__wrap__title'>{products.title}</h2>
                 <div className='item__wrap__info'>
                     <div className='item__wrap__info__img-wrap'>
