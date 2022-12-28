@@ -35,11 +35,14 @@
             &__img-wrap {
                 max-width: 500px;
                 width: 100%;
-                max-height: 500px;
-                height: 100%;
+                height: 40vh;
+                padding: 10px;
                 display: flex;
-                align-items: flex-start;
+                align-items: center;
                 justify-content: center;
+                border-radius: 7px;
+                overflow: hidden;
+                border: 2px solid gray;
 
                 &__image {
                     max-width: 100%;
@@ -57,7 +60,8 @@
 
                 @media (max-width: 940px) {
                     width: 100%;
-                    height: 270px;
+                    min-height: 270px;
+                    height: fit-content;
                     margin-top: 30px;
                     margin-left: 30px;
                 }
@@ -66,7 +70,7 @@
 
                     &__price {
                         font-weight: 700;
-                        font-size: 36px;
+                        font-size: 2.25em;
                         line-height: 42px;
                         color: $item-card-font-color;
                     }
@@ -75,9 +79,14 @@
                     &__brand {
                         display: flex;
                         font-weight: 600;
-                        font-size: 24px;
+                        font-size: 1.5em;
                         line-height: 42px;
                         color: $item-card-font-color;
+
+                        @media (max-width: 400px) {
+                            display: none;
+
+                        }
 
                         &__name {
                             display: block;
@@ -92,7 +101,7 @@
 
                     &__description {
                         padding-top: 10px;
-                        font-size: 24px;
+                        font-size: 1.4em;
                     }
                 }
             }
