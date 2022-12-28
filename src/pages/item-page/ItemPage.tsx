@@ -2,6 +2,7 @@ import React from 'react'
 import './ItemPage.scss'
 import { useParams } from 'react-router-dom'
 import { catalog } from '../../core/data/catalog.data';
+import { ReactComponent as CartLogo } from '../../assets/cart.svg';
 
 export const ItemPage = (): JSX.Element => {
     const params = useParams();
@@ -28,6 +29,20 @@ export const ItemPage = (): JSX.Element => {
                             alt={products.title} />
                     </div>
                     <div className='item__wrap__info__about'>
+                        <div className='item__wrap__info__about__block'>
+                            <p className='item__wrap__info__about__block__price'>{products.price} $</p>
+                            <p className='item__wrap__info__about__block__category'>
+                                Category: <span className='item__wrap__info__about__block__category__name'>{products.category}</span></p>
+                            <p className='item__wrap__info__about__block__brand'>
+                                Brand: <span className='item__wrap__info__about__block__brand__name'>{products.brand}</span>
+                            </p>
+                            <p className='item__wrap__info__about__block__description'>{products.description}</p>
+                        </div>
+
+                        <button className='blue-button item__wrap__info__about__button'>
+                            <CartLogo />
+                            <span>To Cart</span>
+                        </button>
                     </div>
                 </div>
             </div>

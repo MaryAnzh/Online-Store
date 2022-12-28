@@ -1,5 +1,5 @@
 .blue-button {
-    width: 96px;
+    width: 120px;
     height: 40px;
     background: $contrast-color;
     border-radius: 2px;
@@ -12,6 +12,16 @@
     color: white;
     cursor: pointer;
     transition: .3s;
+    padding: 0px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+        width: 15px;
+        margin-right: 5px;
+        fill: white
+    }
 
     &:hover {
         background: $contrast-color-hover;

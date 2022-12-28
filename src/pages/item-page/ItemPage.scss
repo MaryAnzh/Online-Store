@@ -30,15 +30,15 @@
 
             @media (max-width: 940px) {
                 flex-direction: column;
-                align-items: center;
             }
 
             &__img-wrap {
                 max-width: 500px;
                 width: 100%;
-                height: 500px;
+                max-height: 500px;
+                height: 100%;
                 display: flex;
-                align-items: center;
+                align-items: flex-start;
                 justify-content: center;
 
                 &__image {
@@ -49,11 +49,51 @@
 
             &__about {
                 width: calc(100% - 500px);
-                padding: 10px 0;
+                margin-left: 70px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
                 background: white;
 
                 @media (max-width: 940px) {
                     width: 100%;
+                    height: 270px;
+                    margin-top: 30px;
+                    margin-left: 30px;
+                }
+
+                &__block {
+
+                    &__price {
+                        font-weight: 700;
+                        font-size: 36px;
+                        line-height: 42px;
+                        color: $item-card-font-color;
+                    }
+
+                    &__category,
+                    &__brand {
+                        display: flex;
+                        font-weight: 600;
+                        font-size: 24px;
+                        line-height: 42px;
+                        color: $item-card-font-color;
+
+                        &__name {
+                            display: block;
+                            padding-left: 5px;
+                            font-weight: 400;
+
+                            &::first-letter {
+                                text-transform: uppercase;
+                            }
+                        }
+                    }
+
+                    &__description {
+                        padding-top: 10px;
+                        font-size: 24px;
+                    }
                 }
             }
         }
