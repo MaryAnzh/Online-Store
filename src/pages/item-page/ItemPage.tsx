@@ -1,6 +1,6 @@
-import React from 'react'
-import './ItemPage.scss'
-import { Link, useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import './ItemPage.scss';
+import { Link, useParams } from 'react-router-dom';
 import { catalog } from '../../core/data/catalog.data';
 import { ReactComponent as CartLogo } from '../../assets/cart.svg';
 
@@ -17,22 +17,34 @@ export const ItemPage = (): JSX.Element => {
         )
     }
 
-    const onClick = (e: React.MouseEvent<HTMLElement>): void => {
-        console.log(e.target);
+    const images = [...products.images];
+    const item = images.pop();
+    if (item !== undefined) {
+        images.unshift(item);
+    }
+
+    const [previewSRC, setSRC] = useState<string>(products.thumbnail);
+
+    const changeImageOnClick = (e: React.MouseEvent<HTMLElement>): void => {
+        const elem = e.target as HTMLImageElement;
+        const src = elem.src;
+        setSRC(src);
     };
 
-    const images = [...products.images];
-    images.reverse();
     const preview: JSX.Element[] = images.map((el, i) => {
         const active = i === 0 ? 'item-active' : '';
         return (
             <li key={`image_${i}`}
                 className={`item__wrap__info__img-wrap__preview__item ${active}`}
-                onClick={(e) => onClick(e)}>
+                onClick={(e) => {
+                    const elem = e.target as HTMLImageElement;
+                    const src = elem.src;
+                    setSRC(src);
+                }}>
                 <img src={el} alt={products.title} />
             </li>
         );
-    })
+    });
 
     return (
         <section className='item'>
@@ -54,7 +66,7 @@ export const ItemPage = (): JSX.Element => {
                         <div className='item__wrap__info__img-wrap__image'>
                             <img
                                 className='item__wrap__info__img-wrap__image'
-                                src={images[0]}
+                                src={previewSRC}
                                 alt={products.title} />
                         </div>
                     </div>
