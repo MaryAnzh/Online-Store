@@ -35,6 +35,7 @@ export const ItemPage = (): JSX.Element => {
                 <h2 className='item__wrap__title'>{products.title}</h2>
                 <div className='item__wrap__info'>
                     <ItemSlider images={products.images} title={products.title} />
+                    
                     <div className='item__wrap__info__about'>
                         <div className='item__wrap__info__about__block'>
                             <p className='item__wrap__info__about__block__price'>{products.price} $</p>

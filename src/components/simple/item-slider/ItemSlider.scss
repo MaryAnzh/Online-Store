@@ -23,10 +23,6 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
-
-        .item-active {
-            border: 1px solid gray;
-        }
     }
 
     &__image-wrap {
@@ -42,5 +38,4 @@
             max-height: 100%;
         }
     }
-
 }

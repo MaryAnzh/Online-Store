@@ -15,20 +15,30 @@ export const ItemSlider = (props: ItemSliderProps) => {
     }
 
     const [previewSRC, setSRC] = useState<string>(images[0]);
-    const changeImageOnClick = (e: React.MouseEvent<HTMLElement>): void => {
-        const elem = e.target as HTMLImageElement;
-        const src = elem.src;
-        elem.classList.add('item-active');
+    const [active, setActive] = useState<boolean>(false);
+
+    const activePreView = (value: boolean) => {
+        setActive(value);
+    }
+
+    const changeImageOnClick = ({ target }: React.MouseEvent<HTMLElement>): void => {
+        const elem = target as HTMLImageElement;
+        const { src } = elem;
         setSRC(src);
+        elem.classList.add('active-item');
     };
 
-    const previews = images.map(src =>
+    const previews = images.map((src, i) =>
+
         <Preview
             key={src}
             imageSRC={src}
             title={props.title}
             changeImageOnClick={changeImageOnClick}
+            active={active}
+            handleClick={setActive}
         />
+
     );
 
     return (
