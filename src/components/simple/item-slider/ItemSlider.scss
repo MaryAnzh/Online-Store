@@ -1,0 +1,46 @@
+@import '../../../style/utils/variable';
+
+.slider {
+    max-width: 500px;
+    width: 100%;
+    min-height: 40vh;
+    height: fit-content;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 7px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0px 0px 6px rgba($color: gray, $alpha: 0.4);
+
+    &__preview {
+        width: 80px;
+        height: 100%;
+        padding-right: 10px;
+        align-self: flex-start;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+        .item-active {
+            border: 1px solid gray;
+        }
+    }
+
+    &__image-wrap {
+        width: calc(100% - 80px);
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+
+        &__image {
+            max-width: 96%;
+            max-height: 100%;
+        }
+    }
+
+}

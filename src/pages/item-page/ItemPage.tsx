@@ -3,6 +3,7 @@ import './ItemPage.scss';
 import { Link, useParams } from 'react-router-dom';
 import { catalog } from '../../core/data/catalog.data';
 import { ReactComponent as CartLogo } from '../../assets/cart.svg';
+import { ItemSlider } from '../../components/simple/item-slider/ItemSlider';
 
 export const ItemPage = (): JSX.Element => {
     const params = useParams();
@@ -17,31 +18,6 @@ export const ItemPage = (): JSX.Element => {
         )
     }
 
-    const images = [...products.images];
-    const item = images.pop();
-    if (item !== undefined) {
-        images.unshift(item);
-    }
-
-    const [previewSRC, setSRC] = useState<string>(products.thumbnail);
-
-    const changeImageOnClick = (e: React.MouseEvent<HTMLElement>): void => {
-        const elem = e.target as HTMLImageElement;
-        const src = elem.src;
-        setSRC(src);
-    };
-
-    const preview: JSX.Element[] = images.map((el, i) => {
-        const active = i === 0 ? 'item-active' : '';
-        return (
-            <li key={`image_${i}`}
-                className={`item__wrap__info__img-wrap__preview__item ${active}`}
-                onClick={(e) => changeImageOnClick(e)}>
-                <img src={el} alt={products.title} />
-            </li>
-        );
-    });
-
     return (
         <section className='item'>
             <div className='item__wrap'>
@@ -51,21 +27,14 @@ export const ItemPage = (): JSX.Element => {
                             <span>/</span> </Link>
                     </li>
                     <li className='item__wrap__breadcrumb__crumb'>{products.category}
-                        <span>/</span> </li>
+                        <span>/</span>
+                    </li>
+                    <li className='item__wrap__breadcrumb__crumb'>{products.brand}
+                    </li>
                 </ul>
                 <h2 className='item__wrap__title'>{products.title}</h2>
                 <div className='item__wrap__info'>
-                    <div className='item__wrap__info__img-wrap'>
-                        <ul className='item__wrap__info__img-wrap__preview'>
-                            {preview}
-                        </ul>
-                        <div className='item__wrap__info__img-wrap__image'>
-                            <img
-                                className='item__wrap__info__img-wrap__image'
-                                src={previewSRC}
-                                alt={products.title} />
-                        </div>
-                    </div>
+                    <ItemSlider images={products.images} title={products.title} />
                     <div className='item__wrap__info__about'>
                         <div className='item__wrap__info__about__block'>
                             <p className='item__wrap__info__about__block__price'>{products.price} $</p>
