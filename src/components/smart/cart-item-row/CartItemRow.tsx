@@ -24,7 +24,9 @@ export const CartItemRow = (props: ICartItemRowProps): JSX.Element => {
     return (
         <div className={styles.cartItem}>
             <span className={styles.number}>{props.number}</span>
-            <img src={props.item.thumbnail} alt={props.item.title} className={styles.picture}/>
+            <div className={styles.imgWrap}>
+                <img src={props.item.thumbnail} alt={props.item.title} className={styles.image}/>
+            </div>
             <div className={styles.information}>
                 <span className={styles.title}>{props.item.title}</span>
                 <p className={styles.description}>{props.item.description}</p>
@@ -41,7 +43,7 @@ export const CartItemRow = (props: ICartItemRowProps): JSX.Element => {
                     <span className={styles.count}>{props.item.count}</span>
                     <button className={styles.changeCountBtn} onClick={increaseCountClick}>+</button>
                 </div>
-                <span className={styles.totalPrice}>{Math.floor(totalPrice)}</span>
+                <span className={styles.totalPrice}>{Math.floor(totalPrice)} $</span>
             </div>
         </div>
     )
