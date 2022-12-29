@@ -36,11 +36,7 @@ export const ItemPage = (): JSX.Element => {
         return (
             <li key={`image_${i}`}
                 className={`item__wrap__info__img-wrap__preview__item ${active}`}
-                onClick={(e) => {
-                    const elem = e.target as HTMLImageElement;
-                    const src = elem.src;
-                    setSRC(src);
-                }}>
+                onClick={(e) => changeImageOnClick(e)}>
                 <img src={el} alt={products.title} />
             </li>
         );
