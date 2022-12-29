@@ -7,9 +7,11 @@
   background-color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, .1);
   border-radius: 10px;
-  width: fit-content;
+  width: 100%;
+  margin: 0 auto;
 
   max-width: 460px;
+  height: fit-content;
 }
 
 .title {
@@ -179,5 +181,29 @@
   }
   &:active {
     transform: scale(0.8);
+  }
+}
+
+@media (max-width: 768px) {
+  .buy {
+    font-size: 20px;
+    font-weight: 400;
+    padding: 5px 0;
+  }
+}
+
+
+@media (max-width: 639px) {
+  .buy {
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  .title {
+    font-size: 25px;
+  }
+
+  .info {
+    font-size: 17px;
   }
 }

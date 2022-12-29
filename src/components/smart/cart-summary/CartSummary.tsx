@@ -48,7 +48,7 @@ export const CartSummary = (props: ICartSummaryProps): JSX.Element => {
         <div className={styles.cartSummary}>
             <h2 className={styles.title}>Summary</h2>
             <span className={styles.info}>Products: {props.itemsCount}</span>
-            <span className={styles.info}>Total: {totalPriceWithDiscount}</span>
+            <span className={styles.info}>Total: {totalPriceWithDiscount} $</span>
 
             {
                 promosActivated.length > 0
@@ -72,8 +72,7 @@ export const CartSummary = (props: ICartSummaryProps): JSX.Element => {
 
             <div className={styles.enterPromo}>
                 <input className={styles.enterPromoInput} placeholder="Enter your promo here" ref={inputReference}/>
-                <button className={styles.enterPromoButton} title="Activate promo code" onClick={addPromoHandler}>Add
-                </button>
+                <button className={styles.enterPromoButton} title="Activate promo code" onClick={addPromoHandler}>Add</button>
             </div>
 
             <button className={styles.buy} onClick={openModal}>Buy now</button>
