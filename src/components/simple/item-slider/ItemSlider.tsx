@@ -7,6 +7,13 @@ type ItemSliderProps = {
     images: string[],
 }
 
+type ImgPreview = {
+    id: string,
+    src: string,
+    title: string,
+    isActive: boolean
+}
+
 export const ItemSlider = (props: ItemSliderProps) => {
     const images = [...props.images];
     const lastSRC = images.pop();
@@ -14,33 +21,54 @@ export const ItemSlider = (props: ItemSliderProps) => {
         images.unshift(lastSRC);
     }
 
+    const imagesSet: ImgPreview[] = images.map((src, i) => {
+        const isActive = (i == 0);
+        return {
+            id: `${props.title}_${i}`,
+            src: src,
+            title: props.title,
+            isActive: isActive,
+        }
+    });
+
     const [previewSRC, setSRC] = useState<string>(images[0]);
+    const [prods, setProds] = useState(imagesSet);
     const [active, setActive] = useState<boolean>(false);
 
-    const activePreView = (value: boolean) => {
-        setActive(value);
+    const activePreview = (id: string) => {
+        setProds(prods.map(prod => {
+            if (prod.id == id) {
+                prod.isActive = true;
+                setActive(true);
+            } else {
+                prod.isActive = false;
+                setActive(false);
+            }
+            return prod;
+        }));
     }
 
     const changeImageOnClick = ({ target }: React.MouseEvent<HTMLElement>): void => {
         const elem = target as HTMLImageElement;
-        const childeNode = Array.from(elem.childNodes);
-        const img = childeNode[0] as HTMLImageElement;
-        const src = img !== undefined ? img.src : '';
-        setSRC(src);
+        activePreview(elem.id);
+        const id = elem.id;
+        const info = imagesSet.find(el => el.id == id);
+        if (info !== undefined) {
+            setSRC(info.src);
+        }
     };
 
-    const previews = images.map((src, i) =>
-
-        <Preview
-            key={src}
-            imageSRC={src}
-            title={props.title}
+    const previews: JSX.Element[] = imagesSet.map((elem) => {
+        console.log(`active: ${active}`);
+        return <Preview
+            key={elem.id}
+            id={elem.id}
+            title={elem.title}
+            src={elem.src}
+            isActive={elem.isActive}
             changeImageOnClick={changeImageOnClick}
-            active={active}
-            handleClick={setActive}
         />
-
-    );
+    });
 
     return (
         <div className='slider'>

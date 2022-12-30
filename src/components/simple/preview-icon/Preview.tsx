@@ -1,22 +1,22 @@
+import React, { useEffect } from 'react';
 import './Preview.scss';
 
 type PreviewProps = {
-    imageSRC: string,
+    id: string,
+    src: string,
     title: string,
-    active: boolean,
+    isActive: boolean,
     changeImageOnClick: (e: React.MouseEvent<HTMLElement>) => void,
-    handleClick: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const Preview = ({ active, changeImageOnClick, imageSRC, title, handleClick }: PreviewProps) => {
-    let isActive = active ? 'preview-item active-item' : 'preview-item';
-    console.log(`Change class name to ${isActive}`);
-
+export const Preview = ({ id, title, src, isActive, changeImageOnClick }: PreviewProps) => {
+    //console.log(`${id}: ${isActive}`);
     return (
         <li
-            className={isActive}
+            className={isActive ? 'preview-item-active' : 'preview-item-anActive'}
+            id={id}
             onClick={changeImageOnClick}>
-            <img src={imageSRC} alt={title} />
+            <img src={src} alt={title} />
         </li>
     )
 }
