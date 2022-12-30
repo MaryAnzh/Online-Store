@@ -11,10 +11,11 @@
   border-radius: 5px;
   &:not(:first-child) {
     margin-top: 10px;
-
   }
+  user-select: none;
 }
 .number {
+  user-select: none;
   background-color: $primary-black;
   color: white;
   font-family: 'SF Pro Display', sans-serif;
