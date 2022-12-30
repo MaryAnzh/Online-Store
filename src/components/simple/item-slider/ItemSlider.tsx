@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Preview } from '../preview-icon/Preview';
 import './ItemSlider.scss';
 
 type ItemSliderProps = {
@@ -33,47 +32,44 @@ export const ItemSlider = (props: ItemSliderProps) => {
 
     const [previewSRC, setSRC] = useState<string>(images[0]);
     const [prods, setProds] = useState(imagesSet);
-    const [active, setActive] = useState<boolean>(false);
 
-    const activePreview = (id: string) => {
-        setProds(prods.map(prod => {
-            if (prod.id == id) {
-                prod.isActive = true;
-                setActive(true);
+    const change = (e: React.MouseEvent) => {
+        const elem = e.target as HTMLElement;
+        const id = elem.id;
+        let src = '';
+        imagesSet.forEach(el => {
+            if (el.id === id) {
+                el.isActive = true;
+                src = el.src;
             } else {
-                prod.isActive = false;
-                setActive(false);
+                el.isActive = false;
             }
-            return prod;
-        }));
+        });
+        setSRC(src);
+        setProds(imagesSet);
     }
 
-    const changeImageOnClick = ({ target }: React.MouseEvent<HTMLElement>): void => {
-        const elem = target as HTMLImageElement;
-        activePreview(elem.id);
-        const id = elem.id;
-        const info = imagesSet.find(el => el.id == id);
-        if (info !== undefined) {
-            setSRC(info.src);
-        }
-    };
+    const views: JSX.Element[] = prods.map((el) => {
+        const className = el.isActive ? 'slider__preview__img-active' : 'slider__preview__img';
 
-    const previews: JSX.Element[] = imagesSet.map((elem) => {
-        console.log(`active: ${active}`);
-        return <Preview
-            key={elem.id}
-            id={elem.id}
-            title={elem.title}
-            src={elem.src}
-            isActive={elem.isActive}
-            changeImageOnClick={changeImageOnClick}
-        />
+        return (
+            <li
+                key={el.id}
+                id={el.id}
+                className={className}
+                onClick={change}>
+                <img src={el.src} alt={el.title} />
+            </li>
+        );
     });
 
     return (
         <div className='slider'>
             <ul className='slider__preview'>
-                {previews}
+                {
+                    /* {previews} */
+                    views
+                }
             </ul>
             <div className='slider__image-wrap'>
                 <img
