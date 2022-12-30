@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Preview } from '../preview-icon/Preview';
 import './ItemSlider.scss';
 
@@ -23,9 +23,10 @@ export const ItemSlider = (props: ItemSliderProps) => {
 
     const changeImageOnClick = ({ target }: React.MouseEvent<HTMLElement>): void => {
         const elem = target as HTMLImageElement;
-        const { src } = elem;
+        const childeNode = Array.from(elem.childNodes);
+        const img = childeNode[0] as HTMLImageElement;
+        const src = img !== undefined ? img.src : '';
         setSRC(src);
-        elem.classList.add('active-item');
     };
 
     const previews = images.map((src, i) =>

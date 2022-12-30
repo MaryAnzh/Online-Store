@@ -35,7 +35,7 @@ export const ItemPage = (): JSX.Element => {
                 <h2 className='item__wrap__title'>{products.title}</h2>
                 <div className='item__wrap__info'>
                     <ItemSlider images={products.images} title={products.title} />
-                    
+
                     <div className='item__wrap__info__about'>
                         <div className='item__wrap__info__about__block'>
                             <p className='item__wrap__info__about__block__price'>{products.price} $</p>
@@ -46,11 +46,17 @@ export const ItemPage = (): JSX.Element => {
                             </p>
                             <p className='item__wrap__info__about__block__description'>{products.description}</p>
                         </div>
+                        <div className='item__wrap__info__about__button-wrap'>
+                            <button className='blue-button'>
+                                <CartLogo />
+                                <span>To Cart</span>
+                            </button>
+                            <button className='blue-button item__wrap__info__about__button-wrap__button'>
+                                <CartLogo />
+                                <span>Buy</span>
+                            </button>
+                        </div>
 
-                        <button className='blue-button item__wrap__info__about__button'>
-                            <CartLogo />
-                            <span>To Cart</span>
-                        </button>
                     </div>
                 </div>
             </div>
