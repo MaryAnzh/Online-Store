@@ -41,6 +41,12 @@
   display: block;
 }
 
+.oldPrice {
+  @extend .info;
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
 .promosActivated {
   margin-top: 30px;
   display: flex;
@@ -149,6 +155,9 @@
   cursor: pointer;
 
   transition: 0.2s all;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   margin-left: 10px;
 
@@ -160,6 +169,23 @@
   &:active {
     transform: scale(0.8);
   }
+
+  min-height: 36px;
+  small {
+    color: $primary-black;
+    font-weight: 900;
+    font-size: 10px;
+  }
+
+  animation-timing-function: ease-in-out;
+  animation-name: promoAppears;
+  animation-duration: 0.2s;
+}
+
+.hint {
+  font-weight: 900;
+  margin-top: 5px;
+  font-style: italic;
 }
 
 .buy {

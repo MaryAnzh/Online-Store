@@ -7,6 +7,7 @@ import {NotFoundPage} from './pages/not-found-page/NotFoundPage'
 import {Header} from './components/common/header/Header'
 import {Footer} from './components/common/footer/Footer'
 
+
 export const App = (): JSX.Element => (
     <Router>
         <section className="wrapper">
