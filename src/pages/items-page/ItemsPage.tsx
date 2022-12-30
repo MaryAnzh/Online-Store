@@ -15,10 +15,10 @@ export const ItemsPage = (): JSX.Element => {
                 <section className='catalog__wrap__info-wrap'>
                     <div className='catalog__wrap__info-wrap__info'>
                         <h3 className='catalog__wrap__info-wrap__info__title'>
-                            Welcome to Online Stor
+                            Welcome to Online Store
                         </h3>
                         <p className='catalog__wrap__info-wrap__info__text'>
-                            A big choose of products, for every taste and wallet.
+                            A big choice of products, for every taste and wallet.
                         </p>
                     </div>
                 </section>
@@ -32,7 +32,8 @@ export const ItemsPage = (): JSX.Element => {
                     <div className='catalog__wrap__tools-wrap__search'>
                         <input
                             className='catalog__wrap__tools-wrap__search__input'
-                            type='text' />
+                            type='text'
+                            placeholder="Product search"/>
                         <button className='blue-button'>Search</button>
                     </div>
                 </section>
