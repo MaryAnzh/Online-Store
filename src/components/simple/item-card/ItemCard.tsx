@@ -12,9 +12,9 @@ type ItemTypeProps = {
 export const ItemCard = (props: ItemTypeProps): JSX.Element => {
 
     return (
-        <div 
-        key={`products_${props.item.id}`}
-        className='item-card'>
+        <div
+            key={`products_${props.item.id}`}
+            className='item-card'>
             <div className='item-card__image-wrap'>
                 <Link to={`/products/${props.item.id}`} className='item-card__image-wrap__link'>
                     <img
@@ -22,21 +22,22 @@ export const ItemCard = (props: ItemTypeProps): JSX.Element => {
                         src={props.item.thumbnail} alt={props.item.title} />
                 </Link>
             </div>
-
-            <div className='item-card__info'>
-                <h5 className='item-card__info__category'>
-                    {props.item.category}
-                </h5>
-                <h4 className='item-card__info__title'>
-                    {props.item.title}
-                </h4>
-                <h5 className='item-card__info__brand'>
-                    Brand: <span>{props.item.brand}</span>
-                </h5>
-                <p className='item-card__info__description'>
-                    {props.item.description}
-                </p>
-            </div>
+            <Link to={`/products/${props.item.id}`}>
+                <div className='item-card__info'>
+                    <h5 className='item-card__info__category'>
+                        {props.item.category}
+                    </h5>
+                    <h4 className='item-card__info__title'>
+                        {props.item.title}
+                    </h4>
+                    <h5 className='item-card__info__brand'>
+                        Brand: <span>{props.item.brand}</span>
+                    </h5>
+                    <p className='item-card__info__description'>
+                        {props.item.description}
+                    </p>
+                </div>
+            </Link>
             <div className='item-card__buy-info'>
                 <button className='blue-button item-card__buy-info__button'>
                     <CartLogo />
