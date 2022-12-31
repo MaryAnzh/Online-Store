@@ -2,6 +2,7 @@ import styles from './CartSummary.module.scss'
 import {IPromoCode} from '../../../core/interfaces/promoCode.interfaces'
 import React from 'react'
 import {ItemBuyModal} from '../../../containers/item-buy-modal/ItemBuyModal'
+import {ActivatedPromo} from '../../simple/activated-promo/ActivatedPromo'
 
 
 interface ICartSummaryProps {
@@ -14,30 +15,47 @@ interface ICartSummaryProps {
 export const CartSummary = (props: ICartSummaryProps): JSX.Element => {
     const [promosActivated, setPromosActivated] = React.useState<Array<IPromoCode>>([])
     const [totalPriceWithDiscount, setTotalPriceWithDiscount] = React.useState<number>(props.totalPrice)
-
     const [isModalShown, setIsModalShown] = React.useState<boolean>(false)
+    const [inputedPromo, setInputedPromo] = React.useState<string>('')
+    const [isAddPromoButtonShown, setIsAddPromoButtonShown] = React.useState<boolean>(false)
 
     const closeModal = (): void => setIsModalShown(false)
     const openModal = (): void => setIsModalShown(true)
-
 
     React.useEffect((): void => {
         const totalDiscount: number = promosActivated.reduce((response, current) => response + current.discount, 0)
         setTotalPriceWithDiscount(Math.floor(props.totalPrice * (1 - totalDiscount / 100)))
     }, [props.totalPrice, promosActivated])
 
-    const inputReference: React.RefObject<HTMLInputElement> = React.useRef<HTMLInputElement>(null)
+    React.useEffect((): void => {
 
-    const addPromoHandler = (): void => {
-        const inputedValue: string = inputReference.current?.value || ''
+        if (promosActivated.find((item: IPromoCode) => item.code === inputedPromo)) {
+            setIsAddPromoButtonShown(false)
+            return
+        }
+        const tryFind = props.workingPromoCodes.find((code: IPromoCode) => code.code === inputedPromo)
+        if (!tryFind) {
+            setIsAddPromoButtonShown(false)
+            return
+        }
 
-        if (promosActivated.find((item: IPromoCode) => item.code === inputedValue)) return
+        setIsAddPromoButtonShown(true)
+    }, [inputedPromo, props.workingPromoCodes, promosActivated])
 
-        const tryFind = props.workingPromoCodes.find((code: IPromoCode) => code.code === inputedValue)
+    const onPromoInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setInputedPromo(event.currentTarget.value)
+    }
+
+    const addPromoButtonClickHandler = (): void => {
+        if (promosActivated.find((item: IPromoCode) => item.code === inputedPromo)) return
+
+        const tryFind = props.workingPromoCodes.find((code: IPromoCode) => code.code === inputedPromo)
 
         if (!tryFind) return
 
         setPromosActivated((old: Array<IPromoCode>): Array<IPromoCode> => [...old, tryFind])
+        setIsAddPromoButtonShown(false)
+        setInputedPromo('')
     }
 
     const deactivatePromoCode = (code: string): void => {
@@ -48,7 +66,12 @@ export const CartSummary = (props: ICartSummaryProps): JSX.Element => {
         <div className={styles.cartSummary}>
             <h2 className={styles.title}>Summary</h2>
             <span className={styles.info}>Products: {props.itemsCount}</span>
-            <span className={styles.info}>Total: {totalPriceWithDiscount}</span>
+            {
+                promosActivated.length !== 0
+                &&
+                <span className={styles.oldPrice}>Total: {props.totalPrice} $</span>
+            }
+            <span className={styles.info}>Total: {totalPriceWithDiscount} $</span>
 
             {
                 promosActivated.length > 0
@@ -56,25 +79,28 @@ export const CartSummary = (props: ICartSummaryProps): JSX.Element => {
                 <div className={styles.promosActivated}>
                     {
                         promosActivated.map((promo: IPromoCode): JSX.Element => (
-                            <article className={styles.promoActivated} key={promo.code}>
-                                <span className={styles.promoName}>{promo.code}</span>
-                                <span className={styles.promoDiscount}>-{promo.discount}%</span>
-                                <button className={styles.dropPromo}
-                                        title="Deactivate promo code"
-                                        onClick={(): void => deactivatePromoCode(promo.code)}>
-                                    &times;
-                                </button>
-                            </article>
+                            <ActivatedPromo promo={promo} key={promo.code} onDeactivate={deactivatePromoCode}/>
                         ))
                     }
                 </div>
             }
 
             <div className={styles.enterPromo}>
-                <input className={styles.enterPromoInput} placeholder="Enter your promo here" ref={inputReference}/>
-                <button className={styles.enterPromoButton} title="Activate promo code" onClick={addPromoHandler}>Add
-                </button>
+                <input className={styles.enterPromoInput}
+                       placeholder="Enter your promo here"
+                       value={inputedPromo}
+                       onChange={onPromoInputChange}
+                />
+                {
+                    isAddPromoButtonShown
+                    &&
+                    <button className={styles.enterPromoButton}
+                            title="Activate promo code"
+                            onClick={addPromoButtonClickHandler}>Add <small>{inputedPromo}</small></button>
+                }
             </div>
+
+            <small className={styles.hint}>Check promocodes: "RS" and "stage2"</small>
 
             <button className={styles.buy} onClick={openModal}>Buy now</button>
 

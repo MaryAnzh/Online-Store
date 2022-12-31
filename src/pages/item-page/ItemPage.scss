@@ -1,0 +1,146 @@
+@import '../../style/utils/variable';
+
+.item {
+    width: 100%;
+    font-family: 'Roboto';
+    display: flex;
+    justify-content: center;
+
+    &__error {
+        text-align: center;
+        font-size: 45px;
+        font-weight: 500;
+    }
+
+    &__wrap {
+        max-width: 1200px;
+        width: 100%;
+
+        &__breadcrumb {
+            display: flex;
+
+            &__crumb {
+                font-size: 1.4em;
+                font-weight: 400;
+
+                &::first-letter {
+                    text-transform: uppercase;
+                }
+
+                a {
+                    font-weight: 400;
+
+                    &:hover {
+                        font-weight: 600;
+                    }
+
+                }
+            }
+
+            span {
+                padding: 0 10px;
+            }
+
+        }
+
+        &__title {
+            margin-bottom: 20px;
+            font-weight: 500;
+            font-size: 32px;
+            line-height: 56px;
+            color: $item-card-font-color;
+        }
+
+        &__info {
+            width: 100%;
+            display: flex;
+
+            @media (max-width: 940px) {
+                flex-direction: column;
+            }
+
+            &__about {
+                width: calc(100% - 500px);
+                margin-left: 70px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                background: white;
+
+                @media (max-width: 940px) {
+                    width: 100%;
+                    min-height: 270px;
+                    height: fit-content;
+                    margin-top: 30px;
+                    margin-left: 30px;
+                }
+
+                &__block {
+
+                    &__price {
+                        font-weight: 700;
+                        font-size: 2.25em;
+                        line-height: 42px;
+                        color: $item-card-font-color;
+                    }
+
+                    &__category,
+                    &__brand {
+                        display: flex;
+                        font-weight: 600;
+                        font-size: 1.5em;
+                        line-height: 42px;
+                        color: $item-card-font-color;
+
+                        @media (max-width: 400px) {
+                            display: none;
+
+                        }
+
+                        &__name {
+                            display: block;
+                            padding-left: 5px;
+                            font-weight: 400;
+
+                            &::first-letter {
+                                text-transform: uppercase;
+                            }
+                        }
+                    }
+
+                    &__description {
+                        padding-top: 10px;
+                        font-size: 1.4em;
+                    }
+                }
+
+                &__button-wrap {
+                    width: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+
+
+                    &__button {
+                        margin-left: 30px;
+                        color: $contrast-color;
+                        background: white;
+                        border: 1px solid $contrast-color;
+
+                        svg {
+                            fill: $contrast-color;
+                        }
+
+                        &:hover {
+                            color: white;
+
+                            svg {
+                                fill: white;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
