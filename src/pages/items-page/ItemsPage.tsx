@@ -12,6 +12,10 @@ export const ItemsPage = (): JSX.Element => {
     const brands: string[] = Filter.createNameSet(itemCatalog, 'brand');
     const filterItemsOnChange = (e: React.ChangeEvent) => {
         const elem = e.target as HTMLSelectElement;
+        if (elem.value === '...') {
+            setProds(itemCatalog);
+            return;
+        }
         const itemObjectKey: keyof IItem = elem.id as keyof IItem;
         const filteringArr = [...itemCatalog].filter(el => el[itemObjectKey] === elem.value);
         setProds(filteringArr);
@@ -32,13 +36,14 @@ export const ItemsPage = (): JSX.Element => {
         </option>
     );
 
-    const brandFilter: JSX.Element[] = brands.map((name) =>
-        <option
-            key={name}
-            value={name}>
-            {name}
-        </option>
-    );
+    const brandFilter: JSX.Element[] = brands.map((name, i) => {
+        return (
+            <option
+                key={name}
+                value={name}>
+                {name}
+            </option>)
+    });
 
     return (
         <section className='catalog'>
@@ -58,20 +63,23 @@ export const ItemsPage = (): JSX.Element => {
                         Sort
                     </div>
                     <div className='catalog__wrap__tools-wrap__filter'>
-                        Filter:
                         <div className='catalog__wrap__tools-wrap__filter__wrap'>
+                            <h3>Category</h3>
                             <select
                                 className='catalog__wrap__tools-wrap__filter__wrap__category'
                                 id='category'
                                 onChange={filterItemsOnChange}>
+                                <option value='...'>...</option>
                                 {categoriesFilter}
                             </select>
                         </div>
                         <div className='catalog__wrap__tools-wrap__filter__wrap'>
+                            <h3>Brand</h3>
                             <select
                                 id='brand'
                                 className='catalog__wrap__tools-wrap__filter__wrap__brand'
                                 onChange={filterItemsOnChange}>
+                                <option value='...'>...</option>
                                 {brandFilter}
                             </select>
                         </div>
