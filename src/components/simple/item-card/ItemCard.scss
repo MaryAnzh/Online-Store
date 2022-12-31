@@ -1,7 +1,7 @@
 @import '../../../style/utils/variable';
 
 .item-card {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     max-width: 384px;
     width: 100%;
     display: flex;
@@ -10,7 +10,8 @@
     padding: 10px 0px;
     border-radius: 7px;
     background: white;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+
 
 
     &__image-wrap {
@@ -60,6 +61,7 @@
             font-weight: 400;
             font-size: 24px;
             line-height: 32px;
+            font-family: 'Roboto', sans-serif;
 
             &::first-letter {
                 text-transform: uppercase;

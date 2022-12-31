@@ -1,10 +1,12 @@
+@import "../utils/variable";
+
 .blue-button {
     width: 120px;
     height: 40px;
-    background: $contrast-color;
+    background: $primary-blue;
     border-radius: 2px;
 
-    font-family: 'SF Pro Display';
+    font-family: 'SF Pro Display', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -25,5 +27,9 @@
 
     &:hover {
         background: $contrast-color-hover;
+    }
+
+    &:active {
+        transform: scale(0.8);
     }
 }

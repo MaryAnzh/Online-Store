@@ -8,6 +8,7 @@ import {Header} from './components/common/header/Header'
 import {Footer} from './components/common/footer/Footer'
 import { ItemPage } from './pages/item-page/ItemPage'
 
+
 export const App = (): JSX.Element => (
     <Router>
         <section className="wrapper">
