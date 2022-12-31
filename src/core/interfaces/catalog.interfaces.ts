@@ -2,7 +2,8 @@ export interface ICatalog {
     products: IItem[],
     total: number,
     skip: number,
-    limit: number
+    limit: number,
+    itemsInCart: number,
 }
 
 export interface IItem {
@@ -12,6 +13,7 @@ export interface IItem {
     price: number,
     discountPercentage: number,
     rating: number,
+    inCartCount: number,
     stock: number,
     brand: string,
     category: string,
