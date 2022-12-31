@@ -7,8 +7,7 @@ import { IItem } from '../../core/interfaces/catalog.interfaces';
 export const ItemsPage = (): JSX.Element => {
     const itemCatalog: IItem[] = [...catalog.products];
     const itemsList: JSX.Element[] = itemCatalog.map(elem => <ItemCard item={elem} />);
-    const category =
-        console.log();
+    
     return (
         <section className='catalog'>
             <div className='catalog__wrap'>
