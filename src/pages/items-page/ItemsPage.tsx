@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { catalog } from '../../core/data/catalog.data';
 import './ItemsPage.scss'
 import { ItemCard } from '../../components/simple/item-card/ItemCard';
@@ -7,16 +7,38 @@ import { Filter } from '../../core/utils/filter';
 
 export const ItemsPage = (): JSX.Element => {
     const itemCatalog: IItem[] = [...catalog.products];
+    const [prods, setProds] = useState(itemCatalog);
     const categories: string[] = Filter.createNameSet(itemCatalog, 'category');
     const brands: string[] = Filter.createNameSet(itemCatalog, 'brand');
-    
-    const itemsList: JSX.Element[] = itemCatalog.map(elem => {
+    const filterItemsOnChange = (e: React.ChangeEvent) => {
+        const elem = e.target as HTMLSelectElement;
+        const itemObjectKey: keyof IItem = elem.id as keyof IItem;
+        const filteringArr = [...itemCatalog].filter(el => el[itemObjectKey] === elem.value);
+        setProds(filteringArr);
+    }
+
+    const itemsList: JSX.Element[] = prods.map(elem => {
         return (
             <ItemCard
                 key={elem.id}
                 item={elem} />)
     });
 
+    const categoriesFilter: JSX.Element[] = categories.map((name) =>
+        <option
+            key={name}
+            value={name}>
+            {name}
+        </option>
+    );
+
+    const brandFilter: JSX.Element[] = brands.map((name) =>
+        <option
+            key={name}
+            value={name}>
+            {name}
+        </option>
+    );
 
     return (
         <section className='catalog'>
@@ -37,9 +59,23 @@ export const ItemsPage = (): JSX.Element => {
                     </div>
                     <div className='catalog__wrap__tools-wrap__filter'>
                         Filter:
-                        <select className='catalog__wrap__tools-wrap__filter__category'>
+                        <div className='catalog__wrap__tools-wrap__filter__wrap'>
+                            <select
+                                className='catalog__wrap__tools-wrap__filter__wrap__category'
+                                id='category'
+                                onChange={filterItemsOnChange}>
+                                {categoriesFilter}
+                            </select>
+                        </div>
+                        <div className='catalog__wrap__tools-wrap__filter__wrap'>
+                            <select
+                                id='brand'
+                                className='catalog__wrap__tools-wrap__filter__wrap__brand'
+                                onChange={filterItemsOnChange}>
+                                {brandFilter}
+                            </select>
+                        </div>
 
-                        </select>
                     </div>
                     <div className='catalog__wrap__tools-wrap__search'>
                         <input
@@ -58,7 +94,7 @@ export const ItemsPage = (): JSX.Element => {
                     </div>
                 </section>
 
-            </div>
-        </section>
+            </div >
+        </section >
     )
 }

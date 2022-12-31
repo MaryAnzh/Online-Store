@@ -82,6 +82,10 @@
 
             &__filter {
                 width: 30%;
+                padding: 0 10px;
+                display: flex;
+                justify-content: space-between;
+
             }
 
             &__search {
