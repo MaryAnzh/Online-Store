@@ -1,3 +1,5 @@
+@import "../../style/utils/variable";
+
 .container {
   padding-top: 30px;
   max-width: 1200px;
@@ -15,7 +17,12 @@
   grid-column-gap: 30px;
 }
 
-
+.emptyCartMessage {
+  font-weight: 500;
+  font-size: 34px;
+  color: $primary-black;
+  font-family: 'SF Pro Display', sans-serif;
+}
 
 
 
