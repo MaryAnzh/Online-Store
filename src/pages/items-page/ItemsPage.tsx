@@ -3,11 +3,21 @@ import { catalog } from '../../core/data/catalog.data';
 import './ItemsPage.scss'
 import { ItemCard } from '../../components/simple/item-card/ItemCard';
 import { IItem } from '../../core/interfaces/catalog.interfaces';
+import { Filter } from '../../core/utils/filter';
 
 export const ItemsPage = (): JSX.Element => {
     const itemCatalog: IItem[] = [...catalog.products];
-    const itemsList: JSX.Element[] = itemCatalog.map(elem => <ItemCard item={elem} />);
+    const categories: string[] = Filter.createNameSet(itemCatalog, 'category');
+    const brands: string[] = Filter.createNameSet(itemCatalog, 'brand');
     
+    const itemsList: JSX.Element[] = itemCatalog.map(elem => {
+        return (
+            <ItemCard
+                key={elem.id}
+                item={elem} />)
+    });
+
+
     return (
         <section className='catalog'>
             <div className='catalog__wrap'>
@@ -26,7 +36,10 @@ export const ItemsPage = (): JSX.Element => {
                         Sort
                     </div>
                     <div className='catalog__wrap__tools-wrap__filter'>
-                        Filter
+                        Filter:
+                        <select className='catalog__wrap__tools-wrap__filter__category'>
+
+                        </select>
                     </div>
                     <div className='catalog__wrap__tools-wrap__search'>
                         <input

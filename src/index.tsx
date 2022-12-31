@@ -16,4 +16,4 @@ root.render(
     </React.StrictMode>
 )
 
-console.log(catalog)
+// console.log(catalog)
