@@ -22,7 +22,7 @@ export const App = (): JSX.Element => {
                         <Route path="/" element={<ItemsPage state={state.current}/>}/>
                         <Route path="/cart" element={<CartPage state={state.current}/>}/>
                         <Route path="/*" element={<NotFoundPage/>}/>
-                        <Route path="/products/:id" element={<ItemPage />} />
+                        <Route path="/products/:id" element={<ItemPage state={state.current} />} />
                     </Routes>
                 </main>
                 < Footer/>
