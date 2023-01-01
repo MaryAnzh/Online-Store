@@ -10,32 +10,16 @@ export class ShopState {
     public readonly cart: ICart
 
     public constructor() {
-        this.cart = this.getCartState()
+        this.cart = this.getSavedCartState()
+        this.checkPageAfterLimitChangeOrItemsCountChange()
         makeAutoObservable(this, {}, {deep: true})
     }
 
-    private getCartState(): ICart {
-        const tryGet: string | null = localStorage.getItem(ShopState.LS_CART_STATE_KEY)
 
-        if (tryGet === null) return cart
-
-        try {
-            return JSON.parse(tryGet)
-        } catch (error) {
-            console.warn('Can\'t parse saved state. Setting default one', error)
-            return cart
-        }
-    }
-
-    private saveCartState(): void {
-        console.log(this.cart)
-        localStorage.setItem(ShopState.LS_CART_STATE_KEY, JSON.stringify(this.cart))
-    }
-
-    public increaseQuantityInCart(item: IItem): void {
+    public increaseQuantityInCart(item: IItem, fromCatalog: boolean = false): void {
         const tryIfItemInCart = this.cart.items.find((it: ICartItem): boolean => it.id === item.id)
 
-        if (tryIfItemInCart) {
+        if (tryIfItemInCart && !fromCatalog) {
             if (tryIfItemInCart.count >= tryIfItemInCart.stock) return
 
             ++tryIfItemInCart.count
@@ -43,6 +27,24 @@ export class ShopState {
             this.cart.items.push({...item, count: 1})
         }
 
+        if (fromCatalog) {
+            this.cart.limit = this.cart.items.length
+        }
+
+        ++this.cart.totalCount
+
+        this.saveCartState()
+    }
+
+    public dropItemFromCart(id: number): void {
+        const position: number = this.getPositionInCart(id)
+        if (position === -1) {
+            return
+        }
+        this.cart.totalCount -= this.cart.items[position].count
+
+        this.cart.items.splice(position, 1)
+        this.checkLimitAndPage()
         this.saveCartState()
     }
 
@@ -52,7 +54,10 @@ export class ShopState {
         } else {
             const position: number = this.getPositionInCart(item.id)
             this.cart.items.splice(position, 1)
+            this.checkLimitAndPage()
         }
+
+        --this.cart.totalCount
 
         this.saveCartState()
     }
@@ -66,14 +71,54 @@ export class ShopState {
     }
 
     public setCartLimit(newLimit: number): void {
-        if  (newLimit > 0 && newLimit <= this.cart.items.length)
+        if (newLimit > 0 && newLimit <= this.cart.items.length) {
             this.cart.limit = newLimit
+            this.saveCartState()
+        }
     }
 
-    public changePageInCart(delta: -1 | 1): void{
-        if (this.cart.page + delta <= 0 || this.cart.limit * (this.cart.page + delta - 1) >= this.cart.items.length)
+    public changePageInCart(delta: -1 | 1): void {
+        if (this.cart.page + delta <= 0 || this.cart.limit * (this.cart.page + delta - 1) >= this.cart.items.length) {
             return
+        }
 
         this.cart.page += delta
+        this.saveCartState()
+    }
+
+    public clearCart(): void {
+        this.cart.items.length = 0
+        this.cart.page = 1
+        this.cart.limit = 1
+        this.saveCartState()
+    }
+
+    private getSavedCartState(): ICart {
+        const tryGet: string | null = localStorage.getItem(ShopState.LS_CART_STATE_KEY)
+
+        if (tryGet === null) return cart
+
+        try {
+            return JSON.parse(tryGet)
+        } catch (error) {
+            console.warn('Can\'t parse saved state. Setting default one', error)
+            return cart
+        }
+    }
+
+    private saveCartState(): void {
+        localStorage.setItem(ShopState.LS_CART_STATE_KEY, JSON.stringify(this.cart))
+    }
+
+    private checkLimitAndPage(): void {
+        this.cart.limit = Math.min(this.cart.limit, this.cart.items.length)
+        this.checkPageAfterLimitChangeOrItemsCountChange()
+    }
+
+    private checkPageAfterLimitChangeOrItemsCountChange(): void {
+        // if it was last item on page, page should decrement after item drop
+        if (this.cart.limit * (this.cart.page - 1) >= this.cart.items.length && this.cart.page > 1) {
+           --this.cart.page
+        }
     }
 }

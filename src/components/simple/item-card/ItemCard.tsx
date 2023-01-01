@@ -13,7 +13,13 @@ type ItemTypeProps = {
 }
 
 export const ItemCard = observer((props: ItemTypeProps): JSX.Element => {
-    const buyButtonClicked = (): void => props.state.increaseQuantityInCart(props.item)
+    const isItemInCard: boolean = props.state.isItemInCart(props.item.id)
+
+    const buyButtonClicked = (): void => {
+        isItemInCard
+            ? props.state.dropItemFromCart(props.item.id)
+            : props.state.increaseQuantityInCart(props.item, true)
+    }
 
     return (
         <div
@@ -43,9 +49,10 @@ export const ItemCard = observer((props: ItemTypeProps): JSX.Element => {
                 </div>
             </Link>
             <div className="item-card__buy-info">
-                <button className="blue-button item-card__buy-info__button" onClick={buyButtonClicked}>
+                <button className="blue-button item-card__buy-info__button"
+                        onClick={buyButtonClicked}>
                     <CartLogo/>
-                    {props.state.isItemInCart(props.item.id) ? 'In cart' : 'Buy' }
+                    {props.state.isItemInCart(props.item.id) ? 'In cart' : 'Buy'}
                 </button>
                 <p className="item-card__buy-info__price">
                     {props.item.price} &#36;
