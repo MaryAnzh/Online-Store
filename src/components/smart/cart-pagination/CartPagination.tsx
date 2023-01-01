@@ -1,13 +1,14 @@
 import styles from './CartPagination.module.scss'
 import React from 'react'
 import {ShopState} from '../../../core/state/ShopState'
+import {observer} from 'mobx-react-lite'
 
 
 interface ICartPaginationProps {
     state: ShopState
 }
 
-export const CartPagination = (props: ICartPaginationProps): JSX.Element => {
+export const CartPagination = observer((props: ICartPaginationProps): JSX.Element => {
     const onLimitChange = (event: React.ChangeEvent<HTMLInputElement>): void => props.state.setCartLimit(Number(event.currentTarget.value))
 
     const nextPageClick = (): void => props.state.changePageInCart(1)
@@ -30,4 +31,4 @@ export const CartPagination = (props: ICartPaginationProps): JSX.Element => {
             </div>
         </div>
     )
-}
+})

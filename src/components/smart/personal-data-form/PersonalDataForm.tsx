@@ -95,7 +95,7 @@ export const PersonalDataForm = (props: IPersonalDataFormProps): JSX.Element => 
                          onOwnerChange={cardOwnerChanged}
             />
 
-            <button className="blue-button">Confirm</button>
+            <button className="blue-button" onClick={confirmButtonClicked}>Confirm</button>
         </form>
     )
 }

@@ -12,11 +12,10 @@ interface ICartPageProps {
 }
 
 export const CartPage = observer((props: ICartPageProps): JSX.Element => {
-    const [totalPrice, setTotalPrice] = React.useState<number>(0)
-    const [totalCount, setTotalCount] = React.useState<number>(0)
-    const cartSize: number = props.state.cart.items.length
+    const totalPrice: number = props.state.getTotalPrice()
+    const totalCount: number = props.state.cart.totalCount
 
-    if (cartSize === 0) {
+    if (totalCount === 0) {
         return (
             <div className={styles.container}>
                 <span className={styles.emptyCartMessage}>Cart is empty</span>

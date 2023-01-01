@@ -33,7 +33,6 @@ export const CartSummary = (props: ICartSummaryProps): JSX.Element => {
     }, [props.totalPrice, promosActivated])
 
     React.useEffect((): void => {
-
         if (promosActivated.find((item: IPromoCode) => item.code === inputedPromo)) {
             setIsAddPromoButtonShown(false)
             return

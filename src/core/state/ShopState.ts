@@ -71,8 +71,11 @@ export class ShopState {
     }
 
     public setCartLimit(newLimit: number): void {
+        this.cart.page = 1
+
         if (newLimit > 0 && newLimit <= this.cart.items.length) {
             this.cart.limit = newLimit
+            this.cart.page = 1
             this.saveCartState()
         }
     }
@@ -90,6 +93,7 @@ export class ShopState {
         this.cart.items.length = 0
         this.cart.page = 1
         this.cart.limit = 1
+        this.cart.totalCount = 0
         this.saveCartState()
     }
 
@@ -118,7 +122,11 @@ export class ShopState {
     private checkPageAfterLimitChangeOrItemsCountChange(): void {
         // if it was last item on page, page should decrement after item drop
         if (this.cart.limit * (this.cart.page - 1) >= this.cart.items.length && this.cart.page > 1) {
-           --this.cart.page
+            --this.cart.page
         }
+    }
+
+    public getTotalPrice(): number {
+        return this.cart.items.reduce((result: number, current: ICartItem) => result + current.count * current.price, 0)
     }
 }

@@ -1,4 +1,3 @@
-import {IItem} from '../../../core/interfaces/catalog.interfaces'
 import styles from './CartItemRow.module.scss'
 import React from 'react'
 import {ICartItem} from '../../../core/interfaces/cart.interfaces'
@@ -12,12 +11,7 @@ interface ICartItemRowProps {
 
 
 export const CartItemRow = observer((props: ICartItemRowProps): JSX.Element => {
-    const [totalPrice, setTotalPrice] = React.useState<number>(
-        props.item.price * (1 - props.item.discountPercentage / 100))
-
-    React.useEffect((): void => {
-        setTotalPrice(props.item.count * props.item.price * (1 - props.item.discountPercentage / 100))
-    }, [props.item.count, props.item.discountPercentage, props.item.price])
+    const totalPrice: number = props.item.price * props.item.count
 
     const decreaseCountClick = (): void => props.state.decreaseQuantityInCart(props.item)
     const increaseCountClick = (): void => props.state.increaseQuantityInCart(props.item)
