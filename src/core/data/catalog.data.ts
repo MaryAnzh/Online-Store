@@ -13,7 +13,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 549,
             "discountPercentage": 12.96,
             "rating": 4.69,
-            "inCartCount": 0,
+            
             "stock": 94,
             "brand": "Apple",
             "category": "smartphones",
@@ -33,7 +33,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 899,
             "discountPercentage": 17.94,
             "rating": 4.44,
-            "inCartCount": 0,
+            
             "stock": 34,
             "brand": "Apple",
             "category": "smartphones",
@@ -52,7 +52,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 1249,
             "discountPercentage": 15.46,
             "rating": 4.09,
-            "inCartCount": 0,
+            
             "stock": 36,
             "brand": "Samsung",
             "category": "smartphones",
@@ -68,7 +68,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 280,
             "discountPercentage": 17.91,
             "rating": 4.3,
-            "inCartCount": 0,
+            
             "stock": 123,
             "brand": "OPPO",
             "category": "smartphones",
@@ -88,7 +88,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 499,
             "discountPercentage": 10.58,
             "rating": 4.09,
-            "inCartCount": 0,
+            
             "stock": 32,
             "brand": "Huawei",
             "category": "smartphones",
@@ -106,7 +106,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 1749,
             "discountPercentage": 11.02,
             "rating": 4.57,
-            "inCartCount": 0,
+            
             "stock": 83,
             "brand": "APPle",
             "category": "laptops",
@@ -125,7 +125,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 1499,
             "discountPercentage": 4.15,
             "rating": 4.25,
-            "inCartCount": 0,
+            
             "stock": 50,
             "brand": "Samsung",
             "category": "laptops",
@@ -144,7 +144,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 1499,
             "discountPercentage": 10.23,
             "rating": 4.43,
-            "inCartCount": 0,
+            
             "stock": 68,
             "brand": "Microsoft Surface",
             "category": "laptops",
@@ -164,7 +164,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 1099,
             "discountPercentage": 11.83,
             "rating": 4.54,
-            "inCartCount": 0,
+            
             "stock": 96,
             "brand": "Infinix",
             "category": "laptops",
@@ -184,7 +184,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 1099,
             "discountPercentage": 6.18,
             "rating": 4.43,
-            "inCartCount": 0,
+            
             "stock": 89,
             "brand": "HP Pavilion",
             "category": "laptops",
@@ -203,7 +203,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 13,
             "discountPercentage": 8.4,
             "rating": 4.26,
-            "inCartCount": 0,
+            
             "stock": 65,
             "brand": "Impression of Acqua Di Gio",
             "category": "fragrances",
@@ -222,7 +222,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 40,
             "discountPercentage": 15.66,
             "rating": 4,
-            "inCartCount": 0,
+            
             "stock": 52,
             "brand": "Royal_Mirage",
             "category": "fragrances",
@@ -242,7 +242,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 13,
             "discountPercentage": 8.14,
             "rating": 4.59,
-            "inCartCount": 0,
+            
             "stock": 61,
             "brand": "Fog Scent Xpressio",
             "category": "fragrances",
@@ -262,7 +262,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 120,
             "discountPercentage": 15.6,
             "rating": 4.21,
-            "inCartCount": 0,
+            
             "stock": 114,
             "brand": "Al Munakh",
             "category": "fragrances",
@@ -281,7 +281,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 30,
             "discountPercentage": 10.99,
             "rating": 4.7,
-            "inCartCount": 0,
+            
             "stock": 105,
             "brand": "Lord - Al-Rehab",
             "category": "fragrances",
@@ -301,7 +301,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 19,
             "discountPercentage": 13.31,
             "rating": 4.83,
-            "inCartCount": 0,
+            
             "stock": 110,
             "brand": "L'Oreal Paris",
             "category": "skincare",
@@ -321,7 +321,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 12,
             "discountPercentage": 4.09,
             "rating": 4.52,
-            "inCartCount": 0,
+            
             "stock": 78,
             "brand": "Hemani Tea",
             "category": "skincare",
@@ -340,7 +340,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 40,
             "discountPercentage": 13.1,
             "rating": 4.56,
-            "inCartCount": 0,
+            
             "stock": 88,
             "brand": "Dermive",
             "category": "skincare",
@@ -360,7 +360,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 46,
             "discountPercentage": 10.68,
             "rating": 4.42,
-            "inCartCount": 0,
+            
             "stock": 54,
             "brand": "ROREC White Rice",
             "category": "skincare",
@@ -379,7 +379,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 70,
             "discountPercentage": 16.99,
             "rating": 4.06,
-            "inCartCount": 0,
+            
             "stock": 140,
             "brand": "Fair & Clear",
             "category": "skincare",
@@ -399,7 +399,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 20,
             "discountPercentage": 4.81,
             "rating": 4.44,
-            "inCartCount": 0,
+            
             "stock": 133,
             "brand": "Saaf & Khaas",
             "category": "groceries",
@@ -417,7 +417,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 14,
             "discountPercentage": 15.58,
             "rating": 4.57,
-            "inCartCount": 0,
+            
             "stock": 146,
             "brand": "Bake Parlor Big",
             "category": "groceries",
@@ -435,7 +435,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 14,
             "discountPercentage": 8.04,
             "rating": 4.85,
-            "inCartCount": 0,
+            
             "stock": 26,
             "brand": "Baking Food Items",
             "category": "groceries",
@@ -455,7 +455,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 46,
             "discountPercentage": 16.8,
             "rating": 4.94,
-            "inCartCount": 0,
+            
             "stock": 113,
             "brand": "fauji",
             "category": "groceries",
@@ -475,7 +475,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 70,
             "discountPercentage": 13.58,
             "rating": 4.87,
-            "inCartCount": 0,
+            
             "stock": 47,
             "brand": "Dry Rose",
             "category": "groceries",
@@ -495,7 +495,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 41,
             "discountPercentage": 17.86,
             "rating": 4.08,
-            "inCartCount": 0,
+            
             "stock": 131,
             "brand": "Boho Decor",
             "category": "home-decoration",
@@ -516,7 +516,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 51,
             "discountPercentage": 15.58,
             "rating": 4.41,
-            "inCartCount": 0,
+            
             "stock": 17,
             "brand": "Flying Wooden",
             "category": "home-decoration",
@@ -536,7 +536,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 20,
             "discountPercentage": 16.49,
             "rating": 4.82,
-            "inCartCount": 0,
+            
             "stock": 54,
             "brand": "LED Lights",
             "category": "home-decoration",
@@ -556,7 +556,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 60,
             "discountPercentage": 15.34,
             "rating": 4.44,
-            "inCartCount": 0,
+            
             "stock": 7,
             "brand": "luxury palace",
             "category": "home-decoration",
@@ -576,7 +576,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 30,
             "discountPercentage": 2.92,
             "rating": 4.92,
-            "inCartCount": 0,
+            
             "stock": 54,
             "brand": "Golden",
             "category": "home-decoration",
@@ -595,7 +595,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 40,
             "discountPercentage": 17,
             "rating": 4.16,
-            "inCartCount": 0,
+            
             "stock": 140,
             "brand": "Furniture Bed Set",
             "category": "furniture",
@@ -615,7 +615,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 50,
             "discountPercentage": 15.59,
             "rating": 4.74,
-            "inCartCount": 0,
+            
             "stock": 30,
             "brand": "Ratttan Outdoor",
             "category": "furniture",
@@ -634,7 +634,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 700,
             "discountPercentage": 17,
             "rating": 4.31,
-            "inCartCount": 0,
+            
             "stock": 106,
             "brand": "Kitchen Shelf",
             "category": "furniture",
@@ -654,7 +654,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 50,
             "discountPercentage": 4,
             "rating": 4.01,
-            "inCartCount": 0,
+            
             "stock": 136,
             "brand": "Multi Purpose",
             "category": "furniture",
@@ -674,7 +674,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 41,
             "discountPercentage": 7.98,
             "rating": 4.06,
-            "inCartCount": 0,
+            
             "stock": 68,
             "brand": "AmnaMart",
             "category": "furniture",
@@ -694,7 +694,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 90,
             "discountPercentage": 10.89,
             "rating": 4.26,
-            "inCartCount": 0,
+            
             "stock": 39,
             "brand": "Professional Wear",
             "category": "tops",
@@ -714,7 +714,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 50,
             "discountPercentage": 12.05,
             "rating": 4.52,
-            "inCartCount": 0,
+            
             "stock": 107,
             "brand": "Soft Cotton",
             "category": "tops",
@@ -734,7 +734,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 100,
             "discountPercentage": 11.12,
             "rating": 4.8,
-            "inCartCount": 0,
+            
             "stock": 20,
             "brand": "Soft Cotton",
             "category": "tops",
@@ -753,7 +753,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 600,
             "discountPercentage": 17.2,
             "rating": 4.55,
-            "inCartCount": 0,
+            
             "stock": 55,
             "brand": "Top Sweater",
             "category": "tops",
@@ -773,7 +773,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 57,
             "discountPercentage": 13.39,
             "rating": 4.91,
-            "inCartCount": 0,
+            
             "stock": 84,
             "brand": "Top Sweater",
             "category": "tops",
@@ -790,7 +790,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 55,
             "discountPercentage": 15.05,
             "rating": 4.65,
-            "inCartCount": 0,
+            
             "stock": 21,
             "brand": "RED MICKY MOUSE..",
             "category": "womens-dresses",
@@ -810,7 +810,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 80,
             "discountPercentage": 15.37,
             "rating": 4.05,
-            "inCartCount": 0,
+            
             "stock": 148,
             "brand": "Digital Printed",
             "category": "womens-dresses",
@@ -830,7 +830,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 600,
             "discountPercentage": 15.55,
             "rating": 4.31,
-            "inCartCount": 0,
+            
             "stock": 150,
             "brand": "Ghazi Fabric",
             "category": "womens-dresses",
@@ -850,7 +850,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 79,
             "discountPercentage": 16.88,
             "rating": 4.03,
-            "inCartCount": 0,
+            
             "stock": 2,
             "brand": "Ghazi Fabric",
             "category": "womens-dresses",
@@ -870,7 +870,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 50,
             "discountPercentage": 5.07,
             "rating": 4.67,
-            "inCartCount": 0,
+            
             "stock": 96,
             "brand": "IELGY",
             "category": "womens-dresses",
@@ -890,7 +890,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 40,
             "discountPercentage": 16.96,
             "rating": 4.14,
-            "inCartCount": 0,
+            
             "stock": 72,
             "brand": "IELGY fashion",
             "category": "womens-shoes",
@@ -910,7 +910,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 120,
             "discountPercentage": 10.37,
             "rating": 4.19,
-            "inCartCount": 0,
+            
             "stock": 50,
             "brand": "Synthetic Leather",
             "category": "womens-shoes",
@@ -929,7 +929,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 40,
             "discountPercentage": 10.83,
             "rating": 4.02,
-            "inCartCount": 0,
+            
             "stock": 25,
             "brand": "Sandals Flip Flops",
             "category": "womens-shoes",
@@ -949,7 +949,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 23,
             "discountPercentage": 2.62,
             "rating": 4.72,
-            "inCartCount": 0,
+            
             "stock": 107,
             "brand": "Maasai Sandals",
             "category": "womens-shoes",
@@ -968,7 +968,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 36,
             "discountPercentage": 16.87,
             "rating": 4.33,
-            "inCartCount": 0,
+            
             "stock": 46,
             "brand": "Arrivals Genuine",
             "category": "womens-shoes",
@@ -986,7 +986,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 23,
             "discountPercentage": 12.76,
             "rating": 4.26,
-            "inCartCount": 0,
+            
             "stock": 132,
             "brand": "Vintage Apparel",
             "category": "mens-shirts",
@@ -1005,7 +1005,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 10,
             "discountPercentage": 14.72,
             "rating": 4.52,
-            "inCartCount": 0,
+            
             "stock": 128,
             "brand": "FREE FIRE",
             "category": "mens-shirts",
@@ -1025,7 +1025,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 35,
             "discountPercentage": 7.54,
             "rating": 4.89,
-            "inCartCount": 0,
+            
             "stock": 6,
             "brand": "Vintage Apparel",
             "category": "mens-shirts",
@@ -1045,7 +1045,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 46,
             "discountPercentage": 16.44,
             "rating": 4.62,
-            "inCartCount": 0,
+            
             "stock": 136,
             "brand": "The Warehouse",
             "category": "mens-shirts",
@@ -1065,7 +1065,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 66,
             "discountPercentage": 15.97,
             "rating": 4.9,
-            "inCartCount": 0,
+            
             "stock": 122,
             "brand": "The Warehouse",
             "category": "mens-shirts",
@@ -1085,7 +1085,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 40,
             "discountPercentage": 12.57,
             "rating": 4.38,
-            "inCartCount": 0,
+            
             "stock": 6,
             "brand": "Sneakers",
             "category": "mens-shoes",
@@ -1106,7 +1106,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 47,
             "discountPercentage": 10.91,
             "rating": 4.91,
-            "inCartCount": 0,
+            
             "stock": 20,
             "brand": "Rubber",
             "category": "mens-shoes",
@@ -1126,7 +1126,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 57,
             "discountPercentage": 12,
             "rating": 4.41,
-            "inCartCount": 0,
+            
             "stock": 68,
             "brand": "The Warehouse",
             "category": "mens-shoes",
@@ -1146,7 +1146,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 20,
             "discountPercentage": 8.71,
             "rating": 4.33,
-            "inCartCount": 0,
+            
             "stock": 137,
             "brand": "Sneakers",
             "category": "mens-shoes",
@@ -1166,7 +1166,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 58,
             "discountPercentage": 7.55,
             "rating": 4.55,
-            "inCartCount": 0,
+            
             "stock": 129,
             "brand": "Sneakers",
             "category": "mens-shoes",
@@ -1185,7 +1185,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 120,
             "discountPercentage": 7.14,
             "rating": 4.63,
-            "inCartCount": 0,
+            
             "stock": 91,
             "brand": "Naviforce",
             "category": "mens-watches",
@@ -1203,7 +1203,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 46,
             "discountPercentage": 3.15,
             "rating": 4.05,
-            "inCartCount": 0,
+            
             "stock": 95,
             "brand": "SKMEI 9117",
             "category": "mens-watches",
@@ -1220,7 +1220,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 50,
             "discountPercentage": 2.56,
             "rating": 4.89,
-            "inCartCount": 0,
+            
             "stock": 142,
             "brand": "SKMEI 9117",
             "category": "mens-watches",
@@ -1239,7 +1239,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 46,
             "discountPercentage": 10.2,
             "rating": 4.98,
-            "inCartCount": 0,
+            
             "stock": 61,
             "brand": "Strap Skeleton",
             "category": "mens-watches",
@@ -1258,7 +1258,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 47,
             "discountPercentage": 17.79,
             "rating": 4.79,
-            "inCartCount": 0,
+            
             "stock": 94,
             "brand": "Stainless",
             "category": "mens-watches",
@@ -1278,7 +1278,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 35,
             "discountPercentage": 3.23,
             "rating": 4.79,
-            "inCartCount": 0,
+            
             "stock": 24,
             "brand": "Eastern Watches",
             "category": "womens-watches",
@@ -1298,7 +1298,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 60,
             "discountPercentage": 16.69,
             "rating": 4.03,
-            "inCartCount": 0,
+            
             "stock": 46,
             "brand": "Eastern Watches",
             "category": "womens-watches",
@@ -1318,7 +1318,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 57,
             "discountPercentage": 9.03,
             "rating": 4.55,
-            "inCartCount": 0,
+            
             "stock": 77,
             "brand": "Luxury Digital",
             "category": "womens-watches",
@@ -1335,7 +1335,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 47,
             "discountPercentage": 17.55,
             "rating": 4.77,
-            "inCartCount": 0,
+            
             "stock": 89,
             "brand": "Watch Pearls",
             "category": "womens-watches",
@@ -1355,7 +1355,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 35,
             "discountPercentage": 8.98,
             "rating": 4.08,
-            "inCartCount": 0,
+            
             "stock": 111,
             "brand": "Bracelet",
             "category": "womens-watches",
@@ -1373,7 +1373,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 46,
             "discountPercentage": 14.65,
             "rating": 4.71,
-            "inCartCount": 0,
+            
             "stock": 17,
             "brand": "LouisWill",
             "category": "womens-bags",
@@ -1392,7 +1392,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 23,
             "discountPercentage": 17.5,
             "rating": 4.91,
-            "inCartCount": 0,
+            
             "stock": 27,
             "brand": "LouisWill",
             "category": "womens-bags",
@@ -1412,7 +1412,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 44,
             "discountPercentage": 10.39,
             "rating": 4.18,
-            "inCartCount": 0,
+            
             "stock": 101,
             "brand": "Bracelet",
             "category": "womens-bags",
@@ -1431,7 +1431,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 57,
             "discountPercentage": 11.19,
             "rating": 4.01,
-            "inCartCount": 0,
+            
             "stock": 43,
             "brand": "Copenhagen Luxe",
             "category": "womens-bags",
@@ -1451,7 +1451,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 68,
             "discountPercentage": 14.87,
             "rating": 4.93,
-            "inCartCount": 0,
+            
             "stock": 13,
             "brand": "Steal Frame",
             "category": "womens-bags",
@@ -1470,7 +1470,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 70,
             "discountPercentage": 13.57,
             "rating": 4.61,
-            "inCartCount": 0,
+            
             "stock": 51,
             "brand": "Darojay",
             "category": "womens-jewellery",
@@ -1488,7 +1488,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 100,
             "discountPercentage": 3.22,
             "rating": 4.21,
-            "inCartCount": 0,
+            
             "stock": 149,
             "brand": "Copenhagen Luxe",
             "category": "womens-jewellery",
@@ -1507,7 +1507,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 30,
             "discountPercentage": 8.02,
             "rating": 4.69,
-            "inCartCount": 0,
+            
             "stock": 9,
             "brand": "Fashion Jewellery",
             "category": "womens-jewellery",
@@ -1523,7 +1523,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 30,
             "discountPercentage": 12.8,
             "rating": 4.74,
-            "inCartCount": 0,
+            
             "stock": 16,
             "brand": "Fashion Jewellery",
             "category": "womens-jewellery",
@@ -1539,7 +1539,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 45,
             "discountPercentage": 17.75,
             "rating": 4.59,
-            "inCartCount": 0,
+            
             "stock": 9,
             "brand": "Cuff Butterfly",
             "category": "womens-jewellery",
@@ -1559,7 +1559,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 19,
             "discountPercentage": 10.1,
             "rating": 4.94,
-            "inCartCount": 0,
+            
             "stock": 78,
             "brand": "Designer Sun Glasses",
             "category": "sunglasses",
@@ -1579,7 +1579,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 50,
             "discountPercentage": 15.6,
             "rating": 4.62,
-            "inCartCount": 0,
+            
             "stock": 78,
             "brand": "Designer Sun Glasses",
             "category": "sunglasses",
@@ -1599,7 +1599,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 30,
             "discountPercentage": 6.33,
             "rating": 4.97,
-            "inCartCount": 0,
+            
             "stock": 115,
             "brand": "mastar watch",
             "category": "sunglasses",
@@ -1619,7 +1619,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 28,
             "discountPercentage": 13.89,
             "rating": 4.64,
-            "inCartCount": 0,
+            
             "stock": 64,
             "brand": "mastar watch",
             "category": "sunglasses",
@@ -1637,7 +1637,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 50,
             "discountPercentage": 11.27,
             "rating": 4.98,
-            "inCartCount": 0,
+            
             "stock": 92,
             "brand": "LouisWill",
             "category": "sunglasses",
@@ -1655,7 +1655,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 25,
             "discountPercentage": 10.56,
             "rating": 4.57,
-            "inCartCount": 0,
+            
             "stock": 22,
             "brand": "Car Aux",
             "category": "automotive",
@@ -1675,7 +1675,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 40,
             "discountPercentage": 11.3,
             "rating": 4.54,
-            "inCartCount": 0,
+            
             "stock": 37,
             "brand": "W1209 DC12V",
             "category": "automotive",
@@ -1695,7 +1695,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 29,
             "discountPercentage": 3.19,
             "rating": 4.98,
-            "inCartCount": 0,
+            
             "stock": 42,
             "brand": "TC Reusable",
             "category": "automotive",
@@ -1715,7 +1715,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 40,
             "discountPercentage": 17.53,
             "rating": 4.2,
-            "inCartCount": 0,
+            
             "stock": 79,
             "brand": "TC Reusable",
             "category": "automotive",
@@ -1735,7 +1735,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 35,
             "discountPercentage": 11.08,
             "rating": 4.1,
-            "inCartCount": 0,
+            
             "stock": 63,
             "brand": "Neon LED Light",
             "category": "automotive",
@@ -1755,7 +1755,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 569,
             "discountPercentage": 13.63,
             "rating": 4.04,
-            "inCartCount": 0,
+            
             "stock": 115,
             "brand": "METRO 70cc Motorcycle - MR70",
             "category": "motorcycle",
@@ -1775,7 +1775,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 920,
             "discountPercentage": 14.4,
             "rating": 4.19,
-            "inCartCount": 0,
+            
             "stock": 22,
             "brand": "BRAVE BULL",
             "category": "motorcycle",
@@ -1794,7 +1794,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 1050,
             "discountPercentage": 3.34,
             "rating": 4.84,
-            "inCartCount": 0,
+            
             "stock": 127,
             "brand": "shock absorber",
             "category": "motorcycle",
@@ -1814,7 +1814,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 900,
             "discountPercentage": 3.85,
             "rating": 4.06,
-            "inCartCount": 0,
+            
             "stock": 109,
             "brand": "JIEPOLLY",
             "category": "motorcycle",
@@ -1833,7 +1833,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 930,
             "discountPercentage": 17.67,
             "rating": 4.21,
-            "inCartCount": 0,
+            
             "stock": 144,
             "brand": "Xiangle",
             "category": "motorcycle",
@@ -1853,7 +1853,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 30,
             "discountPercentage": 14.89,
             "rating": 4.83,
-            "inCartCount": 0,
+            
             "stock": 96,
             "brand": "lightingbrilliance",
             "category": "lighting",
@@ -1873,7 +1873,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 35,
             "discountPercentage": 10.94,
             "rating": 4.93,
-            "inCartCount": 0,
+            
             "stock": 146,
             "brand": "Ifei Home",
             "category": "lighting",
@@ -1893,7 +1893,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 34,
             "discountPercentage": 5.92,
             "rating": 4.99,
-            "inCartCount": 0,
+            
             "stock": 44,
             "brand": "DADAWU",
             "category": "lighting",
@@ -1913,7 +1913,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 46,
             "discountPercentage": 8.84,
             "rating": 4.32,
-            "inCartCount": 0,
+            
             "stock": 138,
             "brand": "Ifei Home",
             "category": "lighting",
@@ -1933,7 +1933,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "price": 47,
             "discountPercentage": 16,
             "rating": 4.74,
-            "inCartCount": 0,
+            
             "stock": 133,
             "brand": "YIOSI",
             "category": "lighting",

@@ -3,12 +3,15 @@ import {IPromoCode} from '../../../core/interfaces/promoCode.interfaces'
 import React from 'react'
 import {ItemBuyModal} from '../../../containers/item-buy-modal/ItemBuyModal'
 import {ActivatedPromo} from '../../simple/activated-promo/ActivatedPromo'
+import {ShopState} from '../../../core/state/ShopState'
+import {NavigateFunction, useNavigate} from 'react-router-dom'
 
 
 interface ICartSummaryProps {
     itemsCount: number
     totalPrice: number
     workingPromoCodes: Array<IPromoCode>
+    state: ShopState
 }
 
 
@@ -19,6 +22,8 @@ export const CartSummary = (props: ICartSummaryProps): JSX.Element => {
     const [inputedPromo, setInputedPromo] = React.useState<string>('')
     const [isAddPromoButtonShown, setIsAddPromoButtonShown] = React.useState<boolean>(false)
 
+    const navigate: NavigateFunction = useNavigate()
+
     const closeModal = (): void => setIsModalShown(false)
     const openModal = (): void => setIsModalShown(true)
 
@@ -28,7 +33,6 @@ export const CartSummary = (props: ICartSummaryProps): JSX.Element => {
     }, [props.totalPrice, promosActivated])
 
     React.useEffect((): void => {
-
         if (promosActivated.find((item: IPromoCode) => item.code === inputedPromo)) {
             setIsAddPromoButtonShown(false)
             return
@@ -60,6 +64,15 @@ export const CartSummary = (props: ICartSummaryProps): JSX.Element => {
 
     const deactivatePromoCode = (code: string): void => {
         setPromosActivated((old: Array<IPromoCode>) => old.filter((item: IPromoCode) => item.code !== code))
+    }
+
+    const confirmModal = (): void => {
+        window.alert('Thank you for purchase')
+
+        window.setTimeout((): void => {
+            props.state.clearCart()
+            navigate('/')
+        }, 3500)
     }
 
     return (
@@ -104,7 +117,7 @@ export const CartSummary = (props: ICartSummaryProps): JSX.Element => {
 
             <button className={styles.buy} onClick={openModal}>Buy now</button>
 
-            {isModalShown && <ItemBuyModal closeCallback={closeModal}/>}
+            {isModalShown && <ItemBuyModal closeCallback={closeModal} state={props.state} submitCallback={confirmModal}/>}
         </div>
     )
 }

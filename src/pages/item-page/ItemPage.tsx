@@ -1,21 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import './ItemPage.scss';
-import { Link, useParams } from 'react-router-dom';
+import {Link, NavigateFunction, useNavigate, useParams} from 'react-router-dom'
 import { catalog } from '../../core/data/catalog.data';
 import { ReactComponent as CartLogo } from '../../assets/cart.svg';
 import { ItemSlider } from '../../components/simple/item-slider/ItemSlider';
+import {ShopState} from '../../core/state/ShopState'
+import {NotFoundPage} from '../not-found-page/NotFoundPage'
+import {observer} from 'mobx-react-lite'
 
-export const ItemPage = (): JSX.Element => {
+interface IItemPageProps {
+    state: ShopState
+}
+
+export const ItemPage = observer((props: IItemPageProps): JSX.Element => {
     const params = useParams();
     const prodId = params.id;
     const products = catalog.products.find((el) => `${el.id}` === prodId);
 
     if (products === undefined) {
-        return (
-            <section className='item'>
-                <h2>Products not found</h2>
-            </section>
-        )
+        return  <NotFoundPage/>
+    }
+
+    const isItemInCard: boolean = props.state.isItemInCart(products.id)
+
+    const addToCartButtonClicked = (): void => {
+        isItemInCard
+            ? props.state.dropItemFromCart(products.id)
+            : props.state.increaseQuantityInCart(products, true)
     }
 
     return (
@@ -47,20 +58,18 @@ export const ItemPage = (): JSX.Element => {
                             <p className='item__wrap__info__about__block__description'>{products.description}</p>
                         </div>
                         <div className='item__wrap__info__about__button-wrap'>
-                            <button className='blue-button'>
+                            <button className='blue-button' onClick={addToCartButtonClicked}>
                                 <CartLogo />
-                                <span>To Cart</span>
+                                <span>{props.state.isItemInCart(products.id) ? 'Already in cart' : 'To cart'}</span>
                             </button>
                             <button className='blue-button item__wrap__info__about__button-wrap__button'>
                                 <CartLogo />
                                 <span>Buy</span>
                             </button>
                         </div>
-
                     </div>
                 </div>
             </div>
-
         </section>
     )
-}
+})

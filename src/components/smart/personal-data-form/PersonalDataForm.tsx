@@ -6,15 +6,16 @@ import {CardDetails} from './card-details/CardDetails'
 
 interface IFormData {
     name: string
-    telephone: string
+    phone: string
     email: string
     cardNumber: string
     cardOwner: string
     cardExpirationDate: string
+    address: string
 }
 
 interface IPersonalDataFormProps {
-    onSubmitCallback?: (data: IFormData) => void
+    onSubmitCallback: (data: IFormData) => void
 }
 
 const CARD_NUMBER_DELIMITER: string = ' '
@@ -49,10 +50,14 @@ export const PersonalDataForm = (props: IPersonalDataFormProps): JSX.Element => 
         }
     }
 
-    const cancelSubmit = (event: React.FormEvent<HTMLFormElement>): void => event.preventDefault()
+    const cancelDefaultFormSubmit = (event: React.FormEvent<HTMLFormElement>): void => event.preventDefault()
+
+    const confirmButtonClicked = () => {
+        props.onSubmitCallback({name, phone, email, cardNumber, cardOwner, cardExpirationDate, address })
+    }
 
     return (
-        <form action="#" onSubmit={cancelSubmit} className={styles.form}>
+        <form action="#" onSubmit={cancelDefaultFormSubmit} className={styles.form}>
             <FormGroup value={name}
                        onChange={setName}
                        type="name"
@@ -89,6 +94,8 @@ export const PersonalDataForm = (props: IPersonalDataFormProps): JSX.Element => 
                          onExpirationDateChange={cardExpDateChanged}
                          onOwnerChange={cardOwnerChanged}
             />
+
+            <button className="blue-button" onClick={confirmButtonClicked}>Confirm</button>
         </form>
     )
 }

@@ -7,21 +7,26 @@ import {NotFoundPage} from './pages/not-found-page/NotFoundPage'
 import {Header} from './components/common/header/Header'
 import {Footer} from './components/common/footer/Footer'
 import { ItemPage } from './pages/item-page/ItemPage'
+import {ShopState} from './core/state/ShopState'
 
 
-export const App = (): JSX.Element => (
-    <Router>
-        <section className="wrapper">
-            <Header/>
-            <main className="wrapper__main">
-                <Routes>
-                    <Route path="/" element={<ItemsPage/>}/>
-                    <Route path="/cart" element={<CartPage/>}/>
-                    <Route path="/*" element={<NotFoundPage/>}/>
-                    <Route path="/products/:id" element={<ItemPage />} />
-                </Routes>
-            </main>
-            < Footer/>
-        </section>
-    </Router>
-)
+export const App = (): JSX.Element => {
+    const state: React.MutableRefObject<ShopState> = React.useRef<ShopState>(new ShopState())
+
+    return (
+        <Router>
+            <section className="wrapper">
+                <Header cartState={state.current.cart}/>
+                <main className="wrapper__main">
+                    <Routes>
+                        <Route path="/" element={<ItemsPage state={state.current}/>}/>
+                        <Route path="/cart" element={<CartPage state={state.current}/>}/>
+                        <Route path="/*" element={<NotFoundPage/>}/>
+                        <Route path="/products/:id" element={<ItemPage state={state.current} />} />
+                    </Routes>
+                </main>
+                < Footer/>
+            </section>
+        </Router>
+    )
+}
