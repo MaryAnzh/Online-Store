@@ -3,11 +3,17 @@ import { catalog } from '../../core/data/catalog.data';
 import './ItemsPage.scss'
 import { ItemCard } from '../../components/simple/item-card/ItemCard';
 import { IItem } from '../../core/interfaces/catalog.interfaces';
+import {ShopState} from '../../core/state/ShopState'
 
-export const ItemsPage = (): JSX.Element => {
+
+interface IItemsPageProps {
+    state: ShopState
+}
+
+export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     const itemCatalog: IItem[] = [...catalog.products];
-    const itemsList: JSX.Element[] = itemCatalog.map(elem => <ItemCard item={elem} />);
-    
+    const itemsList: JSX.Element[] = itemCatalog.map(elem => <ItemCard item={elem} state={props.state} key={elem.id}/>);
+
     return (
         <section className='catalog'>
             <div className='catalog__wrap'>

@@ -13,7 +13,6 @@ export interface IItem {
     price: number,
     discountPercentage: number,
     rating: number,
-    inCartCount: number,
     stock: number,
     brand: string,
     category: string,

@@ -2,28 +2,29 @@ import {IItem} from '../../../core/interfaces/catalog.interfaces'
 import styles from './CartItemRow.module.scss'
 import React from 'react'
 import {ICartItem} from '../../../core/interfaces/cart.interfaces'
+import {ShopState} from '../../../core/state/ShopState'
+import {observer} from 'mobx-react-lite'
 
 interface ICartItemRowProps {
     item: ICartItem
-    number: number
-    onIncreaseCount: (item: ICartItem) => void
-    onDecreaseCount: (item: ICartItem) => void
+    state: ShopState
 }
 
 
-export const CartItemRow = (props: ICartItemRowProps): JSX.Element => {
-    const [totalPrice, setTotalPrice] = React.useState<number>(props.item.price * (1 - props.item.discountPercentage / 100))
+export const CartItemRow = observer((props: ICartItemRowProps): JSX.Element => {
+    const [totalPrice, setTotalPrice] = React.useState<number>(
+        props.item.price * (1 - props.item.discountPercentage / 100))
 
     React.useEffect((): void => {
         setTotalPrice(props.item.count * props.item.price * (1 - props.item.discountPercentage / 100))
     }, [props.item.count, props.item.discountPercentage, props.item.price])
 
-    const increaseCountClick = (): void => props.onIncreaseCount(props.item)
-    const decreaseCountClick = (): void => props.onDecreaseCount(props.item)
+    const decreaseCountClick = (): void => props.state.decreaseQuantityInCart(props.item)
+    const increaseCountClick = (): void => props.state.increaseQuantityInCart(props.item)
 
     return (
         <div className={styles.cartItem}>
-            <span className={styles.number}>{props.number}</span>
+            <span className={styles.number}>{props.state.getPositionInCart(props.item.id) + 1}</span>
             <div className={styles.imgWrap}>
                 <img src={props.item.thumbnail} alt={props.item.title} className={styles.image}/>
             </div>
@@ -47,4 +48,4 @@ export const CartItemRow = (props: ICartItemRowProps): JSX.Element => {
             </div>
         </div>
     )
-}
+})
