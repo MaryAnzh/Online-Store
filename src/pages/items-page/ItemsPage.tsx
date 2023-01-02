@@ -46,7 +46,7 @@ export const ItemsPage = (): JSX.Element => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     //получкам каталог товаров
-    const itemCatalog: IItem[] = [...catalog.products];
+    let catalogItems: IItem[] = [...catalog.products];
 
     //сброс опций
     const resetOption = () => {
@@ -65,8 +65,8 @@ export const ItemsPage = (): JSX.Element => {
     }
 
     //создаем массивы для фильтрации по брендам и категориям
-    const categories: string[] = Filter.createNameSet(itemCatalog, 'category');
-    const brands: string[] = Filter.createNameSet(itemCatalog, 'brand');
+    const categories: string[] = Filter.createNameSet(catalogItems, 'category');
+    const brands: string[] = Filter.createNameSet(catalogItems, 'brand');
 
     // Проверяем есть ли в url строке квери параметры, если есть то записываем их в текучие параметры и рендерим
     //если нет, то проверяем есть ли информация в локал сторж о предыдущем поиске
@@ -111,19 +111,18 @@ export const ItemsPage = (): JSX.Element => {
     getCurrentParams();
 
     const filterItems = (value: string, itemObjectKey: keyof IItem, items: IItem[]) => {
+        let filterItems: IItem[] = [];
         if (value === '...') {
-            return items;
+            return filterItems;
         }
-
-        const filteringArr = items.filter(el => el[itemObjectKey] === value);
-        return filteringArr;
+        filterItems = items.filter(el => el[itemObjectKey] === value);
+        return filterItems;
     }
 
-    const modifyItemsByParams = (items = itemCatalog) => {
-        setSearchParams([]);
-        storageService.setData(storageKey, null);
-        let itemsByOptions = items;
+    const modifyItemsByParams = () => {
         const urlParams: ParamKeyValuePair[] = [];
+        catalogItems = [...catalog.products];
+
         for (const objKey in currentOptions) {
             const key = objKey as keyof itemsQueryOptions;
             if (key === 'search') {
@@ -139,7 +138,10 @@ export const ItemsPage = (): JSX.Element => {
                     const param = subKey as keyof IItem;
                     const v = filter[subKey];
                     if (v !== null) {
-                        itemsByOptions = filterItems(v, param, itemsByOptions);
+                        const filtering = filterItems(v, param, catalogItems);
+                        if (filtering.length > 0) {
+                            catalogItems = filtering;
+                        }
                         if (v !== '...') {
                             urlParams.push([`${subKey}`, v]);
                         }
@@ -157,61 +159,22 @@ export const ItemsPage = (): JSX.Element => {
                 }
             }
         }
-
-        setSearchParams(urlParams);
-        storageService.setData(storageKey, currentOptions);
-        setProds(itemsByOptions);
+        return urlParams;
     }
 
-    const [prods, setProds] = useState(itemCatalog);
-
-    // const itemsByQueryOptions = (items = itemCatalog) => {
-    //     setSearchParams([]);
-    //     let itemsByOptions = items;
-
-    //     const urlParams: ParamKeyValuePair[] = [];
-    //     for (const objKey in currentOptions) {
-    //         const key = objKey as keyof itemsQueryOptions;
-    //         if (key === 'search') {
-    //             const v = currentOptions[key];
-    //             if (v !== null) {
-    //                 urlParams.push([`${key}`, v]);
-    //             }
-    //         }
-    //         if (key === 'filter') {
-    //             const filter: FilterType = currentOptions.filter;
-    //             for (const subObjKey in filter) {
-    //                 const subKey = subObjKey as keyof FilterType;
-    //                 const param = subKey as keyof IItem;
-    //                 const v = filter[subKey];
-    //                 if (v !== null) {
-    //                     itemsByOptions = filterItems(v, param, itemsByOptions);
-    //                     urlParams.push([`${subKey}`, v]);
-    //                 }
-    //             }
-    //         }
-    //         if (key == 'sort') {
-    //             const sort: SortType = currentOptions.sort;
-    //             for (const subObjKey in sort) {
-    //                 const subKey = subObjKey as keyof SortType;
-    //                 const v = sort[subKey];
-    //                 if (v !== null) {
-    //                     urlParams.push([`${subKey}`, v]);
-    //                 }
-    //             }
-    //         }
-    //     }
-
-    //     setSearchParams(urlParams);
-    //     setProds(itemsByOptions);
-    // }
+    //сортируем.фильтруем товары
+    modifyItemsByParams();
+    const [prods, setProds] = useState(catalogItems);
 
     const filterItemsOnChange = (e: React.ChangeEvent) => {
         const elem = e.target as HTMLSelectElement;
         const value = elem.value;
         const itemObjectKey = elem.id as keyof FilterType;
         currentOptions.filter[itemObjectKey] = value;
-        modifyItemsByParams();
+        const url = modifyItemsByParams();
+        setProds(catalogItems);
+        setSearchParams(url);
+        storageService.setData(storageKey, currentOptions);
     }
 
     const itemsList: JSX.Element[] = prods.map(elem => {
