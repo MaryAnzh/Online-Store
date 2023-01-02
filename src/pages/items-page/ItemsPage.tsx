@@ -104,6 +104,8 @@ export const ItemsPage = (): JSX.Element => {
                     }
                 }
             }
+            console.log('param');
+            console.log(currentOptions);
         } else if (storageService.getData('maryangItemsQueryParam') !== null) {
             currentOptions = storageService.getData(storageKey) as itemsQueryOptions;
         }
