@@ -70,44 +70,48 @@ export const ItemsPage = (): JSX.Element => {
 
     // Проверяем есть ли в url строке квери параметры, если есть то записываем их в текучие параметры и рендерим
     //если нет, то проверяем есть ли информация в локал сторж о предыдущем поиске
-    //модифицируем каталог товаров в соответствии с условиями
+    // меняем объект с параметрами в соответствии
     const getCurrentParams = () => {
         resetOption();
+        let paramsCount = 0;
 
-        if (searchParams.getAll.length > 0) {
-            for (const key in currentOptions) {
-                const objKey = key as keyof itemsQueryOptions;
-                if (objKey === 'filter') {
-                    const filter: FilterType = currentOptions.filter;
-                    for (const subObjKey in filter) {
-                        let subKey = subObjKey as keyof FilterType;
-                        const params = searchParams.get(`${subKey}`);
-                        if (params !== null) {
-                            currentOptions.filter[subKey] = params;
-                        }
-                    }
-                }
-                if (objKey === 'sort') {
-                    const sort: SortType = currentOptions.sort;
-                    for (const subObjKey in sort) {
-                        let subKey = subObjKey as keyof SortType;
-                        const params = searchParams.get(`${subKey}`) as "assent" | "descent" | null;
-                        if (params !== null) {
-                            currentOptions.sort[subKey] = params;
-                        }
-                    }
-                }
-                if (objKey === 'search') {
-                    const params = searchParams.get(`${objKey}`) as "assent" | "descent" | null;
+        for (const key in currentOptions) {
+            const objKey = key as keyof itemsQueryOptions;
+            if (objKey === 'filter') {
+                const filter: FilterType = currentOptions.filter;
+                for (const subObjKey in filter) {
+                    let subKey = subObjKey as keyof FilterType;
+                    const params = searchParams.get(`${subKey}`);
                     if (params !== null) {
-                        currentOptions.search = params;
+                        currentOptions.filter[subKey] = params;
+                        paramsCount++;
                     }
                 }
             }
-            console.log('param');
-            console.log(currentOptions);
-        } else if (storageService.getData('maryangItemsQueryParam') !== null) {
-            currentOptions = storageService.getData(storageKey) as itemsQueryOptions;
+            if (objKey === 'sort') {
+                const sort: SortType = currentOptions.sort;
+                for (const subObjKey in sort) {
+                    let subKey = subObjKey as keyof SortType;
+                    const params = searchParams.get(`${subKey}`) as "assent" | "descent" | null;
+                    if (params !== null) {
+                        currentOptions.sort[subKey] = params;
+                        paramsCount++;
+                    }
+                }
+            }
+            if (objKey === 'search') {
+                const params = searchParams.get(`${objKey}`) as "assent" | "descent" | null;
+                if (params !== null) {
+                    currentOptions.search = params;
+                    paramsCount++;
+                }
+            }
+        }
+        if (paramsCount === 0) {
+            const data: itemsQueryOptions | null = storageService.getData(storageKey);
+            if (data !== null) {
+                currentOptions = data;
+            }
         }
     }
     getCurrentParams();
