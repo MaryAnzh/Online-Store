@@ -15,5 +15,8 @@ root.render(
         <App/>
     </React.StrictMode>
 )
+<<<<<<< HEAD
 
 // console.log(catalog)
+=======
+>>>>>>> origin/develop

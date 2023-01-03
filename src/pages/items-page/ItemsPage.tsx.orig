@@ -4,13 +4,9 @@ import { catalog } from '../../core/data/catalog.data';
 import './ItemsPage.scss'
 import { ItemCard } from '../../components/simple/item-card/ItemCard';
 import { IItem } from '../../core/interfaces/catalog.interfaces';
+<<<<<<< HEAD
 import { Filter } from '../../core/utils/filter';
 import { Sort } from '../../core/utils/sort';
-import {ShopState} from '../../core/state/ShopState'
-
-interface IItemsPageProps {
-    state: ShopState
-}
 
 type FilterType = {
     category: null | string,
@@ -42,10 +38,8 @@ let currentOptions: itemsQueryOptions = {
     search: null,
 };
 
-export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
-    const itemCatalog: IItem[] = [...catalog.products];
-    const itemsList: JSX.Element[] = itemCatalog.map(elem => <ItemCard item={elem} state={props.state} key={elem.id}/>);
-
+export const ItemsPage = (): JSX.Element => {
+    //хук квери параметров url
     const [searchParams, setSearchParams] = useSearchParams();
 
     //получкам каталог товаров
@@ -229,6 +223,19 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
 
     let categorySelectValue = currentOptions.filter.category === null ? '...' : currentOptions.filter.category;
     let brandSelectValue = currentOptions.filter.brand === null ? '...' : currentOptions.filter.brand;
+=======
+import {ShopState} from '../../core/state/ShopState'
+
+
+interface IItemsPageProps {
+    state: ShopState
+}
+
+export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
+    const itemCatalog: IItem[] = [...catalog.products];
+    const itemsList: JSX.Element[] = itemCatalog.map(elem => <ItemCard item={elem} state={props.state} key={elem.id}/>);
+
+>>>>>>> origin/develop
     return (
         <section className='catalog'>
             <div className='catalog__wrap'>
@@ -323,4 +330,3 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
         </section >
     )
 }
-

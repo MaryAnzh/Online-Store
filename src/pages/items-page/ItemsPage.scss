@@ -1,6 +1,19 @@
 @import './../../style/utils/variable';
 
+@keyframes catalogAppears {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
 .catalog {
+    animation-timing-function: ease-in-out;
+    animation-name: catalogAppears;
+    animation-duration: 0.2s;
     width: 100%;
     display: flex;
     justify-content: center;
