@@ -44,8 +44,6 @@ let currentOptions: itemsQueryOptions = {
 
 export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     const itemCatalog: IItem[] = [...catalog.products];
-    const itemsList: JSX.Element[] = itemCatalog.map(elem => <ItemCard item={elem} state={props.state} key={elem.id} />);
-
     const [searchParams, setSearchParams] = useSearchParams();
 
     //получкам каталог товаров
@@ -202,6 +200,9 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
         setProds(catalogItems);
         setSearchParams(url);
     }
+
+    const itemsList: JSX.Element[] = prods.map(elem => <ItemCard item={elem} state={props.state} key={elem.id} />);
+
 
     const categoriesFilter: JSX.Element[] = categories.map((name) =>
         <option
