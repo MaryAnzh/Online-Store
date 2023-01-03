@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import './ItemPage.scss';
 import { Link, useParams } from 'react-router-dom';
 import { catalog } from '../../core/data/catalog.data';
@@ -23,14 +22,18 @@ export const ItemPage = (): JSX.Element => {
             <div className='item__wrap'>
                 <ul className='item__wrap__breadcrumb'>
                     <li className='item__wrap__breadcrumb__crumb'>
-                        <Link to={'./'}>Catalog
-                            <span>/</span> </Link>
+                        <Link to='/'>Catalog</Link>
                     </li>
-                    <li className='item__wrap__breadcrumb__crumb'>{products.category}
-                        <span>/</span>
+                    <li><span>/</span></li>
+                    <li className='item__wrap__breadcrumb__crumb'>
+                        <Link to={`/?category=${products.category}`}>{products.category}</Link>
                     </li>
-                    <li className='item__wrap__breadcrumb__crumb'>{products.brand}
+                    <li><span>/</span></li>
+                    <li className='item__wrap__breadcrumb__crumb'>
+                        <Link to={`/?category=${products.category}&brand=${products.brand}`}>{products.brand}</Link>
                     </li>
+                    <li><span>/</span></li>
+
                 </ul>
                 <h2 className='item__wrap__title'>{products.title}</h2>
                 <div className='item__wrap__info'>

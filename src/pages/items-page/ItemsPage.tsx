@@ -5,7 +5,6 @@ import './ItemsPage.scss'
 import { ItemCard } from '../../components/simple/item-card/ItemCard';
 import { IItem } from '../../core/interfaces/catalog.interfaces';
 import { Filter } from '../../core/utils/filter';
-import { StorageService } from '../../core/utils/localStorage';
 
 type FilterType = {
     category: null | string,
@@ -38,16 +37,12 @@ let currentOptions: itemsQueryOptions = {
 };
 
 export const ItemsPage = (): JSX.Element => {
-    // сервис для работы с локал сторж
-    const storageService = new StorageService();
-    const storageKey = 'maryangItemsQueryParams';
-
     //хук квери параметров url
     const [searchParams, setSearchParams] = useSearchParams();
 
     //получкам каталог товаров
     let catalogItems: IItem[] = [...catalog.products];
-
+    
     //сброс опций
     const resetOption = () => {
         currentOptions = {
@@ -69,7 +64,6 @@ export const ItemsPage = (): JSX.Element => {
     const brands: string[] = Filter.createNameSet(catalogItems, 'brand');
 
     // Проверяем есть ли в url строке квери параметры, если есть то записываем их в текучие параметры и рендерим
-    //если нет, то проверяем есть ли информация в локал сторж о предыдущем поиске
     // меняем объект с параметрами в соответствии
     const getCurrentParams = () => {
         resetOption();
@@ -106,12 +100,6 @@ export const ItemsPage = (): JSX.Element => {
                     paramsCount++;
                 }
             }
-        }
-        if (paramsCount === 0) {
-            const data: itemsQueryOptions | null = storageService.getData(storageKey);
-            // if (data !== null) {
-            //     currentOptions = data;
-            // }
         }
     }
     getCurrentParams();
@@ -180,7 +168,6 @@ export const ItemsPage = (): JSX.Element => {
         const url = modifyItemsByParams();
         setProds(catalogItems);
         setSearchParams(url);
-        storageService.setData(storageKey, currentOptions);
     }
 
     const itemsList: JSX.Element[] = prods.map(elem => {
@@ -206,10 +193,9 @@ export const ItemsPage = (): JSX.Element => {
                 {name}
             </option>)
     });
-
+    
     let categorySelectValue = currentOptions.filter.category === null ? '...' : currentOptions.filter.category;
     let brandSelectValue = currentOptions.filter.brand === null ? '...' : currentOptions.filter.brand;
-
     return (
         <section className='catalog'>
             <div className='catalog__wrap'>
