@@ -5,6 +5,7 @@ import './ItemsPage.scss'
 import { ItemCard } from '../../components/simple/item-card/ItemCard';
 import { IItem } from '../../core/interfaces/catalog.interfaces';
 import { Filter } from '../../core/utils/filter';
+import { Sort } from '../../core/utils/sort';
 
 type FilterType = {
     category: null | string,
@@ -42,7 +43,7 @@ export const ItemsPage = (): JSX.Element => {
 
     //получкам каталог товаров
     let catalogItems: IItem[] = [...catalog.products];
-    
+
     //сброс опций
     const resetOption = () => {
         currentOptions = {
@@ -113,6 +114,17 @@ export const ItemsPage = (): JSX.Element => {
         return filterItems;
     }
 
+    const sortItems = (direction: 'assent' | 'descent', itemObjectKey: keyof IItem, items: IItem[]) => {
+        if (itemObjectKey === 'price') {
+            Sort.sortByPrice(items, direction);
+        }
+        if (itemObjectKey === 'stock') {
+            Sort.sortByInStock(items, direction);
+        }
+
+
+    }
+
     const modifyItemsByParams = () => {
         const urlParams: ParamKeyValuePair[] = [];
         catalogItems = [...catalog.products];
@@ -146,8 +158,10 @@ export const ItemsPage = (): JSX.Element => {
                 const sort: SortType = currentOptions.sort;
                 for (const subObjKey in sort) {
                     const subKey = subObjKey as keyof SortType;
+                    const keyAsItemsKet = subKey as keyof IItem;
                     const v = sort[subKey];
                     if (v !== null) {
+                        sortItems(v, keyAsItemsKet, catalogItems);
                         urlParams.push([`${subKey}`, v]);
                     }
                 }
@@ -165,6 +179,18 @@ export const ItemsPage = (): JSX.Element => {
         const value = elem.value;
         const itemObjectKey = elem.id as keyof FilterType;
         currentOptions.filter[itemObjectKey] = value;
+        const url = modifyItemsByParams();
+        setProds(catalogItems);
+        setSearchParams(url);
+    }
+
+    const sortItemsOnClick = (e: React.MouseEvent) => {
+        currentOptions.sort.price = null;
+        currentOptions.sort.store = null;
+        const elem = e.target as HTMLElement;
+        const direction = elem.dataset.direction as 'assent' | 'descent' | null;
+        const option = elem.dataset.option as keyof SortType;
+        currentOptions.sort[option] = direction;
         const url = modifyItemsByParams();
         setProds(catalogItems);
         setSearchParams(url);
@@ -193,7 +219,7 @@ export const ItemsPage = (): JSX.Element => {
                 {name}
             </option>)
     });
-    
+
     let categorySelectValue = currentOptions.filter.category === null ? '...' : currentOptions.filter.category;
     let brandSelectValue = currentOptions.filter.brand === null ? '...' : currentOptions.filter.brand;
     return (
@@ -211,7 +237,37 @@ export const ItemsPage = (): JSX.Element => {
                 </section>
                 <section className='catalog__wrap__tools-wrap'>
                     <div className='catalog__wrap__tools-wrap__sort'>
-                        Sort
+                        <div className='catalog__wrap__tools-wrap__sort__by-price'>
+                            <span>Sort by price</span>
+                            <div className='catalog__wrap__tools-wrap__sort__by-price__button-wrap'>
+                                <button
+                                    data-direction='assent'
+                                    data-option='price'
+                                    onClick={sortItemsOnClick}
+                                >🠕</button>
+                                <button
+                                    data-direction='descent'
+                                    data-option='price'
+                                    onClick={sortItemsOnClick}
+                                >🠗</button>
+                            </div>
+
+                        </div>
+                        <div className='catalog__wrap__tools-wrap__sort__by-stock'>
+                            <span>Sort by stock</span>
+                            <div className='catalog__wrap__tools-wrap__sort__by-stock__button-wrap'>
+                                <button
+                                    data-direction='assent'
+                                    data-option='stock'
+                                    onClick={sortItemsOnClick}
+                                >🠕</button>
+                                <button
+                                    data-direction='descent'
+                                    data-option='stock'
+                                    onClick={sortItemsOnClick}
+                                >🠗</button>
+                            </div>
+                        </div>
                     </div>
                     <div className='catalog__wrap__tools-wrap__filter'>
                         <div className='catalog__wrap__tools-wrap__filter__wrap'>
