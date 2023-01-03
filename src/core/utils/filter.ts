@@ -12,4 +12,8 @@ export class Filter {
             return arr;
         }, []);
     }
+
+    static createBrandSetForCategory(array: IItem[], category: string) {
+
+    }
 }

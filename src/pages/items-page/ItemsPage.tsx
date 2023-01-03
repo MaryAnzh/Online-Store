@@ -68,6 +68,7 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     //создаем массивы для фильтрации по брендам и категориям
     const categories: string[] = Filter.createNameSet(catalogItems, 'category');
     const brands: string[] = Filter.createNameSet(catalogItems, 'brand');
+    const [brandsInCategory, setBrandsInCategory] = useState(brands);
 
     // Проверяем есть ли в url строке квери параметры, если есть то записываем их в текучие параметры и рендерим
     // меняем объект с параметрами в соответствии
@@ -212,7 +213,7 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
         </option>
     );
 
-    const brandFilter: JSX.Element[] = brands.map((name, i) => {
+    const brandFilter: JSX.Element[] = brandsInCategory.map((name, i) => {
         return (
             <option
                 key={name}
