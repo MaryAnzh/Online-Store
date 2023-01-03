@@ -6,7 +6,7 @@ import { ItemCard } from '../../components/simple/item-card/ItemCard';
 import { IItem } from '../../core/interfaces/catalog.interfaces';
 import { Filter } from '../../core/utils/filter';
 import { Sort } from '../../core/utils/sort';
-import {ShopState} from '../../core/state/ShopState'
+import { ShopState } from '../../core/state/ShopState'
 
 interface IItemsPageProps {
     state: ShopState
@@ -44,7 +44,7 @@ let currentOptions: itemsQueryOptions = {
 
 export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     const itemCatalog: IItem[] = [...catalog.products];
-    const itemsList: JSX.Element[] = itemCatalog.map(elem => <ItemCard item={elem} state={props.state} key={elem.id}/>);
+    const itemsList: JSX.Element[] = itemCatalog.map(elem => <ItemCard item={elem} state={props.state} key={elem.id} />);
 
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -202,13 +202,6 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
         setProds(catalogItems);
         setSearchParams(url);
     }
-
-    const itemsList: JSX.Element[] = prods.map(elem => {
-        return (
-            <ItemCard
-                key={elem.id}
-                item={elem} />)
-    });
 
     const categoriesFilter: JSX.Element[] = categories.map((name) =>
         <option
