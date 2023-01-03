@@ -109,9 +109,9 @@ export const ItemsPage = (): JSX.Element => {
         }
         if (paramsCount === 0) {
             const data: itemsQueryOptions | null = storageService.getData(storageKey);
-            if (data !== null) {
-                currentOptions = data;
-            }
+            // if (data !== null) {
+            //     currentOptions = data;
+            // }
         }
     }
     getCurrentParams();
@@ -147,9 +147,9 @@ export const ItemsPage = (): JSX.Element => {
                         const filtering = filterItems(v, param, catalogItems);
                         if (filtering.length > 0) {
                             catalogItems = filtering;
-                        }
-                        if (v !== '...') {
-                            urlParams.push([`${subKey}`, v]);
+                            if (v !== '...') {
+                                urlParams.push([`${subKey}`, v]);
+                            }
                         }
                     }
                 }
@@ -207,6 +207,9 @@ export const ItemsPage = (): JSX.Element => {
             </option>)
     });
 
+    let categorySelectValue = currentOptions.filter.category === null ? '...' : currentOptions.filter.category;
+    let brandSelectValue = currentOptions.filter.brand === null ? '...' : currentOptions.filter.brand;
+
     return (
         <section className='catalog'>
             <div className='catalog__wrap'>
@@ -230,7 +233,8 @@ export const ItemsPage = (): JSX.Element => {
                             <select
                                 className='catalog__wrap__tools-wrap__filter__wrap__category'
                                 id='category'
-                                onChange={filterItemsOnChange}>
+                                onChange={filterItemsOnChange}
+                                value={categorySelectValue}>
                                 <option value='...'>...</option>
                                 {categoriesFilter}
                             </select>
@@ -240,7 +244,8 @@ export const ItemsPage = (): JSX.Element => {
                             <select
                                 id='brand'
                                 className='catalog__wrap__tools-wrap__filter__wrap__brand'
-                                onChange={filterItemsOnChange}>
+                                onChange={filterItemsOnChange}
+                                value={brandSelectValue}>
                                 <option value='...'>...</option>
                                 {brandFilter}
                             </select>
