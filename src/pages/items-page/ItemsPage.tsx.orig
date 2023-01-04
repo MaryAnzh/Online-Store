@@ -4,13 +4,9 @@ import { catalog } from '../../core/data/catalog.data';
 import './ItemsPage.scss'
 import { ItemCard } from '../../components/simple/item-card/ItemCard';
 import { IItem } from '../../core/interfaces/catalog.interfaces';
+<<<<<<< HEAD
 import { Filter } from '../../core/utils/filter';
 import { Sort } from '../../core/utils/sort';
-import { ShopState } from '../../core/state/ShopState'
-
-interface IItemsPageProps {
-    state: ShopState
-}
 
 type FilterType = {
     category: null | string,
@@ -23,13 +19,13 @@ type SortType = {
     store: null | 'assent' | 'descent',
 }
 
-type ItemsQueryOptions = {
+type itemsQueryOptions = {
     filter: FilterType,
     sort: SortType,
     search: null | string,
 }
 
-let currentOptions: ItemsQueryOptions = {
+let currentOptions: itemsQueryOptions = {
     filter: {
         category: null,
         brand: null,
@@ -42,8 +38,8 @@ let currentOptions: ItemsQueryOptions = {
     search: null,
 };
 
-export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
-    const itemCatalog: IItem[] = [...catalog.products];
+export const ItemsPage = (): JSX.Element => {
+    //хук квери параметров url
     const [searchParams, setSearchParams] = useSearchParams();
 
     //получкам каталог товаров
@@ -68,7 +64,6 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     //создаем массивы для фильтрации по брендам и категориям
     const categories: string[] = Filter.createNameSet(catalogItems, 'category');
     const brands: string[] = Filter.createNameSet(catalogItems, 'brand');
-    const [brandsInCategory, setBrandsInCategory] = useState(brands);
 
     // Проверяем есть ли в url строке квери параметры, если есть то записываем их в текучие параметры и рендерим
     // меняем объект с параметрами в соответствии
@@ -77,7 +72,7 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
         let paramsCount = 0;
 
         for (const key in currentOptions) {
-            const objKey = key as keyof ItemsQueryOptions;
+            const objKey = key as keyof itemsQueryOptions;
             if (objKey === 'filter') {
                 const filter: FilterType = currentOptions.filter;
                 for (const subObjKey in filter) {
@@ -136,7 +131,7 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
         catalogItems = [...catalog.products];
 
         for (const objKey in currentOptions) {
-            const key = objKey as keyof ItemsQueryOptions;
+            const key = objKey as keyof itemsQueryOptions;
             if (key === 'search') {
                 const v = currentOptions[key];
                 if (v !== null) {
@@ -202,8 +197,12 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
         setSearchParams(url);
     }
 
-    const itemsList: JSX.Element[] = prods.map(elem => <ItemCard item={elem} state={props.state} key={elem.id} />);
-
+    const itemsList: JSX.Element[] = prods.map(elem => {
+        return (
+            <ItemCard
+                key={elem.id}
+                item={elem} />)
+    });
 
     const categoriesFilter: JSX.Element[] = categories.map((name) =>
         <option
@@ -213,7 +212,7 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
         </option>
     );
 
-    const brandFilter: JSX.Element[] = brandsInCategory.map((name, i) => {
+    const brandFilter: JSX.Element[] = brands.map((name, i) => {
         return (
             <option
                 key={name}
@@ -224,6 +223,19 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
 
     let categorySelectValue = currentOptions.filter.category === null ? '...' : currentOptions.filter.category;
     let brandSelectValue = currentOptions.filter.brand === null ? '...' : currentOptions.filter.brand;
+=======
+import {ShopState} from '../../core/state/ShopState'
+
+
+interface IItemsPageProps {
+    state: ShopState
+}
+
+export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
+    const itemCatalog: IItem[] = [...catalog.products];
+    const itemsList: JSX.Element[] = itemCatalog.map(elem => <ItemCard item={elem} state={props.state} key={elem.id}/>);
+
+>>>>>>> origin/develop
     return (
         <section className='catalog'>
             <div className='catalog__wrap'>
@@ -318,4 +330,3 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
         </section >
     )
 }
-
