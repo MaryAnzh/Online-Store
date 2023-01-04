@@ -14,21 +14,19 @@ export const App = (): JSX.Element => {
     const state: React.MutableRefObject<ShopState> = React.useRef<ShopState>(new ShopState())
 
     return (
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
-            {/* <Router> */}
-                <section className="wrapper">
-                    <Header cartState={state.current.cart} />
-                    <main className="wrapper__main">
-                        <Routes>
-                            <Route path="/" element={<ItemsPage state={state.current} />} />
-                            <Route path="/cart" element={<CartPage state={state.current} />} />
-                            <Route path="/*" element={<NotFoundPage />} />
-                            <Route path="/products/:id" element={<ItemPage state={state.current} />} />
-                        </Routes>
-                    </main>
-                    < Footer />
-                </section>
-            {/* </Router> */}
-        </BrowserRouter>
+        <HashRouter>
+            <section className="wrapper">
+                <Header cartState={state.current.cart} />
+                <main className="wrapper__main">
+                    <Routes>
+                        <Route path="/" element={<ItemsPage state={state.current} />} />
+                        <Route path="/cart" element={<CartPage state={state.current} />} />
+                        <Route path="/*" element={<NotFoundPage />} />
+                        <Route path="/products/:id" element={<ItemPage state={state.current} />} />
+                    </Routes>
+                </main>
+                < Footer />
+            </section>
+        </HashRouter>
     )
 }

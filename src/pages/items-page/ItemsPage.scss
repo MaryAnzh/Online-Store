@@ -76,12 +76,9 @@
                     font-family: 'Roboto', sans-serif;
                     font-style: normal;
                     font-size: 1.75em;
-
-                    color: #302C34;
+                    color: $main-font-color;
                 }
             }
-
-
         }
 
         &__tools-wrap {
@@ -187,15 +184,13 @@
                 font-weight: 700;
                 font-size: 36px;
                 line-height: 42px;
-
-                color: #000000;
+                color: $item-card-font-color
             }
 
             &__items-wrap {
                 display: flex;
                 align-self: center;
                 flex-wrap: wrap;
-                justify-content: space-between;
             }
 
         }
