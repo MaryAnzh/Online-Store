@@ -23,13 +23,13 @@ type SortType = {
     store: null | 'assent' | 'descent',
 }
 
-type itemsQueryOptions = {
+type ItemsQueryOptions = {
     filter: FilterType,
     sort: SortType,
     search: null | string,
 }
 
-let currentOptions: itemsQueryOptions = {
+let currentOptions: ItemsQueryOptions = {
     filter: {
         category: null,
         brand: null,
@@ -77,7 +77,7 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
         let paramsCount = 0;
 
         for (const key in currentOptions) {
-            const objKey = key as keyof itemsQueryOptions;
+            const objKey = key as keyof ItemsQueryOptions;
             if (objKey === 'filter') {
                 const filter: FilterType = currentOptions.filter;
                 for (const subObjKey in filter) {
@@ -136,7 +136,7 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
         catalogItems = [...catalog.products];
 
         for (const objKey in currentOptions) {
-            const key = objKey as keyof itemsQueryOptions;
+            const key = objKey as keyof ItemsQueryOptions;
             if (key === 'search') {
                 const v = currentOptions[key];
                 if (v !== null) {
