@@ -3,7 +3,7 @@ import { IItem } from '../../../core/interfaces/catalog.interfaces';
 import { toolsModel, ModifyItemsType } from '../../../core/model/toolsModel';
 import { ParamKeyValuePair } from 'react-router-dom';
 import React, { useState } from 'react';
-import { FilterType, ItemsQueryOptions } from '../../../core/types/tools.types';
+import { FilterType, ItemsQueryOptions, SortType } from '../../../core/types/tools.types';
 
 interface IToolsProps {
     items: IItem[],
@@ -14,8 +14,8 @@ interface IToolsProps {
 type SelectViewType = {
     categories: string[],
     brands: string[],
-    price: 'select' | 'low to hight' | 'hight to low',
-    stock: 'select' | 'low to hight' | 'hight to low',
+    price: 'select' | 'assent' | 'descent',
+    stock: 'select' | 'assent' | 'descent',
 }
 
 export const Tools = (props: IToolsProps) => {
@@ -54,6 +54,22 @@ export const Tools = (props: IToolsProps) => {
         }
     }
 
+    const checkSort = (settings: ItemsQueryOptions) => {
+        const sort = settings.sort;
+        const price = sort.price;
+        if (price === null) {
+            selectView.price = 'select';
+        } else {
+            selectView.price = price;
+        }
+        const stock = sort.stock;
+        if (stock === null) {
+            selectView.stock = 'select';
+        } else {
+            selectView.stock = stock;
+        }
+    }
+
     //проверяем пустые ли параметры, если нет
     //то подгоняем отображение под параметры
     for (const key in toolsSettings) {
@@ -61,11 +77,16 @@ export const Tools = (props: IToolsProps) => {
         if (keyInObj === 'filter') {
             checkFilters(toolsSettings);
         }
+        if (keyInObj === 'sort') {
+            checkSort(toolsSettings);
+        }
     }
 
     //устанавливаем состояние отображения фильтров по категории и бренду
     const [categories, setCategories] = useState(selectView.categories);
     const [brands, setBrands] = useState(selectView.brands);
+    const [priceValue, setPriceValue] = useState(selectView.price);
+    const [stockValue, setStockValue] = useState(selectView.stock);
 
     // рендеринг списков
     const categoriesFilter: JSX.Element[] = categories.map((name) =>
@@ -86,7 +107,7 @@ export const Tools = (props: IToolsProps) => {
     });
 
     const setItemsData = () => {
-        const modifyData: ModifyItemsType = toolsModel.modifyItemsByParams(props.items, toolsSettings);
+        const modifyData: ModifyItemsType = toolsModel.modifyItemsByParams(allItems, toolsSettings);
         props.setItems(modifyData.items, modifyData.urlParams);
     }
 
@@ -98,6 +119,23 @@ export const Tools = (props: IToolsProps) => {
         checkFilters(toolsSettings);
         setBrands(selectView.brands);
         setCategories(selectView.categories);
+        setItemsData();
+    }
+
+    const sortItemsOnChange = (e: React.ChangeEvent) => {
+        toolsSettings.sort.price = null;
+        toolsSettings.sort.stock = null;
+
+        const elem = e.target as HTMLSelectElement;
+        const value = elem.value === 'select' ? null : elem.value as "assent" | "descent";
+        const itemObjectKey = elem.id as keyof SortType;
+        toolsSettings.sort[itemObjectKey] = value;
+        console.log(`id: ${itemObjectKey}, value: ${value}`);
+
+        checkSort(toolsSettings);
+        setPriceValue(selectView.price);
+        setStockValue(selectView.stock);
+        console.log(selectView.stock);
         setItemsData();
     }
 
@@ -164,11 +202,11 @@ export const Tools = (props: IToolsProps) => {
                         <select
                             className='tools__hidden__select-tools__tool__select filter-select'
                             id='price'
-
-                            onChange={() => { console.log('ky ky') }}>
+                            value={priceValue}
+                            onChange={sortItemsOnChange}>
                             <option value='select'>...</option>
-                            <option value='low to hight'>low to hight</option>
-                            <option value='hight to low'>hight to low</option>
+                            <option value='assent'>low to hight</option>
+                            <option value='descent'>hight to low</option>
                         </select>
                     </div>
                     <div className='tools__hidden__select-tools__tool'>
@@ -180,11 +218,11 @@ export const Tools = (props: IToolsProps) => {
                         <select
                             className='tools__hidden__select-tools__tool__select filter-selects'
                             id='stock'
-
-                            onChange={() => console.log('')}>
+                            value={selectView.stock}
+                            onChange={sortItemsOnChange}>
                             <option value='select'>...</option>
-                            <option value='low to hight'>low to hight</option>
-                            <option value='hight to low'>hight to low</option>
+                            <option value='assent'>low to hight</option>
+                            <option value='descent'>hight to low</option>
                         </select>
                     </div>
                 </div>

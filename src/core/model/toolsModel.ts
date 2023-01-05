@@ -19,7 +19,7 @@ class ToolsModel {
             },
             sort: {
                 price: null,
-                store: null,
+                stock: null,
             },
             search: null,
         };
@@ -34,7 +34,7 @@ class ToolsModel {
             },
             sort: {
                 price: null,
-                store: null,
+                stock: null,
             },
             search: null,
         };
@@ -43,7 +43,7 @@ class ToolsModel {
     isSettingsEmpty = (settings: ItemsQueryOptions): boolean => {
         let isSettingsEmpty = true;
         if (settings.search !== null || settings.filter.category !== null || settings.filter.brand !== null
-            || settings.filter.inCart !== null || settings.sort.price !== null || settings.sort.store !== null) {
+            || settings.filter.inCart !== null || settings.sort.price !== null || settings.sort.stock !== null) {
             isSettingsEmpty = false;
         }
         return isSettingsEmpty;

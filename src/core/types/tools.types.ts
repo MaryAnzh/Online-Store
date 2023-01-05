@@ -6,7 +6,7 @@ export type FilterType = {
 
 export type SortType = {
     price: null | 'assent' | 'descent',
-    store: null | 'assent' | 'descent',
+    stock: null | 'assent' | 'descent',
 }
 
 export type ItemsQueryOptions = {
