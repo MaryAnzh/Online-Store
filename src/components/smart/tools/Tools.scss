@@ -16,8 +16,10 @@
     &__hidden {
         width: 100%;
         padding: 10px;
+        display: flex;
+        justify-content: space-between;
 
-        &__filter {
+        &__select-tools {
             max-width: 500px;
             width: 100%;
             display: flex;
@@ -27,8 +29,7 @@
                 flex-direction: column;
             }
 
-            &__category,
-            &__brand {
+            &__tool {
                 width: 240px;
 
                 &__title {

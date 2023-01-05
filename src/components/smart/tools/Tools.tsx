@@ -14,6 +14,8 @@ interface IToolsProps {
 type SelectViewType = {
     categories: string[],
     brands: string[],
+    price: 'select' | 'low to hight' | 'hight to low',
+    stock: 'select' | 'low to hight' | 'hight to low',
 }
 
 export const Tools = (props: IToolsProps) => {
@@ -24,6 +26,8 @@ export const Tools = (props: IToolsProps) => {
     const selectView: SelectViewType = {
         categories: [],
         brands: [],
+        price: 'select',
+        stock: 'select',
     }
     let categorySelectValue = '...';
     let brandSelectValue = '...';
@@ -112,18 +116,18 @@ export const Tools = (props: IToolsProps) => {
                 </div>
             </div>
             <div className='tools__hidden'>
-                <div className='tools__hidden__filter'>
-                    <div className='tools__hidden__filter__category'>
-                        <div className='tools__hidden__filter__category__title'>
-                            <span className='tools__hidden__filter__brand__title__name'>
+                <div className='tools__hidden__select-tools'>
+                    <div className='tools__hidden__select-tools__tool'>
+                        <div className='tools__hidden__select-tools__tool__title'>
+                            <span className='tools__hidden__select-tools__tool__title__name'>
                                 Category
                             </span>
-                            <div className='tools__hidden__filter__category__title__count'>
+                            <div className='tools__hidden__select-tools__tool__title__count'>
                                 (<span>{categories.length}</span>)
                             </div>
                         </div>
                         <select
-                            className='tools__hidden__filter__category__select filter-select'
+                            className='tools__hidden__select-tools__tool__select filter-select'
                             id='category'
                             value={categorySelectValue}
                             onChange={filterItemsOnChange}>
@@ -131,22 +135,56 @@ export const Tools = (props: IToolsProps) => {
                             {categoriesFilter}
                         </select>
                     </div>
-                    <div className='tools__hidden__filter__brand'>
-                        <div className='tools__hidden__filter__brand__title'>
-                            <span className='tools__hidden__filter__brand__title__name'>
+                    <div className='tools__hidden__select-tools__tool'>
+                        <div className='tools__hidden__select-tools__tool__title'>
+                            <span className='tools__hidden__select-tools__tool__title__name'>
                                 Brand
                             </span>
-                            <div className='tools__hidden__filter__brand__title__count'>
+                            <div className='tools__hidden__select-tools__tool__title__count'>
                                 (<span>{brands.length}</span>)
                             </div>
                         </div>
                         <select
-                            className='tools__hidden__filter__brand__select filter-selects'
+                            className='tools__hidden__select-tools__tool__select filter-selects'
                             id='brand'
                             value={brandSelectValue}
                             onChange={filterItemsOnChange}>
                             <option value={'...'}></option>
                             {brandFilter}
+                        </select>
+                    </div>
+                </div>
+                <div className='tools__hidden__select-tools'>
+                    <div className='tools__hidden__select-tools__tool'>
+                        <div className='tools__hidden__select-tools__tool__title'>
+                            <span className='tools__hidden__select-tools__tool__title__name'>
+                                Sorn by Price
+                            </span>
+                        </div>
+                        <select
+                            className='tools__hidden__select-tools__tool__select filter-select'
+                            id='price'
+
+                            onChange={() => { console.log('ky ky') }}>
+                            <option value='select'>...</option>
+                            <option value='low to hight'>low to hight</option>
+                            <option value='hight to low'>hight to low</option>
+                        </select>
+                    </div>
+                    <div className='tools__hidden__select-tools__tool'>
+                        <div className='tools__hidden__select-tools__tool__title'>
+                            <span className='tools__hidden__select-tools__tool__title__name'>
+                                Sort by Stock
+                            </span>
+                        </div>
+                        <select
+                            className='tools__hidden__select-tools__tool__select filter-selects'
+                            id='stock'
+
+                            onChange={() => console.log('')}>
+                            <option value='select'>...</option>
+                            <option value='low to hight'>low to hight</option>
+                            <option value='hight to low'>hight to low</option>
                         </select>
                     </div>
                 </div>
