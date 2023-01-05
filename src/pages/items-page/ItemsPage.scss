@@ -4,6 +4,7 @@
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -21,6 +22,8 @@
     &__wrap {
         max-width: 1200px;
         width: 100%;
+        min-height: 91vh;
+        height: fit-content;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -78,6 +81,20 @@
                     font-size: 1.75em;
                     color: $main-font-color;
                 }
+            }
+        }
+
+        &__total-items-count {
+            width: 100%;
+            color: $usual-text-color;
+            text-align: left;
+            font-size: 20px;
+            font-weight: 500;
+
+            span {
+                padding-left: 10px;
+                font-weight: 600;
+                color: $contrast-color;
             }
         }
 
@@ -188,9 +205,16 @@
             }
 
             &__items-wrap {
-                display: flex;
+                width: 100%;
                 align-self: center;
-                flex-wrap: wrap;
+                display: flex;
+                justify-content: space-between;
+                flex-flow: row wrap;
+
+                &::after {
+                    content: "";
+                    flex: auto;
+                }
             }
 
         }

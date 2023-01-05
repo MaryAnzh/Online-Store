@@ -69,7 +69,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "discountPercentage": 17.91,
             "rating": 4.3,
             
-            "stock": 123,
+            "stock": 99,
             "brand": "OPPO",
             "category": "smartphones",
             "thumbnail": "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
@@ -108,7 +108,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "rating": 4.57,
             
             "stock": 83,
-            "brand": "APPle",
+            "brand": "Apple",
             "category": "laptops",
             "thumbnail": "https://i.dummyjson.com/data/products/6/thumbnail.png",
             "images": [

@@ -1,0 +1,82 @@
+@import '../../../style/utils/variable';
+
+.tools {
+    width: 100%;
+    padding: 10px;
+    border: 7px;
+    background: $promo-background-color;
+
+    &__visible {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__hidden {
+        width: 100%;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+
+        &__select-tools {
+            max-width: 500px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+
+            @media (max-width: 500px) {
+                flex-direction: column;
+            }
+
+            &__tool {
+                width: 240px;
+
+                &__title {
+                    width: 100%;
+                    display: flex;
+
+                    &__name {
+                        font-weight: 500;
+                    }
+
+                    &__count {
+                        width: 40px;
+                        padding-left: 10px;
+                        display: flex;
+                        justify-content: center;
+                    }
+                }
+
+                &__select {
+                    width: 100%;
+                    margin-bottom: 10px;
+                    display: block;
+                    font-size: 16px;
+                    padding: 5px 2px;
+                    border: 1px solid $yellow-accent-color;
+                    border-radius: 7px;
+                    transition: .3s;
+
+                    &::-ms-expand {
+                        display: none;
+                    }
+
+                    &:hover {
+                        box-shadow: 2px 2px 4px rgba($color: gray, $alpha: 0.2);
+                    }
+
+                    &:focus {
+                        box-shadow: 0 0 1px 3px rgba($color: $contrast-color, $alpha: 0.1);
+                        outline: none;
+                    }
+
+                    option {
+                        font-weight: normal;
+                    }
+                }
+
+            }
+        }
+    }
+}
