@@ -10,7 +10,7 @@
 
   padding: 10px 20px;
 
-  max-width: 300px;
+  max-width: 400px;
 }
 
 .row {
@@ -32,8 +32,8 @@
   -webkit-user-select: none;
 }
 
-.globus {
-  width: 40px;
+.paymentSystemLogo {
+  height: 30px;
   user-select: none;
   -ms-user-select: none;
   -webkit-user-select: none;
@@ -91,3 +91,18 @@
 }
 
 
+.cardCvv {
+  width: auto;
+  margin-left: auto;
+  max-width: 60px;
+  border: none;
+  padding: 5px 0;
+  outline: none;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, .08);
+  font-size: 12px;
+  font-weight: 500;
+  font-style: italic;
+}

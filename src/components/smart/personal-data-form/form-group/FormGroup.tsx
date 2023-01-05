@@ -34,12 +34,13 @@ export const FormGroup = (props: IFormGroupProps) => {
 }
 
 type Accordance = {
-    [_ in FormGroupType]?: string
+    [key in FormGroupType]?: string
 }
 
 const PATTERN_FOR_TYPE: Accordance = {
-    name: '[A-ZА-Я][a-zа-я-]+[ ]*([A-ZА-я][a-zа-я-]+)?[ ]*([A-ZА-я][a-zа-я-]+)?[ ]*',
-    phone: '([\\+])?[0-9 -]+[0-9]'
+    name: '^[A-Za-zа-яА-Я]{3,}(?:[ ]*[A-Za-zа-яА-Я]{3,})+[ ]*$',
+    phone: '[\\+][0-9]{9,}',
+    address: '^[A-Za-zа-яА-Я]{5,}[ ]*[A-Za-zа-яА-Я]{5,}[ ]*(?:[ ]*[A-Za-zа-яА-Я]{5,})+[ ]*$'
 }
 
 const INPUT_TYPE_FOR_TYPE: Accordance = {

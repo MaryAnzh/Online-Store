@@ -3,7 +3,6 @@ import styles from './ItemBuyModal.module.scss'
 import ReactDOM from 'react-dom'
 import {PersonalDataForm} from '../../components/smart/personal-data-form/PersonalDataForm'
 import {ShopState} from '../../core/state/ShopState'
-import {useNavigate} from 'react-router-dom'
 
 
 interface IItemBuyModal {
