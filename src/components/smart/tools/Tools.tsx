@@ -3,7 +3,7 @@ import { IItem } from '../../../core/interfaces/catalog.interfaces';
 import { toolsModel, ModifyItemsType } from '../../../core/model/toolsModel';
 import { ParamKeyValuePair } from 'react-router-dom';
 import React, { useState } from 'react';
-import { ItemsQueryOptions } from '../../../core/types/tools.types';
+import { FilterType, ItemsQueryOptions } from '../../../core/types/tools.types';
 
 type ToolsProps = {
     items: IItem[],
@@ -63,8 +63,17 @@ export const Tools = (props: ToolsProps) => {
     let categorySelectValue = toolsSettings.filter.category === null ? '...' : toolsSettings.filter.category;
     let brandSelectValue = toolsSettings.filter.brand === null ? '...' : toolsSettings.filter.brand;
 
+    const setItemsData = () => {
+        const modifyData: ModifyItemsType = toolsModel.modifyItemsByParams(props.items, toolsSettings);
+        props.setItems(modifyData.items, modifyData.urlParams);
+    }
+
     const filterItemsOnChange = (e: React.ChangeEvent) => {
-        console.log(e.target);
+        const elem = e.target as HTMLSelectElement;
+        const value = elem.value;
+        const itemObjectKey = elem.id as keyof FilterType;
+        toolsSettings.filter[itemObjectKey] = value;
+        setItemsData();
     }
 
     return (
@@ -86,6 +95,7 @@ export const Tools = (props: ToolsProps) => {
                     <div>
                         <h4>Category</h4>
                         <select
+                            id='category'
                             value={categorySelectValue}
                             onChange={filterItemsOnChange}>
                             <option value={'...'}></option>
@@ -95,6 +105,7 @@ export const Tools = (props: ToolsProps) => {
                     <div>
                         <h4>Brand</h4>
                         <select
+                            id='brand'
                             value={brandSelectValue}
                             onChange={filterItemsOnChange}>
                             <option value={'...'}></option>
