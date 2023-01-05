@@ -1,10 +1,11 @@
 import React from 'react'
 import './ItemCard.scss'
-import {IItem} from '../../../core/interfaces/catalog.interfaces'
-import {ReactComponent as CartLogo} from '../../../assets/cart.svg'
-import {Link} from 'react-router-dom'
-import {ShopState} from '../../../core/state/ShopState'
-import {observer} from 'mobx-react-lite'
+import { IItem } from '../../../core/interfaces/catalog.interfaces'
+import { ReactComponent as CartLogo } from '../../../assets/cart.svg'
+import { ReactComponent as FlagLogo } from '../../../assets/flag.svg';
+import { Link } from 'react-router-dom'
+import { ShopState } from '../../../core/state/ShopState'
+import { observer } from 'mobx-react-lite'
 
 
 type ItemTypeProps = {
@@ -25,11 +26,14 @@ export const ItemCard = observer((props: ItemTypeProps): JSX.Element => {
         <div
             key={`products_${props.item.id}`}
             className="item-card">
+            <FlagLogo />
+            <div className='item-card__in-stock'>Stock: {props.item.stock}</div>
+
             <div className="item-card__image-wrap">
                 <Link to={`/products/${props.item.id}`} className="item-card__image-wrap__link">
                     <img
                         className="item-card__image-wrap__link__image"
-                        src={props.item.thumbnail} alt={props.item.title}/>
+                        src={props.item.thumbnail} alt={props.item.title} />
                 </Link>
             </div>
             <Link to={`/products/${props.item.id}`}>
@@ -50,8 +54,8 @@ export const ItemCard = observer((props: ItemTypeProps): JSX.Element => {
             </Link>
             <div className="item-card__buy-info">
                 <button className="blue-button item-card__buy-info__button"
-                        onClick={buyButtonClicked}>
-                    <CartLogo/>
+                    onClick={buyButtonClicked}>
+                    <CartLogo />
                     {props.state.isItemInCart(props.item.id) ? 'In cart' : 'Buy'}
                 </button>
                 <p className="item-card__buy-info__price">

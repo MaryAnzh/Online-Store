@@ -1,6 +1,7 @@
 @import '../../../style/utils/variable';
 
 .item-card {
+    position: relative;
     font-family: 'Roboto', sans-serif;
     max-width: 384px;
     width: 100%;
@@ -11,6 +12,36 @@
     border-radius: 7px;
     background: white;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+
+    &__in-stock {
+        position: absolute;
+        height: 54px;
+        display: flex;
+        align-items: center;
+        right: 15px;
+        top: 0px;
+        color: white;
+        z-index: 2;
+    }
+
+
+    .flag {
+        position: absolute;
+        height: 54px;
+        right: 0;
+        top: 0;
+        box-shadow: 2px 2px 4px rgba($color: gray, $alpha: 0.4);
+        z-index: 1;
+
+        &__body {
+            fill: $contrast-color;
+        }
+
+        &__stroke {
+            stroke: white;
+            stroke-width: 2px;
+        }
+    }
 
 
 
