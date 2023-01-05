@@ -5,7 +5,6 @@ import './ItemsPage.scss'
 import { ItemCard } from '../../components/simple/item-card/ItemCard';
 import { IItem } from '../../core/interfaces/catalog.interfaces';
 import { Filter } from '../../core/utils/filter';
-import { Sort } from '../../core/utils/sort';
 import { ShopState } from '../../core/state/ShopState'
 import { FilterType, SortType, ItemsQueryOptions } from '../../core/types/tools.types';
 import { Tools } from '../../components/smart/tools/Tools';
@@ -21,7 +20,7 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
 
     //получкам каталог товаров
     const catalogItems: IItem[] = [...catalog.products];
-    const toolsSetting = toolsModel.toolsSetting;
+    let toolsSetting = toolsModel.toolsSetting;
 
     //создаем массивы для фильтрации по брендам и категориям
     const categories: string[] = Filter.createNameSet(catalogItems, 'category');
@@ -121,8 +120,9 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     let categorySelectValue = toolsSetting.filter.category === null ? '...' : toolsSetting.filter.category;
     let brandSelectValue = toolsSetting.filter.brand === null ? '...' : toolsSetting.filter.brand;
 
-    const setItemsFromTools = (items: IItem[]) => {
+    const setItemsFromTools = (items: IItem[], urlParam: ParamKeyValuePair[]) => {
         setProds(items);
+        setSearchParams(urlParam);
     }
 
     return (
@@ -138,7 +138,12 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
                         </p>
                     </div>
                 </section>
-                <Tools items={prods} setItems={setItemsFromTools} />
+
+                <h4 className='catalog__wrap__total-items-count'>
+                    Items in page:
+                    <span>{prods.length}</span>
+                </h4>
+                <Tools items={[...catalog.products]} setItems={setItemsFromTools} toolsSetting={toolsSetting} />
                 <section className='catalog__wrap__tools-wrap'>
                     <div className='catalog__wrap__tools-wrap__sort'>
                         <div className='catalog__wrap__tools-wrap__sort__by-price'>

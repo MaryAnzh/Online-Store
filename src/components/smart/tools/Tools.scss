@@ -1,0 +1,26 @@
+@import '../../../style/utils/variable';
+
+.tools {
+    width: 100%;
+    padding: 10px;
+    border: 7px;
+    background: $promo-background-color;
+
+    &__visible {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__hidden {
+        width: 100%;
+        padding: 10px;
+
+        &__filter {
+            width: 350px;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}

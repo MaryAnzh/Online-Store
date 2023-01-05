@@ -72,7 +72,6 @@ class ToolsModel {
                     const subKey = subObjKey as keyof FilterType;
                     const param = subKey as keyof IItem;
                     const v = filter[subKey];
-                    console.log(`v: ${v}, key: ${subKey}`);
 
                     if (v !== null) {
                         const filtering = this.filterItems(v, param, items);
@@ -104,6 +103,17 @@ class ToolsModel {
             urlParams: urlParams
         }
         return modifyItems;
+    }
+
+    createSelectViewByToolsTitle = (name: string, array: IItem[]) => {
+        return array.reduce((arr: string[], curr) => {
+            const key = name as keyof IItem;
+            const k = curr[key];
+            if (arr.indexOf(`${k}`) === -1) {
+                arr.push(`${k}`);
+            }
+            return arr;
+        }, []);
     }
 }
 
