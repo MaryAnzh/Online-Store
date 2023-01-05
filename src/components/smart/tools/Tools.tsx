@@ -118,10 +118,12 @@ export const Tools = (props: IToolsProps) => {
                 <div className='tools__hidden__filter'>
                     <div className='tools__hidden__filter__category'>
                         <div className='tools__hidden__filter__category__title'>
-                            <span>Category</span>
+                            <span className='tools__hidden__filter__brand__title__name'>
+                                Category
+                            </span>
                             <div className='tools__hidden__filter__category__title__count'>
-                                ({categories.length}
-                            </div>)
+                                (<span>{categories.length}</span>)
+                            </div>
                         </div>
                         <select
                             id='category'
@@ -133,9 +135,11 @@ export const Tools = (props: IToolsProps) => {
                     </div>
                     <div className='tools__hidden__filter__brand'>
                         <div className='tools__hidden__filter__brand__title'>
-                            <span>Brand</span>
+                            <span className='tools__hidden__filter__brand__title__name'>
+                                Brand
+                            </span>
                             <div className='tools__hidden__filter__brand__title__count'>
-                                ({brands.length})
+                                (<span>{brands.length}</span>)
                             </div>
                         </div>
                         <select

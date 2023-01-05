@@ -22,7 +22,8 @@
     &__wrap {
         max-width: 1200px;
         width: 100%;
-        height: 90vh;
+        min-height: 91vh;
+        height: fit-content;
         display: flex;
         flex-direction: column;
         align-items: center;

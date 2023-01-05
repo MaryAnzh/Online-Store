@@ -18,10 +18,15 @@
         padding: 10px;
 
         &__filter {
-            width: 500px;
+            max-width: 500px;
+            width: 100%;
             width: fit-content;
             display: flex;
             justify-content: space-between;
+
+            @media (max-width: 500px) {
+                flex-direction: column;
+            }
 
             &__category,
             &__brand {
@@ -31,9 +36,27 @@
                     width: 100%;
                     display: flex;
 
+                    &__name {
+                        font-weight: 400;
+                    }
+
                     &__count {
-                        width: 20px;
-                        text-align: center;
+                        width: 40px;
+                        padding-left: 10px;
+                        display: flex;
+                        justify-content: center;
+                    }
+                }
+
+                select {
+                    width: 240px;
+                    height: 20px;
+                    margin-bottom: 10px;
+                    outline: none;
+
+                    &:active {
+                        outline: none;
+
                     }
                 }
             }
