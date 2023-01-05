@@ -10,7 +10,7 @@
 
   padding: 10px 20px;
 
-  max-width: 400px;
+  max-width: 330px;
 }
 
 .row {
@@ -37,6 +37,10 @@
   user-select: none;
   -ms-user-select: none;
   -webkit-user-select: none;
+
+  animation-name: smoothAppear;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in-out;
 }
 
 
@@ -105,4 +109,14 @@
   font-size: 12px;
   font-weight: 500;
   font-style: italic;
+}
+
+@keyframes smoothAppear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
