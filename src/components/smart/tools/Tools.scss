@@ -18,9 +18,25 @@
         padding: 10px;
 
         &__filter {
-            width: 350px;
+            width: 500px;
+            width: fit-content;
             display: flex;
             justify-content: space-between;
+
+            &__category,
+            &__brand {
+                width: 240px;
+
+                &__title {
+                    width: 100%;
+                    display: flex;
+
+                    &__count {
+                        width: 20px;
+                        text-align: center;
+                    }
+                }
+            }
         }
     }
 }

@@ -1,8 +1,22 @@
 @import 'style/utils/reset';
 @import 'style/utils/variable';
 
+html {
+    overflow-x: hidden;
+    margin-right: calc(-1 * (100vw - 100%));
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: no-repeat;
+}
+
+body * {
+    font-family: 'Roboto', sans-serif;
+}
+
 .wrapper {
-    width: 100%;
+    width: 100vw;
     min-height: 100vh;
     height: fit-content;
     padding: 8px;

@@ -1,6 +1,11 @@
 @import './utils/reset';
 @import './utils/variable';
 
+html {
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   background: no-repeat;

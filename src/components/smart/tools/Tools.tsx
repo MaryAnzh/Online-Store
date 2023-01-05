@@ -5,7 +5,7 @@ import { ParamKeyValuePair } from 'react-router-dom';
 import React, { useState } from 'react';
 import { FilterType, ItemsQueryOptions } from '../../../core/types/tools.types';
 
-type ToolsProps = {
+interface IToolsProps {
     items: IItem[],
     toolsSetting: ItemsQueryOptions,
     setItems: (items: IItem[], urlParam: ParamKeyValuePair[]) => void;
@@ -16,32 +16,57 @@ type SelectViewType = {
     brands: string[],
 }
 
-export const Tools = (props: ToolsProps) => {
+export const Tools = (props: IToolsProps) => {
+    //инициализация
+    // переемные
     const toolsSettings = props.toolsSetting;
-    const checkToolsSetting = () => {
-        let isSettingsEmpty = true;
-        for (const key in props.toolsSetting) {
-            if (props.toolsSetting.search !== null || props.toolsSetting.filter.brand !== null
-                || props.toolsSetting.filter.category !== null || props.toolsSetting.filter.inCart
-                || props.toolsSetting.sort.price !== null || props.toolsSetting.sort.store !== null
-            ) {
-                isSettingsEmpty = false;
-            }
-        }
+    const allItems = props.items;
+    const selectView: SelectViewType = {
+        categories: [],
+        brands: [],
     }
+    let categorySelectValue = '...';
+    let brandSelectValue = '...';
+    let isSettingsShow = false;
 
-    const selectView = {
-        categories: toolsModel.createSelectViewByToolsTitle('category', props.items),
-        brands: toolsModel.createSelectViewByToolsTitle('brand', props.items),
-    }
-
-    const [categories, setCategories] = useState(selectView.categories);
-    const [brands, setBrands] = useState(selectView.brands);
-
+    //функции
     const modifyItems = (items: IItem[], urlParam: ParamKeyValuePair[]) => {
         props.setItems(items, urlParam);
     }
+    const checkFilters = (settings: ItemsQueryOptions) => {
+        const filter: FilterType = settings.filter;
+        const category = filter.category;
+        if (category === null || category == '...') {
+            categorySelectValue = '...';
+            selectView.brands = toolsModel.createSelectViewByToolsTitle('brand', allItems);
+        } else {
+            categorySelectValue = category;
+            selectView.brands = toolsModel.updateBrandSet(allItems, category);
+        }
+        const brand = filter.brand;
+        if (brand === null || brand === '...') {
+            brandSelectValue = '...';
+            selectView.categories = toolsModel.createSelectViewByToolsTitle('category', allItems);
+        } else {
+            brandSelectValue = brand;
+            selectView.categories = toolsModel.updateCategorySet(allItems, brand);
+        }
+    }
 
+    //проверяем пустые ли параметры, если нет
+    //то подгоняем отображение под параметры
+    for (const key in toolsSettings) {
+        const keyInObj = key as keyof ItemsQueryOptions;
+        if (keyInObj === 'filter') {
+            checkFilters(toolsSettings);
+        }
+    }
+
+    //устанавливаем состояние отображения фильтров по категории и бренду
+    const [categories, setCategories] = useState(selectView.categories);
+    const [brands, setBrands] = useState(selectView.brands);
+
+    // рендеринг списков
     const categoriesFilter: JSX.Element[] = categories.map((name) =>
         <option
             key={name}
@@ -59,10 +84,6 @@ export const Tools = (props: ToolsProps) => {
             </option>)
     });
 
-    let isSettingsShow = false;
-    let categorySelectValue = toolsSettings.filter.category === null ? '...' : toolsSettings.filter.category;
-    let brandSelectValue = toolsSettings.filter.brand === null ? '...' : toolsSettings.filter.brand;
-
     const setItemsData = () => {
         const modifyData: ModifyItemsType = toolsModel.modifyItemsByParams(props.items, toolsSettings);
         props.setItems(modifyData.items, modifyData.urlParams);
@@ -73,6 +94,9 @@ export const Tools = (props: ToolsProps) => {
         const value = elem.value;
         const itemObjectKey = elem.id as keyof FilterType;
         toolsSettings.filter[itemObjectKey] = value;
+        checkFilters(toolsSettings);
+        setBrands(selectView.brands);
+        setCategories(selectView.categories);
         setItemsData();
     }
 
@@ -92,8 +116,13 @@ export const Tools = (props: ToolsProps) => {
             </div>
             <div className='tools__hidden'>
                 <div className='tools__hidden__filter'>
-                    <div>
-                        <h4>Category</h4>
+                    <div className='tools__hidden__filter__category'>
+                        <div className='tools__hidden__filter__category__title'>
+                            <span>Category</span>
+                            <div className='tools__hidden__filter__category__title__count'>
+                                ({categories.length}
+                            </div>)
+                        </div>
                         <select
                             id='category'
                             value={categorySelectValue}
@@ -102,8 +131,13 @@ export const Tools = (props: ToolsProps) => {
                             {categoriesFilter}
                         </select>
                     </div>
-                    <div>
-                        <h4>Brand</h4>
+                    <div className='tools__hidden__filter__brand'>
+                        <div className='tools__hidden__filter__brand__title'>
+                            <span>Brand</span>
+                            <div className='tools__hidden__filter__brand__title__count'>
+                                ({brands.length})
+                            </div>
+                        </div>
                         <select
                             id='brand'
                             value={brandSelectValue}

@@ -40,6 +40,33 @@ class ToolsModel {
         };
     }
 
+    isSettingsEmpty = (settings: ItemsQueryOptions): boolean => {
+        let isSettingsEmpty = true;
+        if (settings.search !== null || settings.filter.category !== null || settings.filter.brand !== null
+            || settings.filter.inCart !== null || settings.sort.price !== null || settings.sort.store !== null) {
+            isSettingsEmpty = false;
+        }
+        return isSettingsEmpty;
+    }
+
+    updateBrandSet = (items: IItem[], category: string): string[] => {
+        return items.reduce((arr: string[], el) => {
+            if (el.category === category) {
+                arr.push(el.brand);
+            }
+            return arr;
+        }, []);
+    }
+
+    updateCategorySet = (items: IItem[], brand: string): string[] => {
+        return items.reduce((arr: string[], el) => {
+            if (el.brand === brand) {
+                arr.push(el.category);
+            }
+            return arr;
+        }, []);
+    }
+
     filterItems = (value: string, itemObjectKey: keyof IItem, items: IItem[]) => {
         let filterItems: IItem[] = [];
         if (value === '...') {
