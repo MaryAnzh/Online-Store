@@ -52,7 +52,9 @@ class ToolsModel {
     updateBrandSet = (items: IItem[], category: string): string[] => {
         return items.reduce((arr: string[], el) => {
             if (el.category === category) {
-                arr.push(el.brand);
+                if (arr.indexOf(el.brand) === -1) {
+                    arr.push(el.brand);
+                }
             }
             return arr;
         }, []);
@@ -61,7 +63,9 @@ class ToolsModel {
     updateCategorySet = (items: IItem[], brand: string): string[] => {
         return items.reduce((arr: string[], el) => {
             if (el.brand === brand) {
-                arr.push(el.category);
+                if (arr.indexOf(el.category) === -1) {
+                    arr.push(el.category);
+                }
             }
             return arr;
         }, []);

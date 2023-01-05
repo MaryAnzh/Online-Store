@@ -108,7 +108,7 @@ export const catalog: ICatalog = JSON.parse(`{
             "rating": 4.57,
             
             "stock": 83,
-            "brand": "APPle",
+            "brand": "Apple",
             "category": "laptops",
             "thumbnail": "https://i.dummyjson.com/data/products/6/thumbnail.png",
             "images": [

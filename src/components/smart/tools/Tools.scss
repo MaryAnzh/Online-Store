@@ -20,7 +20,6 @@
         &__filter {
             max-width: 500px;
             width: 100%;
-            width: fit-content;
             display: flex;
             justify-content: space-between;
 
@@ -37,7 +36,7 @@
                     display: flex;
 
                     &__name {
-                        font-weight: 400;
+                        font-weight: 500;
                     }
 
                     &__count {
@@ -48,17 +47,34 @@
                     }
                 }
 
-                select {
-                    width: 240px;
-                    height: 20px;
+                &__select {
+                    width: 100%;
                     margin-bottom: 10px;
-                    outline: none;
+                    display: block;
+                    font-size: 16px;
+                    padding: 5px 2px;
+                    border: 1px solid $yellow-accent-color;
+                    border-radius: 7px;
+                    transition: .3s;
 
-                    &:active {
+                    &::-ms-expand {
+                        display: none;
+                    }
+
+                    &:hover {
+                        box-shadow: 2px 2px 4px rgba($color: gray, $alpha: 0.2);
+                    }
+
+                    &:focus {
+                        box-shadow: 0 0 1px 3px rgba($color: $contrast-color, $alpha: 0.1);
                         outline: none;
+                    }
 
+                    option {
+                        font-weight: normal;
                     }
                 }
+
             }
         }
     }

@@ -30,9 +30,6 @@ export const Tools = (props: IToolsProps) => {
     let isSettingsShow = false;
 
     //функции
-    const modifyItems = (items: IItem[], urlParam: ParamKeyValuePair[]) => {
-        props.setItems(items, urlParam);
-    }
     const checkFilters = (settings: ItemsQueryOptions) => {
         const filter: FilterType = settings.filter;
         const category = filter.category;
@@ -126,6 +123,7 @@ export const Tools = (props: IToolsProps) => {
                             </div>
                         </div>
                         <select
+                            className='tools__hidden__filter__category__select filter-select'
                             id='category'
                             value={categorySelectValue}
                             onChange={filterItemsOnChange}>
@@ -143,6 +141,7 @@ export const Tools = (props: IToolsProps) => {
                             </div>
                         </div>
                         <select
+                            className='tools__hidden__filter__brand__select filter-selects'
                             id='brand'
                             value={brandSelectValue}
                             onChange={filterItemsOnChange}>
