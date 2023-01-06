@@ -96,10 +96,11 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
                     </div>
                 </section>
 
-                <h4 className='catalog__wrap__total-items-count'>
-                    Items in page:
-                    <span>{prods.length}</span>
-                </h4>
+                <div className='catalog__wrap__total-items-count'>
+                    <span>Items in page:</span>
+                    <div className='catalog__wrap__total-items-count__number'>{prods.length}</div>
+                    <span>from 100</span>
+                </div>
 
                 <Tools items={[...catalog.products]} setItems={setItemsFromTools} toolsSetting={toolsSetting} />
 
