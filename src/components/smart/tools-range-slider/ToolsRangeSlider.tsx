@@ -17,9 +17,13 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
     return (
         <div className='range-slider'>
             <div className='range-slider__input'>
-                <div className='range-slider__input__runner-left'></div>
-                <div className='range-slider__input__runner-right'></div>
-
+                <div
+                    className='range-slider__input__runner-left'
+                    id={`${props.filterBy}LeftRunner`}></div>
+                <div
+                    className='range-slider__input__runner-right'
+                    id={`${props.filterBy}RightRunner`}>
+                </div>
             </div>
             <div className='range-slider__number-line'>
                 <span>{min}</span>
