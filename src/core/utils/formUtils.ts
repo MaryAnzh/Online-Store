@@ -43,7 +43,7 @@ export const formatCardDate = (cardDate: string): string => {
 export const PATTERN_FOR_TYPE: Accordance = {
     name: '^[A-Za-zа-яА-Я]{3,}(?:[ ]*[A-Za-zа-яА-Я]{3,})+[ ]*$',
     phone: '[\\+][0-9]{9,}',
-    address: '^[A-Za-zа-яА-Я]{5,}[ ]*[A-Za-zа-яА-Я]{5,}[ ]*(?:[ ]*[A-Za-zа-яА-Я]{5,})+[ ]*$'
+    address: '^[A-Za-zа-яА-Я0-9]{5,}[ ]*[A-Za-zа-яА-Я0-9]{5,}[ ]*(?:[ ]*[A-Za-zа-яА-Я0-9]{5,})+[ ]*$'
 }
 
 export const INPUT_TYPE_FOR_TYPE: Required<Accordance> = {
