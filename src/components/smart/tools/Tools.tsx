@@ -111,8 +111,8 @@ export const Tools = (props: IToolsProps) => {
         props.setItems(modifyData.items, modifyData.urlParams);
     }
 
-    const filterItemsOnChange = (e: React.ChangeEvent) => {
-        const elem = e.target as HTMLSelectElement;
+    const filterItemsOnChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const elem = e.target;
         const value = elem.value;
         const itemObjectKey = elem.id as keyof FilterType;
         toolsSettings.filter[itemObjectKey] = value;
@@ -122,20 +122,17 @@ export const Tools = (props: IToolsProps) => {
         setItemsData();
     }
 
-    const sortItemsOnChange = (e: React.ChangeEvent) => {
+    const sortItemsOnChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         toolsSettings.sort.price = null;
         toolsSettings.sort.stock = null;
 
-        const elem = e.target as HTMLSelectElement;
-        const value = elem.value === 'select' ? null : elem.value as "assent" | "descent";
+        const elem = e.target;
+        const value = elem.value === 'select' ? null : elem.value as 'assent' | 'descent';
         const itemObjectKey = elem.id as keyof SortType;
         toolsSettings.sort[itemObjectKey] = value;
-        console.log(`id: ${itemObjectKey}, value: ${value}`);
-
         checkSort(toolsSettings);
         setPriceValue(selectView.price);
         setStockValue(selectView.stock);
-        console.log(selectView.stock);
         setItemsData();
     }
 
@@ -150,7 +147,7 @@ export const Tools = (props: IToolsProps) => {
                 <div className='tools__visible__search'>
                     <input
                         className='tools__visible__search__input'
-                        type="text" />
+                        type='text' />
                 </div>
             </div>
             <div className='tools__hidden'>
@@ -218,7 +215,7 @@ export const Tools = (props: IToolsProps) => {
                         <select
                             className='tools__hidden__select-tools__tool__select filter-selects'
                             id='stock'
-                            value={selectView.stock}
+                            value={stockValue}
                             onChange={sortItemsOnChange}>
                             <option value='select'>...</option>
                             <option value='assent'>low to hight</option>
