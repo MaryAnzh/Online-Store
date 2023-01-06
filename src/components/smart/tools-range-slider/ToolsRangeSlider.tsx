@@ -21,11 +21,18 @@ type ElemDragType = {
 const sliderWidth = 340;
 const runnerRadius = 12;
 let leftRunner = 0;
-let rightRunner = sliderWidth - runnerRadius;
+let rightRunner = sliderWidth - runnerRadius * 2;
+
 
 export const ToolsRangeSlider = (props: RangeSliderType) => {
-    const min = props.filterBy === 'price' ? `${props.min} $` : props.min;
-    const max = props.filterBy === 'price' ? `${props.max} $` : props.max;
+    const min = props.min;
+    const max = props.max;
+    const count = +max - +min;
+    const [minCount, setMinCount] = useState(min);
+    const [maxCount, setMaxCount] = useState(max);
+    // let minNum = (leftRunner / (sliderWidth / 100)) * (count / 100);
+    // console.log(minNum);
+
     const leftRunnerDrag: ElemDragType = {
         isMouseDown: false,
         isDrag: false,
@@ -79,6 +86,8 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
                 marginLeft: `${position}px`,
             };
             setLeftRunnerPosX(leftRunnerStyle);
+            let num = Math.round((((+max - +min) / 100) * (position / (sliderWidth / 100))) + +min);
+            setMinCount(num);
         }
 
         if (rightRunnerDrag.isMouseDown) {
@@ -97,6 +106,8 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
                 position = maxPos;
             }
             rightRunner = position;
+            let num = Math.round((((+max - +min) / 100) * (position / (sliderWidth / 100))) + +min);
+            setMaxCount(num);
             rightRunnerStyle = {
                 marginLeft: `${position}px`,
             };
@@ -109,8 +120,6 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
         resetDrag(rightRunnerDrag);
         window.removeEventListener('mousemove', runnerMouseMove);
         window.removeEventListener('mouseup', runnerMouseUp);
-        console.log(leftRunner);
-        console.log(rightRunner);
     }
 
     const runnerMouseDown = (e: React.MouseEvent) => {
@@ -148,6 +157,7 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
             </div>
             <div className='range-slider__number-line'>
                 <span>{min}</span>
+                <span>{minCount} - {maxCount}</span>
                 <span>{max}</span>
             </div>
 
