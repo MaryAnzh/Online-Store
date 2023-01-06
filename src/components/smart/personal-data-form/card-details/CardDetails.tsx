@@ -6,23 +6,21 @@ import React from 'react'
 interface ICardDetailsProps {
     cardNumber: string
     onCardNumberChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-    owner: string
-    onOwnerChange: (event: React.ChangeEvent<HTMLInputElement>) => void
     expirationDate: string
     onExpirationDateChange: (event: React.ChangeEvent<HTMLInputElement>) => void
     cvv: string
     onCvvChange: (event: React.ChangeEvent<HTMLInputElement>) => void
     paymentSystem: string
+    showInvalidText: boolean
 }
 
 
 export const CardDetails = (props: ICardDetailsProps): JSX.Element => {
-
     return (
         <div className={styles.card}>
             <div className={styles.row}>
                 <img src={chipImage} className={styles.chip} alt="chip"/>
-                <img src={props.paymentSystem} className={styles.paymentSystemLogo} alt="globus"/>
+                <img src={props.paymentSystem} className={styles.paymentSystemLogo} alt="globus" title="Starts with 4 - visa, 5 - mastercard, 6 - union pay"/>
             </div>
 
             <div className={styles.row}>
@@ -39,16 +37,6 @@ export const CardDetails = (props: ICardDetailsProps): JSX.Element => {
             </div>
 
             <div className={styles.row}>
-                <input type="text"
-                       inputMode="text"
-                       required
-                       className={styles.cardOwnerInput}
-                       value={props.owner}
-                       onChange={props.onOwnerChange}
-                       maxLength={20}
-                       placeholder="Black Adam"
-                />
-
                 <input type="text"
                        inputMode="numeric"
                        required
@@ -70,6 +58,8 @@ export const CardDetails = (props: ICardDetailsProps): JSX.Element => {
                        placeholder="CVV"
                 />
             </div>
+
+            <small className={styles.invalidText}>{props.showInvalidText && 'Some field in cart is filled wrong !'}</small>
         </div>
     )
 }

@@ -5636,6 +5636,11 @@
   "resolved" "https://registry.npmmirror.com/is-docker/-/is-docker-2.2.1.tgz"
   "version" "2.2.1"
 
+"is-email@^1.0.2":
+  "integrity" "sha512-UojUgD2EhDTBQ2SGKwrK9edce5phRzgLsP+V5+Uu2Swi+uvjVXgH3zduM3HhT9iaC/9Kq19/TYUbP0jPoi6ioA=="
+  "resolved" "https://registry.npmjs.org/is-email/-/is-email-1.0.2.tgz"
+  "version" "1.0.2"
+
 "is-extglob@^2.1.1":
   "integrity" "sha512-SbKbANkN603Vi4jEZv49LeVJMn4yGwsbzZworEoyEiutsN3nJYdbO36zfhGJ6QEDpOZIFkDtnq5JRxmvl3jsoQ=="
   "resolved" "https://registry.npmmirror.com/is-extglob/-/is-extglob-2.1.1.tgz"
@@ -5657,6 +5662,11 @@
   "version" "4.0.3"
   dependencies:
     "is-extglob" "^2.1.1"
+
+"is-it-email@^1.0.1":
+  "integrity" "sha512-HqDCj/OaugJAFOsAEky8J473rnnqizafIYRXiSrSNYAcBrslKviDGwuLsI41qT0yICiZMkEeuiHdumLzeDMgRA=="
+  "resolved" "https://registry.npmjs.org/is-it-email/-/is-it-email-1.0.1.tgz"
+  "version" "1.0.1"
 
 "is-lambda@^1.0.1":
   "integrity" "sha512-z7CMFGNrENq5iFB9Bqo64Xk6Y9sg+epq1myIcdHaGnbMTYOxvzsEtdYqQUylB7LxfkvgrrjP32T6Ywciio9UIQ=="
@@ -5777,6 +5787,13 @@
   "integrity" "sha512-VLghIWNM6ELQzo7zwmcg0NmTVyWKYjvIeM83yjp0wRDTmUnrM678fQbcKBo6n2CJEF0szoG//ytg+TKla89ALQ=="
   "resolved" "https://registry.npmmirror.com/isarray/-/isarray-1.0.0.tgz"
   "version" "1.0.0"
+
+"isemail@^3.2.0":
+  "integrity" "sha512-zKqkK+O+dGqevc93KNsbZ/TqTUFd46MwWjYOoMrjIMZ51eU7DtQG3Wmd9SQQT7i7RVnuTPEiYEWHU3MSbxC1Tg=="
+  "resolved" "https://registry.npmjs.org/isemail/-/isemail-3.2.0.tgz"
+  "version" "3.2.0"
+  dependencies:
+    "punycode" "2.x.x"
 
 "isexe@^2.0.0":
   "integrity" "sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw=="
@@ -8111,7 +8128,7 @@
   "resolved" "https://registry.npmmirror.com/psl/-/psl-1.9.0.tgz"
   "version" "1.9.0"
 
-"punycode@^2.1.0", "punycode@^2.1.1":
+"punycode@^2.1.0", "punycode@^2.1.1", "punycode@2.x.x":
   "integrity" "sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A=="
   "resolved" "https://registry.npmmirror.com/punycode/-/punycode-2.1.1.tgz"
   "version" "2.1.1"

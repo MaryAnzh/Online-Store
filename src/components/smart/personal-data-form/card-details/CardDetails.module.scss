@@ -1,3 +1,6 @@
+@import "../../../../style/utils/variable";
+
+
 .card {
   margin-top: 10px;
   user-select: none;
@@ -10,7 +13,7 @@
 
   padding: 10px 20px;
 
-  max-width: 330px;
+  max-width: 290px;
 }
 
 .row {
@@ -80,7 +83,6 @@
 
 .cardExpirationDateInput {
   width: auto;
-  margin-left: auto;
   max-width: 70px;
   border: none;
   padding: 5px 0;
@@ -98,7 +100,7 @@
 .cardCvv {
   width: auto;
   margin-left: auto;
-  max-width: 60px;
+  max-width: 100px;
   border: none;
   padding: 5px 0;
   outline: none;
@@ -119,4 +121,16 @@
   to {
     opacity: 1;
   }
+}
+
+
+.invalidText {
+  display: block;
+  height: 12px;
+  color: $red-accent-color;
+  margin-top: 10px;
+  font-size: 11px;
+  transition: 0.3s all;
+  font-weight: 400;
+  font-family: 'Roboto', sans-serif;
 }
