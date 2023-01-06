@@ -13,31 +13,34 @@ type RangeSliderType = {
 type ElemDragType = {
     isMouseDown: boolean,
     isDrag: boolean,
-    runnerPos: number,
+    startRunnerPos: number,
+    currentRunnerPos: number,
     cursorStartPos: null | number,
 }
 
+const sliderWidth = 340;
+const runnerRadius = 12;
+let leftRunner = 0;
+let rightRunner = sliderWidth - runnerRadius;
+
 export const ToolsRangeSlider = (props: RangeSliderType) => {
-    const sliderWidth = 340;
-    const runnerRadius = 12;
     const min = props.filterBy === 'price' ? `${props.min} $` : props.min;
     const max = props.filterBy === 'price' ? `${props.max} $` : props.max;
     const leftRunnerDrag: ElemDragType = {
         isMouseDown: false,
         isDrag: false,
-        runnerPos: 0,
+        startRunnerPos: 0,
+        currentRunnerPos: 0,
         cursorStartPos: null,
     }
-    let currentLeftRunnerPos = leftRunnerDrag.runnerPos;
 
     const rightRunnerDrag: ElemDragType = {
         isMouseDown: false,
         isDrag: false,
-        runnerPos: sliderWidth - runnerRadius * 2,
+        startRunnerPos: sliderWidth - runnerRadius * 2,
+        currentRunnerPos: sliderWidth - runnerRadius * 2,
         cursorStartPos: null,
     }
-    let currentRightRunnerPos = rightRunnerDrag.runnerPos;
-
 
     let leftRunnerStyle = {
         marginLeft: '0px',
@@ -45,7 +48,7 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
     const [leftRunnerPosX, setLeftRunnerPosX] = useState(leftRunnerStyle);
 
     let rightRunnerStyle = {
-        marginLeft: `${rightRunnerDrag.runnerPos}px`,
+        marginLeft: `${rightRunnerDrag.startRunnerPos}px`,
     };
     const [rightRunnerPosX, setRightRunnerPosX] = useState(rightRunnerStyle);
 
@@ -63,15 +66,15 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
             }
 
             const minPos = 0;
-            const maxPos = sliderWidth - (runnerRadius * 2);
-            let position = leftRunnerDrag.runnerPos + (e.clientX - leftRunnerDrag.cursorStartPos);
+            const maxPos = rightRunner;
+            let position = leftRunnerDrag.startRunnerPos + (e.clientX - leftRunnerDrag.cursorStartPos);
             if (position < minPos) {
                 position = minPos;
             }
             if (position > maxPos) {
                 position = maxPos;
             }
-            currentLeftRunnerPos = position;
+            leftRunner = position;
             leftRunnerStyle = {
                 marginLeft: `${position}px`,
             };
@@ -84,16 +87,16 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
                 rightRunnerDrag.isDrag = true;
             }
 
-            const minPos = 0;
+            const minPos = leftRunner;
             const maxPos = sliderWidth - runnerRadius * 2;
-            let position = rightRunnerDrag.runnerPos + (e.clientX - rightRunnerDrag.cursorStartPos);
+            let position = rightRunnerDrag.startRunnerPos + (e.clientX - rightRunnerDrag.cursorStartPos);
             if (position < minPos) {
                 position = minPos;
             }
             if (position > maxPos) {
                 position = maxPos;
             }
-            currentRightRunnerPos = position;
+            rightRunner = position;
             rightRunnerStyle = {
                 marginLeft: `${position}px`,
             };
@@ -106,6 +109,8 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
         resetDrag(rightRunnerDrag);
         window.removeEventListener('mousemove', runnerMouseMove);
         window.removeEventListener('mouseup', runnerMouseUp);
+        console.log(leftRunner);
+        console.log(rightRunner);
     }
 
     const runnerMouseDown = (e: React.MouseEvent) => {
@@ -114,14 +119,12 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
         if (type === 'left') {
             leftRunnerDrag.isMouseDown = true;
             const pos = elem.style.marginLeft.replace('px', '');
-            leftRunnerDrag.runnerPos = +pos;
-            console.log(pos);
+            leftRunnerDrag.startRunnerPos = +pos;
         }
         if (type == 'right') {
             rightRunnerDrag.isMouseDown = true;
             const pos = elem.style.marginLeft.replace('px', '');
-            console.log(pos);
-            rightRunnerDrag.runnerPos = +pos;
+            rightRunnerDrag.startRunnerPos = +pos;
         }
         window.addEventListener('mousemove', runnerMouseMove);
         window.addEventListener('mouseup', runnerMouseUp);
