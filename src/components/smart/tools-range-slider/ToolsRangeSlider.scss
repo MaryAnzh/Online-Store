@@ -27,6 +27,7 @@
         &__runner-right {
             position: absolute;
             border-radius: 50%;
+            left: 0;
             background: $contrast-color;
             cursor: pointer;
         }
@@ -34,13 +35,11 @@
         &__runner-left {
             width: 24px;
             height: 24px;
-            left: 0;
         }
 
         &__runner-right {
             width: 22px;
             height: 22px;
-            right: 0;
             border: 1px solid $contrast-color;
             background: white;
         }

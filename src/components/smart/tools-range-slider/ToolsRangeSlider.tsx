@@ -3,40 +3,53 @@ import { ItemsQueryOptions } from '../../../core/types/tools.types';
 import './ToolsRangeSlider.scss';
 
 type RangeSliderType = {
-
     filterBy: string,
     min: number,
     max: number,
     toolsSetting: ItemsQueryOptions,
     modifyItems: (settings: ItemsQueryOptions) => void,
 }
-type ElemMoveType = {
+
+type ElemDragType = {
     isMouseDown: boolean,
     isDrag: boolean,
-    runnerLeftPos: number,
+    runnerPos: number,
     cursorStartPos: null | number,
 }
 
 export const ToolsRangeSlider = (props: RangeSliderType) => {
     const sliderWidth = 340;
+    const runnerRadius = 12;
     const min = props.filterBy === 'price' ? `${props.min} $` : props.min;
     const max = props.filterBy === 'price' ? `${props.max} $` : props.max;
-    let isRightMoveStart = false;
-    let leftPos = 0;
-    const leftRunnerDrag: ElemMoveType = {
+    const leftRunnerDrag: ElemDragType = {
         isMouseDown: false,
         isDrag: false,
-        runnerLeftPos: 0,
+        runnerPos: 0,
         cursorStartPos: null,
     }
+    let currentLeftRunnerPos = leftRunnerDrag.runnerPos;
 
-    const leftRuggerId = `${props.filterBy}LeftRunner`;
-    let leftRangeStyle = {
-        transform: 'translateX(0px)',
+    const rightRunnerDrag: ElemDragType = {
+        isMouseDown: false,
+        isDrag: false,
+        runnerPos: sliderWidth - runnerRadius * 2,
+        cursorStartPos: null,
+    }
+    let currentRightRunnerPos = rightRunnerDrag.runnerPos;
+
+
+    let leftRunnerStyle = {
+        marginLeft: '0px',
     };
-    const [leftRunnerPosX, setLeftRunnerPosX] = useState(leftRangeStyle);
+    const [leftRunnerPosX, setLeftRunnerPosX] = useState(leftRunnerStyle);
 
-    const resetDrag = (dragObj: ElemMoveType) => {
+    let rightRunnerStyle = {
+        marginLeft: `${rightRunnerDrag.runnerPos}px`,
+    };
+    const [rightRunnerPosX, setRightRunnerPosX] = useState(rightRunnerStyle);
+
+    const resetDrag = (dragObj: ElemDragType) => {
         dragObj.isDrag = false;
         dragObj.isMouseDown = false;
         dragObj.cursorStartPos = 0;
@@ -50,33 +63,47 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
             }
 
             const minPos = 0;
-            const maxPos = sliderWidth;
-            let position = leftRunnerDrag.runnerLeftPos + (e.clientX - leftRunnerDrag.cursorStartPos);
-            console.log(position);
+            const maxPos = sliderWidth - (runnerRadius * 2);
+            let position = leftRunnerDrag.runnerPos + (e.clientX - leftRunnerDrag.cursorStartPos);
             if (position < minPos) {
                 position = minPos;
             }
             if (position > maxPos) {
                 position = maxPos;
             }
-
-            leftPos = position;
-            leftRangeStyle = {
-                transform: `translateX(${position}px)`,
+            currentLeftRunnerPos = position;
+            leftRunnerStyle = {
+                marginLeft: `${position}px`,
             };
-            setLeftRunnerPosX(leftRangeStyle);
+            setLeftRunnerPosX(leftRunnerStyle);
+        }
+
+        if (rightRunnerDrag.isMouseDown) {
+            if (rightRunnerDrag.cursorStartPos === null) {
+                rightRunnerDrag.cursorStartPos = e.clientX;
+                rightRunnerDrag.isDrag = true;
+            }
+
+            const minPos = 0;
+            const maxPos = sliderWidth - runnerRadius * 2;
+            let position = rightRunnerDrag.runnerPos + (e.clientX - rightRunnerDrag.cursorStartPos);
+            if (position < minPos) {
+                position = minPos;
+            }
+            if (position > maxPos) {
+                position = maxPos;
+            }
+            currentRightRunnerPos = position;
+            rightRunnerStyle = {
+                marginLeft: `${position}px`,
+            };
+            setRightRunnerPosX(rightRunnerStyle);
         }
     }
 
     const runnerMouseUp = (e: MouseEvent) => {
-        if (leftRunnerDrag.isMouseDown) {
-            leftRangeStyle = {
-                transform: `translateX(${leftPos}px)`,
-            };
-            setLeftRunnerPosX(leftRangeStyle);
-            resetDrag(leftRunnerDrag);
-        }
-        isRightMoveStart = false;
+        resetDrag(leftRunnerDrag);
+        resetDrag(rightRunnerDrag);
         window.removeEventListener('mousemove', runnerMouseMove);
         window.removeEventListener('mouseup', runnerMouseUp);
     }
@@ -86,18 +113,18 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
         const type = elem.dataset.type as 'left' | 'right';
         if (type === 'left') {
             leftRunnerDrag.isMouseDown = true;
-            leftRunnerDrag.runnerLeftPos = elem.offsetLeft;
-            console.log('leftRunnerDrag.runnerLeftPos');
-            console.log(leftRunnerDrag.runnerLeftPos);
+            const pos = elem.style.marginLeft.replace('px', '');
+            leftRunnerDrag.runnerPos = +pos;
+            console.log(pos);
         }
-
-        if (type === 'right') {
-            isRightMoveStart = true;
+        if (type == 'right') {
+            rightRunnerDrag.isMouseDown = true;
+            const pos = elem.style.marginLeft.replace('px', '');
+            console.log(pos);
+            rightRunnerDrag.runnerPos = +pos;
         }
-
         window.addEventListener('mousemove', runnerMouseMove);
         window.addEventListener('mouseup', runnerMouseUp);
-
     };
 
     return (
@@ -107,13 +134,12 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
                     className='range-slider__input__runner-left'
                     data-type='left'
                     style={leftRunnerPosX}
-                    id={leftRuggerId}
                     onMouseDown={runnerMouseDown}>
                 </div>
                 <div
                     className='range-slider__input__runner-right'
-                    id={`${props.filterBy}RightRunner`}
                     data-type='right'
+                    style={rightRunnerPosX}
                     onMouseDown={runnerMouseDown}>
                 </div>
             </div>
