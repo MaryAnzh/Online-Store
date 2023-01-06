@@ -18,7 +18,7 @@
         }
     }
 
-    &__hidden {
+    &__selects-wrap {
         width: 100%;
         padding: 10px;
         display: flex;
@@ -86,6 +86,18 @@
                 }
 
             }
+        }
+    }
+
+    &__range-sliders {
+        max-width: 840px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        &__range {
+            width: 340px;
+            padding: 10px;
         }
     }
 }

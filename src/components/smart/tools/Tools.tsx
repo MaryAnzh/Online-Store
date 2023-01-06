@@ -5,6 +5,7 @@ import { ParamKeyValuePair } from 'react-router-dom';
 import React, { useState } from 'react';
 import { FilterType, ItemsQueryOptions, SortType } from '../../../core/types/tools.types';
 import { ToolsSearch } from '../tools-search/ToolsSearch';
+import { ToolsRangeSlider } from '../tools-range-slider/ToolsRangeSlider';
 
 interface IToolsProps {
     items: IItem[],
@@ -32,6 +33,10 @@ export const Tools = (props: IToolsProps) => {
     }
     let categorySelectValue = '...';
     let brandSelectValue = '...';
+    const minPrice = Math.min.apply(null, allItems.map(el => el.price));
+    const maxPrice = Math.max.apply(null, allItems.map(el => el.price));
+    const minInStock = Math.min.apply(null, allItems.map(el => el.stock));
+    const maxInStock = Math.max.apply(null, allItems.map(el => el.stock));
     let isSettingsShow = false;
 
     //функции
@@ -147,26 +152,26 @@ export const Tools = (props: IToolsProps) => {
             <div className='tools__visible'>
                 <div className='tools__visible__show-button-wrap'>
                     <button className='tools__visible__show-button-wrap__button'>
-                        Show filters
+                        Filter Tolls
                     </button>
                 </div>
                 <div className='tools__visible__search-wrap'>
                     <ToolsSearch toolsSetting={toolsSettings} modifyItems={modifyItemsFromChild} />
                 </div>
             </div>
-            <div className='tools__hidden'>
-                <div className='tools__hidden__select-tools'>
-                    <div className='tools__hidden__select-tools__tool'>
-                        <div className='tools__hidden__select-tools__tool__title'>
-                            <span className='tools__hidden__select-tools__tool__title__name'>
+            <div className='tools__selects-wrap'>
+                <div className='tools__selects-wrap__select-tools'>
+                    <div className='tools__selects-wrap__select-tools__tool'>
+                        <div className='tools__selects-wrap__select-tools__tool__title'>
+                            <span className='tools__selects-wrap__select-tools__tool__title__name'>
                                 Category
                             </span>
-                            <div className='tools__hidden__select-tools__tool__title__count'>
+                            <div className='tools__selects-wrap__select-tools__tool__title__count'>
                                 (<span>{categories.length}</span>)
                             </div>
                         </div>
                         <select
-                            className='tools__hidden__select-tools__tool__select filter-select'
+                            className='tools__selects-wrap__select-tools__tool__select filter-select'
                             id='category'
                             value={categorySelectValue}
                             onChange={filterItemsOnChange}>
@@ -174,17 +179,17 @@ export const Tools = (props: IToolsProps) => {
                             {categoriesFilter}
                         </select>
                     </div>
-                    <div className='tools__hidden__select-tools__tool'>
-                        <div className='tools__hidden__select-tools__tool__title'>
-                            <span className='tools__hidden__select-tools__tool__title__name'>
+                    <div className='tools__selects-wrap__select-tools__tool'>
+                        <div className='tools__selects-wrap__select-tools__tool__title'>
+                            <span className='tools__selects-wrap__select-tools__tool__title__name'>
                                 Brand
                             </span>
-                            <div className='tools__hidden__select-tools__tool__title__count'>
+                            <div className='tools__selects-wrap__select-tools__tool__title__count'>
                                 (<span>{brands.length}</span>)
                             </div>
                         </div>
                         <select
-                            className='tools__hidden__select-tools__tool__select filter-selects'
+                            className='tools__selects-wrap__select-tools__tool__select filter-selects'
                             id='brand'
                             value={brandSelectValue}
                             onChange={filterItemsOnChange}>
@@ -193,15 +198,15 @@ export const Tools = (props: IToolsProps) => {
                         </select>
                     </div>
                 </div>
-                <div className='tools__hidden__select-tools'>
-                    <div className='tools__hidden__select-tools__tool'>
-                        <div className='tools__hidden__select-tools__tool__title'>
-                            <span className='tools__hidden__select-tools__tool__title__name'>
+                <div className='tools__selects-wrap__select-tools'>
+                    <div className='tools__selects-wrap__select-tools__tool'>
+                        <div className='tools__selects-wrap__select-tools__tool__title'>
+                            <span className='tools__selects-wrap__select-tools__tool__title__name'>
                                 Sorn by Price
                             </span>
                         </div>
                         <select
-                            className='tools__hidden__select-tools__tool__select filter-select'
+                            className='tools__selects-wrap__select-tools__tool__select filter-select'
                             id='price'
                             value={priceValue}
                             onChange={sortItemsOnChange}>
@@ -210,14 +215,14 @@ export const Tools = (props: IToolsProps) => {
                             <option value='descent'>hight to low</option>
                         </select>
                     </div>
-                    <div className='tools__hidden__select-tools__tool'>
-                        <div className='tools__hidden__select-tools__tool__title'>
-                            <span className='tools__hidden__select-tools__tool__title__name'>
+                    <div className='tools__selects-wrap__select-tools__tool'>
+                        <div className='tools__selects-wrap__select-tools__tool__title'>
+                            <span className='tools__selects-wrap__select-tools__tool__title__name'>
                                 Sort by Stock
                             </span>
                         </div>
                         <select
-                            className='tools__hidden__select-tools__tool__select filter-selects'
+                            className='tools__selects-wrap__select-tools__tool__select filter-selects'
                             id='stock'
                             value={stockValue}
                             onChange={sortItemsOnChange}>
@@ -226,6 +231,24 @@ export const Tools = (props: IToolsProps) => {
                             <option value='descent'>hight to low</option>
                         </select>
                     </div>
+                </div>
+            </div>
+            <div className='tools__range-sliders'>
+                <div className='tools__range-sliders__range'>
+                    <ToolsRangeSlider
+                        filterBy='price'
+                        min={minPrice}
+                        max={maxPrice}
+                        toolsSetting={toolsSettings}
+                        modifyItems={modifyItemsFromChild} />
+                </div>
+                <div className='tools__range-sliders__range'>
+                    <ToolsRangeSlider
+                        filterBy='stock'
+                        min={minInStock}
+                        max={maxInStock}
+                        toolsSetting={toolsSettings}
+                        modifyItems={modifyItemsFromChild} />
                 </div>
             </div>
         </section>
