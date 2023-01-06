@@ -11,8 +11,20 @@ type RangeSliderType = {
 }
 
 export const ToolsRangeSlider = (props: RangeSliderType) => {
+    const min = props.filterBy === 'price' ? `${props.min} $` : props.min;
+    const max = props.filterBy === 'price' ? `${props.max} $` : props.max;
+
     return (
         <div className='range-slider'>
+            <div className='range-slider__input'>
+                <div className='range-slider__input__runner-left'></div>
+                <div className='range-slider__input__runner-right'></div>
+
+            </div>
+            <div className='range-slider__number-line'>
+                <span>{min}</span>
+                <span>{max}</span>
+            </div>
 
         </div>
     )

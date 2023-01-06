@@ -6,11 +6,24 @@
     border: 7px;
     background: $promo-background-color;
 
+    &__title {
+        font-weight: 500;
+        font-size: 16px;
+
+    }
+
     &__visible {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        &__title {
+            padding: 10px;
+            font-weight: 600;
+            font-size: 20px;
+
+        }
 
         &__search-wrap {
             max-width: 500px;
@@ -98,6 +111,10 @@
         &__range {
             width: 340px;
             padding: 10px;
+
+            &__title {
+                padding-bottom: 8px;
+            }
         }
     }
 }

@@ -150,11 +150,9 @@ export const Tools = (props: IToolsProps) => {
     return (
         <section className='tools'>
             <div className='tools__visible'>
-                <div className='tools__visible__show-button-wrap'>
-                    <button className='tools__visible__show-button-wrap__button'>
-                        Filter Tolls
-                    </button>
-                </div>
+                <h4 className='tools__visible__title'>
+                    Tools
+                </h4>
                 <div className='tools__visible__search-wrap'>
                     <ToolsSearch toolsSetting={toolsSettings} modifyItems={modifyItemsFromChild} />
                 </div>
@@ -233,8 +231,10 @@ export const Tools = (props: IToolsProps) => {
                     </div>
                 </div>
             </div>
+            <h4 className='tools__title'>Filtering by range</h4>
             <div className='tools__range-sliders'>
                 <div className='tools__range-sliders__range'>
+                    <h4 className='tools__range-sliders__range__title'>Price</h4>
                     <ToolsRangeSlider
                         filterBy='price'
                         min={minPrice}
@@ -243,6 +243,7 @@ export const Tools = (props: IToolsProps) => {
                         modifyItems={modifyItemsFromChild} />
                 </div>
                 <div className='tools__range-sliders__range'>
+                    <h4 className='tools__range-sliders__range__title'>Stock</h4>
                     <ToolsRangeSlider
                         filterBy='stock'
                         min={minInStock}
