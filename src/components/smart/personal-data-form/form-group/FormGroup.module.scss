@@ -21,6 +21,10 @@
     transition: 0.3s all;
     font-weight: 400;
     font-family: 'Roboto', sans-serif;
+
+    &.show {
+      opacity: 1;
+    }
   }
 
   .input {
