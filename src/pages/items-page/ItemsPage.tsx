@@ -31,7 +31,7 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     // меняем объект с параметрами в соответствии
     const getCurrentParams = () => {
         toolsModel.resetToolsSettings(toolsSetting);
-        let isParam = searchParams.toString() !== '';
+        let isParam = URLSearchParams.toString() !== '';
         if (isParam) {
             for (const key in toolsSetting) {
                 const objKey = key as keyof ItemsQueryOptions;
@@ -95,6 +95,10 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
         setProds(items);
         setSearchParams(urlParam);
     }
+
+    React.useEffect((): void => {
+        setSearchParams(modifyItems.urlParams);
+    }, [])
 
     return (
         <section className='catalog'>
