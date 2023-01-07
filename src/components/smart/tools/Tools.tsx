@@ -40,23 +40,23 @@ export const Tools = (props: IToolsProps) => {
     const maxInStock = Math.max.apply(null, allItems.map(el => el.stock));
 
     //функции
-    const checkFilters = (settings: ItemsQueryOptions) => {
+    const checkFilters = (settings: ItemsQueryOptions, items: IItem[]) => {
         const filter: FilterType = settings.filter;
         const category = filter.category;
         if (category === null || category == '...') {
             categorySelectValue = '...';
-            selectView.brands = toolsModel.createSelectViewByToolsTitle('brand', allItems);
+            selectView.brands = toolsModel.createSelectViewByToolsTitle('brand', items);
         } else {
             categorySelectValue = category;
-            selectView.brands = toolsModel.updateBrandSet(allItems, category);
+            selectView.brands = toolsModel.updateBrandSet(items, category);
         }
         const brand = filter.brand;
         if (brand === null || brand === '...') {
             brandSelectValue = '...';
-            selectView.categories = toolsModel.createSelectViewByToolsTitle('category', allItems);
+            selectView.categories = toolsModel.createSelectViewByToolsTitle('category', items);
         } else {
             brandSelectValue = brand;
-            selectView.categories = toolsModel.updateCategorySet(allItems, brand);
+            selectView.categories = toolsModel.updateCategorySet(items, brand);
         }
     }
 
@@ -79,10 +79,11 @@ export const Tools = (props: IToolsProps) => {
     //проверяем пустые ли параметры, если нет
     //то подгоняем отображение под параметры
     const newView = () => {
+        const modify = toolsModel.modifyItemsByParams(allItems, toolsSettings);
         for (const key in toolsSettings) {
             const keyInObj = key as keyof ItemsQueryOptions;
             if (keyInObj === 'filter') {
-                checkFilters(toolsSettings);
+                checkFilters(toolsSettings, modify.items);
             }
             if (keyInObj === 'sort') {
                 checkSort(toolsSettings);
@@ -126,7 +127,8 @@ export const Tools = (props: IToolsProps) => {
         const value = elem.value;
         const itemObjectKey = elem.id as keyof FilterType;
         toolsSettings.filter[itemObjectKey] = value;
-        checkFilters(toolsSettings);
+        const modify = toolsModel.modifyItemsByParams(allItems, toolsSettings);
+        checkFilters(toolsSettings, modify.items);
         setBrands(selectView.brands);
         setCategories(selectView.categories);
         setItemsData();
@@ -149,6 +151,11 @@ export const Tools = (props: IToolsProps) => {
     const modifyItemsFromChild = (settings: ItemsQueryOptions) => {
         const modifyData: ModifyItemsType = toolsModel.modifyItemsByParams(allItems, settings);
         props.setItems(modifyData.items, modifyData.urlParams);
+        newView();
+        setBrands(selectView.brands);
+        setCategories(selectView.categories);
+        setPriceValue('select');
+        setStockValue('select');
     }
 
     const copySettingsOnClick = () => {
