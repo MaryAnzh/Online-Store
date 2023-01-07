@@ -4,7 +4,6 @@ import { catalog } from '../../core/data/catalog.data';
 import './ItemsPage.scss'
 import { ItemCard } from '../../components/simple/item-card/ItemCard';
 import { IItem } from '../../core/interfaces/catalog.interfaces';
-import { Filter } from '../../core/utils/filter';
 import { ShopState } from '../../core/state/ShopState'
 import { FilterType, SortType, ItemsQueryOptions, RangeType } from '../../core/types/tools.types';
 import { Tools } from '../../components/smart/tools/Tools';
@@ -21,11 +20,6 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     //получкам каталог товаров
     const catalogItems: IItem[] = [...catalog.products];
     let toolsSetting = toolsModel.toolsSetting;
-
-    //создаем массивы для фильтрации по брендам и категориям
-    const categories: string[] = Filter.createNameSet(catalogItems, 'category');
-    const brands: string[] = Filter.createNameSet(catalogItems, 'brand');
-    const [brandsInCategory, setBrandsInCategory] = useState(brands);
 
     // Проверяем есть ли в url строке квери параметры, если есть то записываем их в текучие параметры и рендерим
     // меняем объект с параметрами в соответствии
