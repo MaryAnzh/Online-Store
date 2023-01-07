@@ -22,7 +22,6 @@ export const CartSummary = observer((props: ICartSummaryProps): JSX.Element => {
     const isModalShown: boolean = props.state.cart.showModal
     const [inputedPromo, setInputedPromo] = React.useState<string>('')
     const [isAddPromoButtonShown, setIsAddPromoButtonShown] = React.useState<boolean>(false)
-
     const navigate: NavigateFunction = useNavigate()
 
     const closeModal = (): void => props.state.closeModal()
@@ -68,7 +67,7 @@ export const CartSummary = observer((props: ICartSummaryProps): JSX.Element => {
     }
 
     const confirmModal = (): void => {
-        window.alert('Thank you for purchase')
+        window.alert('Thank you for purchase. Press button — and page will be reloaded in 3-5 seconds')
 
         window.setTimeout((): void => {
             props.state.clearCart()

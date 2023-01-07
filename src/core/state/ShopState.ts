@@ -12,7 +12,9 @@ export class ShopState {
     public constructor() {
         this.cart = this.getSavedCartState()
         this.cart.showModal = false
-        this.checkPageAfterLimitChangeOrItemsCountChange()
+        this.cart.limit = this.cart.items.length
+        this.cart.page = 1
+        //this.checkPageAfterLimitChangeOrItemsCountChange()
         makeAutoObservable(this, {}, {deep: true})
     }
 
@@ -71,22 +73,30 @@ export class ShopState {
         return this.cart.items.findIndex((it: ICartItem): boolean => it.id === id)
     }
 
-    public setCartLimit(newLimit: number): void {
-        this.cart.page = 1
-
-        if (newLimit > 0 && newLimit <= this.cart.items.length) {
-            this.cart.limit = newLimit
+    public setCartLimit(newLimit: number, querySetter?: (obj: unknown) => void): void {
+        if (newLimit > 0 && newLimit <= this.cart.items.length && Number.isInteger(newLimit)) {
             this.cart.page = 1
+            this.cart.limit = newLimit
+            querySetter && querySetter({limit: this.cart.limit, page: this.cart.page})
             this.saveCartState()
         }
     }
 
-    public changePageInCart(delta: -1 | 1): void {
+    private setCartPage(newPage: number, querySetter?: (obj: unknown) => void): void {
+        if (newPage > 0 && newPage <= this.cart.items.length && Number.isInteger(newPage)) {
+            this.cart.page = newPage
+            querySetter && querySetter({limit: this.cart.limit, page: this.cart.page})
+            this.saveCartState()
+        }
+    }
+
+    public changePageInCart(delta: -1 | 1, querySetter: (obj: unknown) => void): void {
         if (this.cart.page + delta <= 0 || this.cart.limit * (this.cart.page + delta - 1) >= this.cart.items.length) {
             return
         }
 
         this.cart.page += delta
+        querySetter({limit: this.cart.limit, page: this.cart.page})
         this.saveCartState()
     }
 
@@ -147,5 +157,10 @@ export class ShopState {
 
     public openModal(): void {
         this.cart.showModal = true
+    }
+
+    public getCartFromQuery(query: URLSearchParams) {
+        query.has('limit') && this.setCartLimit(Number(query.get('limit')))
+        query.has('page') && this.setCartPage(Number(query.get('page')))
     }
 }

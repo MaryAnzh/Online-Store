@@ -2,6 +2,7 @@ import styles from './CartPagination.module.scss'
 import React from 'react'
 import {ShopState} from '../../../core/state/ShopState'
 import {observer} from 'mobx-react-lite'
+import {useSearchParams} from 'react-router-dom'
 
 
 interface ICartPaginationProps {
@@ -9,10 +10,14 @@ interface ICartPaginationProps {
 }
 
 export const CartPagination = observer((props: ICartPaginationProps): JSX.Element => {
-    const onLimitChange = (event: React.ChangeEvent<HTMLInputElement>): void => props.state.setCartLimit(Number(event.currentTarget.value))
+    const [searchParams, setSearchParams] = useSearchParams()
+    React.useEffect(() => {
+        props.state.getCartFromQuery(searchParams)
+    }, [])
 
-    const nextPageClick = (): void => props.state.changePageInCart(1)
-    const previousPageClick = (): void => props.state.changePageInCart(-1)
+    const onLimitChange = (event: React.ChangeEvent<HTMLInputElement>): void => props.state.setCartLimit(Number(event.currentTarget.value), setSearchParams as  any)
+    const nextPageClick = (): void => props.state.changePageInCart(1, setSearchParams as  any)
+    const previousPageClick = (): void => props.state.changePageInCart(-1, setSearchParams as  any)
 
     return (
         <div className={styles.pagination}>
