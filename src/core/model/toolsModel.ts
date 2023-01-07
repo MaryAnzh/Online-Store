@@ -29,8 +29,8 @@ class ToolsModel {
         };
     }
 
-    resetToolsSettings = (settings: ItemsQueryOptions) => {
-        settings = {
+    resetToolsSettings = (settings: ItemsQueryOptions): ItemsQueryOptions => {
+        return {
             filter: {
                 category: null,
                 brand: null,
@@ -155,7 +155,7 @@ class ToolsModel {
 
                         items = rangeArr;
                         const urlValue = `${min}-${max}`;
-                         urlParams.push([`${key}`, urlValue]);
+                        urlParams.push([`${key}`, urlValue]);
                     }
                 }
             }

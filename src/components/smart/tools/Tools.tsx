@@ -7,7 +7,7 @@ import { FilterType, ItemsQueryOptions, SortType } from '../../../core/types/too
 import { ToolsSearch } from '../tools-search/ToolsSearch';
 import { ToolsRangeSlider } from '../tools-range-slider/ToolsRangeSlider';
 
-interface IToolsProps {
+export interface IToolsProps {
     items: IItem[],
     toolsSetting: ItemsQueryOptions,
     setItems: (items: IItem[], urlParam: ParamKeyValuePair[]) => void;
@@ -24,7 +24,7 @@ type SelectViewType = {
 export const Tools = (props: IToolsProps) => {
     //инициализация
     // переемные
-    const toolsSettings = props.toolsSetting;
+    let toolsSettings: ItemsQueryOptions = props.toolsSetting;
     const allItems = props.items;
     const selectView: SelectViewType = {
         categories: [],
@@ -78,15 +78,19 @@ export const Tools = (props: IToolsProps) => {
 
     //проверяем пустые ли параметры, если нет
     //то подгоняем отображение под параметры
-    for (const key in toolsSettings) {
-        const keyInObj = key as keyof ItemsQueryOptions;
-        if (keyInObj === 'filter') {
-            checkFilters(toolsSettings);
-        }
-        if (keyInObj === 'sort') {
-            checkSort(toolsSettings);
+    const newView = () => {
+        for (const key in toolsSettings) {
+            const keyInObj = key as keyof ItemsQueryOptions;
+            if (keyInObj === 'filter') {
+                checkFilters(toolsSettings);
+            }
+            if (keyInObj === 'sort') {
+                checkSort(toolsSettings);
+            }
         }
     }
+    newView();
+
 
     //устанавливаем состояние отображения фильтров по категории и бренду
     const [categories, setCategories] = useState(selectView.categories);
@@ -152,14 +156,22 @@ export const Tools = (props: IToolsProps) => {
         navigator.clipboard.writeText(param);
     }
 
+    const [settings, setSettings] = useState(toolsSettings);
     const resetToolsOnClick = () => {
-        props.reset();
-
+        const settings: ItemsQueryOptions = toolsModel.resetToolsSettings(toolsSettings);
+        toolsSettings = settings;
+        props.setItems(allItems, []);
+        newView();
+        setBrands(selectView.brands);
+        setCategories(selectView.categories);
+        setPriceValue('select');
+        setStockValue('select');
     }
 
     return (
         <section className='tools'>
-            <div className='tools__visible'>
+            <div
+                className='tools__visible'>
                 <div className='tools__visible__info'>
                     <h4 className='tools__visible__info__title'>Tools</h4>
                     <div className='tools__visible__info__settings'>

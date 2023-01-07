@@ -6,7 +6,7 @@ import { ItemCard } from '../../components/simple/item-card/ItemCard';
 import { IItem } from '../../core/interfaces/catalog.interfaces';
 import { ShopState } from '../../core/state/ShopState'
 import { FilterType, SortType, ItemsQueryOptions, RangeType } from '../../core/types/tools.types';
-import { Tools } from '../../components/smart/tools/Tools';
+import { IToolsProps, Tools } from '../../components/smart/tools/Tools';
 import { toolsModel, ModifyItemsType } from '../../core/model/toolsModel';
 
 interface IItemsPageProps {
@@ -24,11 +24,9 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     // Проверяем есть ли в url строке квери параметры, если есть то записываем их в текучие параметры и рендерим
     // меняем объект с параметрами в соответствии
     const getCurrentParams = () => {
-
-        toolsModel.resetToolsSettings(toolsSetting);
-
-        let isParam = document.location.href;
-        //searchParams.toString() !== '';
+        let isParam = searchParams.toString() !== '';
+        const settings = toolsModel.resetToolsSettings(toolsSetting);
+        toolsSetting = settings;
         if (isParam) {
             for (const key in toolsSetting) {
                 const objKey = key as keyof ItemsQueryOptions;
@@ -82,9 +80,7 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     const [prods, setProds] = useState(modifyItems.items);
 
     const resetToolsSettings = () => {
-        setSearchParams([]);
-        toolsModel.resetToolsSettings(toolsSetting);
-        setProds(catalogItems);
+       
     }
 
     const itemsList: JSX.Element[] = prods.map((elem) =>
@@ -94,7 +90,7 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
             key={elem.id}
         />);
 
-    const setItemsFromTools = (items: IItem[], urlParam: ParamKeyValuePair[]) => {
+    const SetItemsFromTools = (items: IItem[], urlParam: ParamKeyValuePair[]) => {
         setProds(items);
         setSearchParams(urlParam);
     }
@@ -123,7 +119,12 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
                     <span>from 100</span>
                 </div>
 
-                <Tools items={[...catalog.products]} setItems={setItemsFromTools} toolsSetting={toolsSetting} reset={resetToolsSettings} />
+                <Tools
+                    items={[...catalog.products]}
+                    setItems={SetItemsFromTools}
+                    toolsSetting={toolsSetting}
+                    reset={resetToolsSettings}
+                />
 
                 <section className='catalog__wrap__items'>
                     <h3 className='catalog__wrap__items__title'>
