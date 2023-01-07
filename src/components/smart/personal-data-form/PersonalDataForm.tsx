@@ -135,8 +135,6 @@ export const PersonalDataForm = (props: IPersonalDataFormProps): JSX.Element => 
     }, [address, cardCvv, cardExpirationDate, cardNumber, email, name, phone, props])
 
 
-
-
     return (
         <form action="#" onSubmit={cancelDefaultFormSubmit} className={styles.form}>
             <FormGroup value={name}

@@ -1,5 +1,5 @@
 import {ICart, ICartItem} from '../interfaces/cart.interfaces'
-import {cart} from '../data/cart.data'
+import {defaultCart} from '../data/cart.data'
 import {makeAutoObservable} from 'mobx'
 import {IItem} from '../interfaces/catalog.interfaces'
 
@@ -11,6 +11,7 @@ export class ShopState {
 
     public constructor() {
         this.cart = this.getSavedCartState()
+        this.cart.showModal = false
         this.checkPageAfterLimitChangeOrItemsCountChange()
         makeAutoObservable(this, {}, {deep: true})
     }
@@ -94,19 +95,20 @@ export class ShopState {
         this.cart.page = 1
         this.cart.limit = 1
         this.cart.totalCount = 0
+        this.cart.showModal = false
         this.saveCartState()
     }
 
     private getSavedCartState(): ICart {
         const tryGet: string | null = localStorage.getItem(ShopState.LS_CART_STATE_KEY)
 
-        if (tryGet === null) return cart
+        if (tryGet === null) return defaultCart
 
         try {
             return JSON.parse(tryGet)
         } catch (error) {
             console.warn('Can\'t parse saved state. Setting default one', error)
-            return cart
+            return defaultCart
         }
     }
 
@@ -128,5 +130,22 @@ export class ShopState {
 
     public getTotalPrice(): number {
         return this.cart.items.reduce((result: number, current: ICartItem) => result + current.count * current.price, 0)
+    }
+
+    public buyNow(item: IItem): void {
+        const isAlreadyInCart: boolean = this.isItemInCart(item.id)
+        this.cart.showModal = true
+        if (isAlreadyInCart) {
+            return
+        }
+        this.increaseQuantityInCart(item, true)
+    }
+
+    public closeModal(): void {
+        this.cart.showModal = false
+    }
+
+    public openModal(): void {
+        this.cart.showModal = true
     }
 }

@@ -13,19 +13,25 @@ interface IItemPageProps {
 
 export const ItemPage = observer((props: IItemPageProps): JSX.Element => {
     const params = useParams();
+    const navigate: NavigateFunction = useNavigate();
     const prodId = params.id;
     const products = catalog.products.find((el) => `${el.id}` === prodId);
 
     if (products === undefined) {
-        return  <NotFoundPage/>
+        return  <NotFoundPage/>;
     }
 
-    const isItemInCard: boolean = props.state.isItemInCart(products.id)
+    const isItemInCard: boolean = props.state.isItemInCart(products.id);
 
     const addToCartButtonClicked = (): void => {
         isItemInCard
             ? props.state.dropItemFromCart(products.id)
-            : props.state.increaseQuantityInCart(products, true)
+            : props.state.increaseQuantityInCart(products, true);
+    }
+
+    const buyButtonClicked = (): void => {
+        props.state.buyNow(products);
+        navigate('/cart');
     }
 
     return (
@@ -65,7 +71,7 @@ export const ItemPage = observer((props: IItemPageProps): JSX.Element => {
                                 <CartLogo />
                                 <span>{props.state.isItemInCart(products.id) ? 'Already in cart' : 'To cart'}</span>
                             </button>
-                            <button className='blue-button item__wrap__info__about__button-wrap__button'>
+                            <button className='blue-button item__wrap__info__about__button-wrap__button' onClick={buyButtonClicked}>
                                 <CartLogo />
                                 <span>Buy</span>
                             </button>

@@ -10,4 +10,5 @@ export interface ICart {
     page: number
     items: Array<ICartItem>
     totalCount: number
+    showModal: boolean
 }

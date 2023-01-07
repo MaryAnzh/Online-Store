@@ -12,13 +12,13 @@ interface IItemBuyModal {
 }
 
 export const ItemBuyModal = (props: IItemBuyModal): JSX.Element => ReactDOM.createPortal(
-        <div className={styles.wrapper}>
-            <dialog className={styles.dialog} open>
-                <h1 className={styles.title}>Personal details</h1>
-                <PersonalDataForm onSubmitCallback={props.submitCallback}/>
-                <button className={styles.close} onClick={props.closeCallback}>&times;</button>
-            </dialog>
-        </div>,
-        document.getElementById('modal-root') as HTMLDivElement
-    )
+    <div className={styles.wrapper}>
+        <dialog className={styles.dialog} open>
+            <h1 className={styles.title}>Personal details</h1>
+            <PersonalDataForm onSubmitCallback={props.submitCallback}/>
+            <button className={styles.close} onClick={props.closeCallback}>&times;</button>
+        </dialog>
+    </div>,
+    document.getElementById('modal-root') as HTMLDivElement
+)
 
