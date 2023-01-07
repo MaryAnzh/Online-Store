@@ -85,3 +85,27 @@
   user-select: none;
   font-family: 'SF Pro Display', sans-serif;
 }
+
+@media (max-width: 400px) {
+  .limit {
+    margin-right: 5px;
+  }
+
+  .limitInput {
+    margin-right: 3px;
+  }
+
+  .pageNumber {
+    margin-right: 2px;
+    margin-left: 2px;
+  }
+
+  .pageTitle {
+    margin-right: 7px;
+    font-size: 15px;
+  }
+
+  .limitTitle {
+    font-size: 15px;
+  }
+}
