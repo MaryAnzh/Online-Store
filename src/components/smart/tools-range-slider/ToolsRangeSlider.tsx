@@ -19,7 +19,7 @@ type ElemDragType = {
 }
 
 export const ToolsRangeSlider = (props: RangeSliderType) => {
-    const sliderWidth = 340;
+    const sliderWidth = 300;
     const runnerRadius = 12;
     const min = props.min;
     const max = props.max;
@@ -195,7 +195,7 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
             </div>
             <div className='range-slider__number-line'>
                 <span>{min}</span>
-                <span>{minCount} - {maxCount}</span>
+                <span className='range-slider__number-line__dynamic'>{minCount} - {maxCount}</span>
                 <span>{max}</span>
             </div>
 

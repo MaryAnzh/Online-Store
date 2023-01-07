@@ -155,7 +155,7 @@ class ToolsModel {
 
                         items = rangeArr;
                         const urlValue = `${min}-${max}`;
-                        urlParams.push([`${key}`, urlValue]);
+                         urlParams.push([`${key}`, urlValue]);
                     }
                 }
             }

@@ -1,7 +1,8 @@
 @import '../../../style/utils/variable';
+$sliderWidth: 300px;
 
 .range-slider {
-    width: 340px;
+    width: sliderWidth;
     height: 50px;
     display: flex;
     flex-direction: column;
@@ -50,6 +51,10 @@
         padding: 0 5px;
         display: flex;
         justify-content: space-between;
+
+        &__dynamic {
+            transform: translateY(-50px);
+        }
 
         span {
             font-size: 18px;
