@@ -4,6 +4,7 @@ import { toolsModel, ModifyItemsType } from '../../../core/model/toolsModel';
 import { ParamKeyValuePair } from 'react-router-dom';
 import React, { useState } from 'react';
 import { FilterType, ItemsQueryOptions, SortType } from '../../../core/types/tools.types';
+import { ToolsSearch } from '../tools-search/ToolsSearch';
 
 interface IToolsProps {
     items: IItem[],
@@ -136,6 +137,11 @@ export const Tools = (props: IToolsProps) => {
         setItemsData();
     }
 
+    const modifyItemsFromChild = (settings: ItemsQueryOptions) => {
+        const modifyData: ModifyItemsType = toolsModel.modifyItemsByParams(allItems, settings);
+        props.setItems(modifyData.items, modifyData.urlParams);
+    }
+
     return (
         <section className='tools'>
             <div className='tools__visible'>
@@ -144,10 +150,8 @@ export const Tools = (props: IToolsProps) => {
                         Show filters
                     </button>
                 </div>
-                <div className='tools__visible__search'>
-                    <input
-                        className='tools__visible__search__input'
-                        type='text' />
+                <div className='tools__visible__search-wrap'>
+                    <ToolsSearch toolsSetting={toolsSettings} modifyItems={modifyItemsFromChild} />
                 </div>
             </div>
             <div className='tools__hidden'>

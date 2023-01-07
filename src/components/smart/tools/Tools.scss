@@ -11,6 +11,11 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        &__search-wrap {
+            max-width: 500px;
+            width: 100%;
+        }
     }
 
     &__hidden {
@@ -18,6 +23,10 @@
         padding: 10px;
         display: flex;
         justify-content: space-between;
+
+        @media (max-width: 500px) {
+            flex-direction: column;
+        }
 
         &__select-tools {
             max-width: 500px;

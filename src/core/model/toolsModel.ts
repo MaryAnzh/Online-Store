@@ -95,6 +95,9 @@ class ToolsModel {
                 const v = setting[key];
                 if (v !== null) {
                     urlParams.push([`${key}`, v]);
+                    const searchItems = items.filter(el => el.brand.indexOf(v) > -1 || el.category.indexOf(v) > -1 || el.description.indexOf(v) > -1 || el.title.indexOf(v) > -1
+                        || el.price.toString() === v || el.stock.toString() === v);
+                    items = searchItems;
                 }
             }
             if (key === 'filter') {
