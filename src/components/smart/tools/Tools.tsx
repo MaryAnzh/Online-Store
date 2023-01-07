@@ -1,7 +1,7 @@
 import './Tools.scss';
 import { IItem } from '../../../core/interfaces/catalog.interfaces';
 import { toolsModel, ModifyItemsType } from '../../../core/model/toolsModel';
-import { ParamKeyValuePair } from 'react-router-dom';
+import { ParamKeyValuePair, useSearchParams } from 'react-router-dom';
 import React, { useState } from 'react';
 import { FilterType, ItemsQueryOptions, SortType } from '../../../core/types/tools.types';
 import { ToolsSearch } from '../tools-search/ToolsSearch';
@@ -11,6 +11,7 @@ interface IToolsProps {
     items: IItem[],
     toolsSetting: ItemsQueryOptions,
     setItems: (items: IItem[], urlParam: ParamKeyValuePair[]) => void;
+    reset: () => void,
 }
 
 type SelectViewType = {
@@ -146,12 +147,32 @@ export const Tools = (props: IToolsProps) => {
         props.setItems(modifyData.items, modifyData.urlParams);
     }
 
+    const copySettingsOnClick = () => {
+        const param = window.location.href;
+        navigator.clipboard.writeText(param);
+    }
+
+    const resetToolsOnClick = () => {
+        props.reset();
+
+    }
+
     return (
         <section className='tools'>
             <div className='tools__visible'>
-                <h4 className='tools__visible__title'>
-                    Tools
-                </h4>
+                <div className='tools__visible__info'>
+                    <h4 className='tools__visible__info__title'>Tools</h4>
+                    <div className='tools__visible__info__settings'>
+                        <button
+                            onClick={copySettingsOnClick}
+                            className='tools__visible__info__setting__copy'>
+                            copy</button>
+                        <button
+                            onClick={resetToolsOnClick}
+                            className='tools__visible__info__setting__reset'>
+                            reset</button>
+                    </div>
+                </div>
                 <div className='tools__visible__search-wrap'>
                     <ToolsSearch toolsSetting={toolsSettings} modifyItems={modifyItemsFromChild} />
                 </div>

@@ -24,8 +24,11 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     // Проверяем есть ли в url строке квери параметры, если есть то записываем их в текучие параметры и рендерим
     // меняем объект с параметрами в соответствии
     const getCurrentParams = () => {
+
         toolsModel.resetToolsSettings(toolsSetting);
-        let isParam = URLSearchParams.toString() !== '';
+
+        let isParam = document.location.href;
+        //searchParams.toString() !== '';
         if (isParam) {
             for (const key in toolsSetting) {
                 const objKey = key as keyof ItemsQueryOptions;
@@ -78,6 +81,12 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     const modifyItems: ModifyItemsType = toolsModel.modifyItemsByParams(catalogItems, toolsSetting);
     const [prods, setProds] = useState(modifyItems.items);
 
+    const resetToolsSettings = () => {
+        setSearchParams([]);
+        toolsModel.resetToolsSettings(toolsSetting);
+        setProds(catalogItems);
+    }
+
     const itemsList: JSX.Element[] = prods.map((elem) =>
         <ItemCard
             item={elem}
@@ -114,7 +123,7 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
                     <span>from 100</span>
                 </div>
 
-                <Tools items={[...catalog.products]} setItems={setItemsFromTools} toolsSetting={toolsSetting} />
+                <Tools items={[...catalog.products]} setItems={setItemsFromTools} toolsSetting={toolsSetting} reset={resetToolsSettings} />
 
                 <section className='catalog__wrap__items'>
                     <h3 className='catalog__wrap__items__title'>
