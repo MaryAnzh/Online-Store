@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+@import "../../style/utils/variable";
+
+.container {
+  padding-top: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  animation-timing-function: ease-in-out;
+  animation-name: cartPageAppears;
+  animation-duration: 0.2s;
+}
+
+.notFound {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+  background-color: $primary-blue;
+  width: 100%;
+  background-image: url("../../assets/404.png");
+  background-position: right 50px center;
+  background-repeat: no-repeat;
+  background-size: 150px  ;
+}
+
+.goHome {
+  width: fit-content;
+  padding: 7px 22px;
+  font-size: 17px;
+  background-color: white;
+  color: $primary-blue;
+  font-family: "JetBrains Mono", sans-serif;
+  border-radius: 3px;
+  border: none;
+  margin-top: 30px;
+  cursor: pointer;
+  transition: 0.2s all;
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+.title {
+  font-family: 'JetBrains Mono', sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  color: white;
+  line-height: 1.6;
+  max-width: 70%;
+}
+
+.tab {
+  display: inline-block;
+  font-family: 'JetBrains Mono', sans-serif;
+  font-size: 30px;
+  font-weight: 300;
+  color: white;
+  padding-left: 20px;
+  font-style: italic;
+}
+
+
+@media (max-width: 1200px){
+  .container {
+    max-width: 940px;
+  }
+}
+
+@media (max-width: 999px) {
+  .container {
+    max-width: 800px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 620px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 639px) {
+  .container {
+    max-width: 95%;
+  }
+
+  .title, .tab {
+    font-size: 20px;
+  }
+
+  .title {
+    max-width: none;
+  }
+
+  .notFound {
+    background-position: top 10px right 10px;
+    background-size: 50px;
+    padding: 27px;
+    padding-left: 15px;
+  }
+
+  .goHome {
+    width: 100%;
+    text-align: center;
+  }
+}
