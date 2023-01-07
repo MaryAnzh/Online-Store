@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ItemsQueryOptions } from '../../../core/types/tools.types';
+import { ItemsQueryOptions, RangeType } from '../../../core/types/tools.types';
 import './ToolsRangeSlider.scss';
 
 type RangeSliderType = {
@@ -18,21 +18,44 @@ type ElemDragType = {
     cursorStartPos: null | number,
 }
 
-const sliderWidth = 340;
-const runnerRadius = 12;
-let leftRunner = 0;
-let rightRunner = sliderWidth - runnerRadius * 2;
-
-
 export const ToolsRangeSlider = (props: RangeSliderType) => {
+    const sliderWidth = 340;
+    const runnerRadius = 12;
     const min = props.min;
     const max = props.max;
-    const count = +max - +min;
-    const [minCount, setMinCount] = useState(min);
-    const [maxCount, setMaxCount] = useState(max);
-    // let minNum = (leftRunner / (sliderWidth / 100)) * (count / 100);
-    // console.log(minNum);
+    let minSettingValue = min;
+    let maxSettingValue = max;
+    const sliderRange = +max - +min;
 
+    const convertPXToValue = (px: number): number => {
+        return Math.round(((sliderRange / 100) * (px / (sliderWidth / 100))) + +min);
+    }
+    const convertValueToPx = (value: number): number => {
+        return Math.round(((value - +min) / (sliderRange / 100)) * (sliderWidth / 100));
+    }
+
+    const convertPXToValueWithCorrect = (px: number): number => {
+        return Math.round(((sliderRange / 100) * ((px + (runnerRadius * 2)) / (sliderWidth / 100))) + +min);
+    }
+
+    let currentRunnerLeftPos = convertValueToPx(min);
+    let currentRunnerRightPos = convertValueToPx(max);
+
+    const checkToolsSettings = () => {
+        const range = props.toolsSetting.range;
+        const key = props.filterBy as keyof RangeType;
+        const rangeSetting = range[key];
+
+        if (rangeSetting !== null) {
+            minSettingValue = rangeSetting[0];
+            maxSettingValue = rangeSetting[1];
+            currentRunnerLeftPos = convertValueToPx(minSettingValue);
+            currentRunnerRightPos = convertValueToPx(maxSettingValue);
+        }
+    }
+    checkToolsSettings();
+    const [minCount, setMinCount] = useState(minSettingValue);
+    const [maxCount, setMaxCount] = useState(maxSettingValue);
     const leftRunnerDrag: ElemDragType = {
         isMouseDown: false,
         isDrag: false,
@@ -50,12 +73,12 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
     }
 
     let leftRunnerStyle = {
-        marginLeft: '0px',
+        marginLeft: `${currentRunnerLeftPos}px`,
     };
     const [leftRunnerPosX, setLeftRunnerPosX] = useState(leftRunnerStyle);
 
     let rightRunnerStyle = {
-        marginLeft: `${rightRunnerDrag.startRunnerPos}px`,
+        marginLeft: `${currentRunnerRightPos}px`,
     };
     const [rightRunnerPosX, setRightRunnerPosX] = useState(rightRunnerStyle);
 
@@ -73,7 +96,7 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
             }
 
             const minPos = 0;
-            const maxPos = rightRunner;
+            const maxPos = currentRunnerRightPos;
             let position = leftRunnerDrag.startRunnerPos + (e.clientX - leftRunnerDrag.cursorStartPos);
             if (position < minPos) {
                 position = minPos;
@@ -81,12 +104,12 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
             if (position > maxPos) {
                 position = maxPos;
             }
-            leftRunner = position;
+            leftRunnerDrag.currentRunnerPos = position;
             leftRunnerStyle = {
                 marginLeft: `${position}px`,
             };
             setLeftRunnerPosX(leftRunnerStyle);
-            let num = Math.round((((+max - +min) / 100) * (position / (sliderWidth / 100))) + +min);
+            let num = convertPXToValue(position);
             setMinCount(num);
         }
 
@@ -96,7 +119,7 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
                 rightRunnerDrag.isDrag = true;
             }
 
-            const minPos = leftRunner;
+            const minPos = currentRunnerLeftPos;
             const maxPos = sliderWidth - runnerRadius * 2;
             let position = rightRunnerDrag.startRunnerPos + (e.clientX - rightRunnerDrag.cursorStartPos);
             if (position < minPos) {
@@ -105,8 +128,8 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
             if (position > maxPos) {
                 position = maxPos;
             }
-            rightRunner = position;
-            let num = Math.round((((+max - +min) / 100) * (position / (sliderWidth / 100))) + +min);
+            rightRunnerDrag.currentRunnerPos = position;
+            let num = convertPXToValueWithCorrect(position);
             setMaxCount(num);
             rightRunnerStyle = {
                 marginLeft: `${position}px`,
@@ -116,6 +139,21 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
     }
 
     const runnerMouseUp = (e: MouseEvent) => {
+        currentRunnerLeftPos = leftRunnerDrag.currentRunnerPos;
+        currentRunnerRightPos = rightRunnerDrag.currentRunnerPos;
+        const leftValue = convertPXToValue(currentRunnerLeftPos);
+        const rightValue = convertPXToValueWithCorrect(currentRunnerRightPos);
+        console.log(currentRunnerRightPos);
+        console.log(rightValue);
+
+        const key = props.filterBy as keyof RangeType;
+        if (leftValue === min && rightValue === max) {
+            props.toolsSetting.range[key] = null;
+        } else {
+            props.toolsSetting.range[key] = [leftValue, rightValue];
+        }
+        props.modifyItems(props.toolsSetting);
+
         resetDrag(leftRunnerDrag);
         resetDrag(rightRunnerDrag);
         window.removeEventListener('mousemove', runnerMouseMove);

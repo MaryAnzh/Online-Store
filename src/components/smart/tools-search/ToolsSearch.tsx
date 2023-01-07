@@ -32,8 +32,14 @@ export const ToolsSearch = (props: ToolsSearchProps) => {
                 timerTime += 100;
             } else {
                 timerTime = 0;
-                props.toolsSetting.search = value;
-                props.modifyItems(props.toolsSetting);
+                if (value.length > 2) {
+                    props.toolsSetting.search = value;
+                    props.modifyItems(props.toolsSetting);
+                }
+                if (value === '') {
+                    props.toolsSetting.search = null;
+                    props.modifyItems(props.toolsSetting);
+                }
                 clearInterval(timer);
             }
         }, 100);
@@ -45,6 +51,7 @@ export const ToolsSearch = (props: ToolsSearchProps) => {
                 className='tools-search__input'
                 type='text'
                 value={inputValue}
+                placeholder='Enter more then 3 characters'
                 onInput={searchInput} />
             <SearchLogo />
         </div>

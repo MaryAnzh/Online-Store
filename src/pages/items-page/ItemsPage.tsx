@@ -6,7 +6,7 @@ import { ItemCard } from '../../components/simple/item-card/ItemCard';
 import { IItem } from '../../core/interfaces/catalog.interfaces';
 import { Filter } from '../../core/utils/filter';
 import { ShopState } from '../../core/state/ShopState'
-import { FilterType, SortType, ItemsQueryOptions } from '../../core/types/tools.types';
+import { FilterType, SortType, ItemsQueryOptions, RangeType } from '../../core/types/tools.types';
 import { Tools } from '../../components/smart/tools/Tools';
 import { toolsModel, ModifyItemsType } from '../../core/model/toolsModel';
 
@@ -59,6 +59,20 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
                     const params = searchParams.get(`${objKey}`) as "assent" | "descent" | null;
                     if (params !== null) {
                         toolsSetting.search = params;
+                    }
+                }
+                if (objKey === 'range') {
+                    const range: RangeType = toolsSetting.range;
+                    for (const keyInRange in range) {
+                        const key = keyInRange as keyof RangeType;
+                        const param = searchParams.get(`${key}`);
+
+                        if (param !== null) {
+                            const values = param.split('-');
+                            const min = +values[0];
+                            const max = +values[1];
+                            range[key] = [min, max];
+                        }
                     }
                 }
             }

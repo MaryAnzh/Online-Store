@@ -37,7 +37,6 @@ export const Tools = (props: IToolsProps) => {
     const maxPrice = Math.max.apply(null, allItems.map(el => el.price));
     const minInStock = Math.min.apply(null, allItems.map(el => el.stock));
     const maxInStock = Math.max.apply(null, allItems.map(el => el.stock));
-    let isSettingsShow = false;
 
     //функции
     const checkFilters = (settings: ItemsQueryOptions) => {
@@ -236,7 +235,7 @@ export const Tools = (props: IToolsProps) => {
                 <div className='tools__range-sliders__range'>
                     <h4 className='tools__range-sliders__range__title'>Price</h4>
                     <ToolsRangeSlider
-                        filterBy='price'
+                        filterBy='rangePrice'
                         min={minPrice}
                         max={maxPrice}
                         toolsSetting={toolsSettings}
@@ -245,7 +244,7 @@ export const Tools = (props: IToolsProps) => {
                 <div className='tools__range-sliders__range'>
                     <h4 className='tools__range-sliders__range__title'>Stock</h4>
                     <ToolsRangeSlider
-                        filterBy='stock'
+                        filterBy='rangeStock'
                         min={minInStock}
                         max={maxInStock}
                         toolsSetting={toolsSettings}
