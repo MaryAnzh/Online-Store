@@ -1,16 +1,20 @@
 {
   "files": {
-    "main.css": "/Online-Store/static/css/main.2b27e38d.css",
-    "main.js": "/Online-Store/static/js/main.bd454a59.js",
+    "main.css": "/Online-Store/static/css/main.b5ac59d1.css",
+    "main.js": "/Online-Store/static/js/main.378426e7.js",
     "static/media/bg.png": "/Online-Store/static/media/bg.ddc9049c3c9abba09dfe.png",
+    "static/media/union.png": "/Online-Store/static/media/union.571e991d176a0349aa6d.png",
+    "static/media/mastercard.png": "/Online-Store/static/media/mastercard.03949330f44397b50c70.png",
+    "static/media/visa.png": "/Online-Store/static/media/visa.90363059fb4fc8981ba4.png",
     "static/media/flag.svg": "/Online-Store/static/media/flag.ec391e5b74e23abbbf39a9d7aa76cf58.svg",
     "index.html": "/Online-Store/index.html",
     "static/media/cart.svg": "/Online-Store/static/media/cart.ccaf69c79bc361514fbaef7ba45540ca.svg",
-    "main.2b27e38d.css.map": "/Online-Store/static/css/main.2b27e38d.css.map",
-    "main.bd454a59.js.map": "/Online-Store/static/js/main.bd454a59.js.map"
+    "static/media/search.svg": "/Online-Store/static/media/search.1fdddfd15ea71fece8610dc48a3e8901.svg",
+    "main.b5ac59d1.css.map": "/Online-Store/static/css/main.b5ac59d1.css.map",
+    "main.378426e7.js.map": "/Online-Store/static/js/main.378426e7.js.map"
   },
   "entrypoints": [
-    "static/css/main.2b27e38d.css",
-    "static/js/main.bd454a59.js"
+    "static/css/main.b5ac59d1.css",
+    "static/js/main.378426e7.js"
   ]
 }
