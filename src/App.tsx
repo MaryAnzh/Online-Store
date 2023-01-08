@@ -16,7 +16,7 @@ export const App = (): JSX.Element => {
     return (
         <HashRouter>
             <section className="wrapper">
-                <Header cartState={state.current.cart} />
+                <Header state={state.current} />
                 <main className="wrapper__main">
                     <Routes>
                         <Route path="/" element={<ItemsPage state={state.current} />} />
