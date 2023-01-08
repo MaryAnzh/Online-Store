@@ -1,16 +1,16 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import './Header.scss'
-import {ICart} from '../../../core/interfaces/cart.interfaces'
 import {observer} from 'mobx-react-lite'
+import {ShopState} from '../../../core/state/ShopState'
 
 
 interface IHeaderProps {
-    cartState: ICart
+    state: ShopState
 }
 
 
-export const Header = observer(({cartState}: IHeaderProps): JSX.Element => {
+export const Header = observer(({state}: IHeaderProps): JSX.Element => {
     return (
         <header className="header">
             <div className="header__wrapper">
@@ -36,7 +36,7 @@ export const Header = observer(({cartState}: IHeaderProps): JSX.Element => {
                             <rect width="12" height="4"/>
                         </svg>
                     </div>
-                    <p className="header__wrapper__cart__count">{cartState.totalCount}</p>
+                    <p className="header__wrapper__cart__count">{state.cart.totalCount} ({state.getTotalPrice()} $)</p>
                 </Link>
             </div>
         </header>

@@ -9,15 +9,19 @@ interface ICartPaginationProps {
     state: ShopState
 }
 
+type SetSearchParamsType = (obj: unknown) => void
+
 export const CartPagination = observer((props: ICartPaginationProps): JSX.Element => {
     const [searchParams, setSearchParams] = useSearchParams()
     React.useEffect(() => {
         props.state.getCartFromQuery(searchParams)
     }, [])
 
-    const onLimitChange = (event: React.ChangeEvent<HTMLInputElement>): void => props.state.setCartLimit(Number(event.currentTarget.value), setSearchParams as  any)
-    const nextPageClick = (): void => props.state.changePageInCart(1, setSearchParams as  any)
-    const previousPageClick = (): void => props.state.changePageInCart(-1, setSearchParams as  any)
+
+
+    const onLimitChange = (event: React.ChangeEvent<HTMLInputElement>): void => props.state.setCartLimit(Number(event.currentTarget.value), setSearchParams as SetSearchParamsType)
+    const nextPageClick = (): void => props.state.changePageInCart(1, setSearchParams as SetSearchParamsType)
+    const previousPageClick = (): void => props.state.changePageInCart(-1, setSearchParams as SetSearchParamsType)
 
     return (
         <div className={styles.pagination}>
