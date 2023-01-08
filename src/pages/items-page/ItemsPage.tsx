@@ -4,11 +4,11 @@ import { catalog } from '../../core/data/catalog.data';
 import './ItemsPage.scss'
 import { ItemCard } from '../../components/simple/item-card/ItemCard';
 import { IItem } from '../../core/interfaces/catalog.interfaces';
-import { Filter } from '../../core/utils/filter';
 import { ShopState } from '../../core/state/ShopState'
-import { FilterType, SortType, ItemsQueryOptions } from '../../core/types/tools.types';
-import { Tools } from '../../components/smart/tools/Tools';
+import { FilterType, SortType, ItemsQueryOptions, RangeType } from '../../core/types/tools.types';
+import { IToolsProps, Tools } from '../../components/smart/tools/Tools';
 import { toolsModel, ModifyItemsType } from '../../core/model/toolsModel';
+import { usage } from 'yargs';
 
 interface IItemsPageProps {
     state: ShopState
@@ -21,17 +21,16 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     //получкам каталог товаров
     const catalogItems: IItem[] = [...catalog.products];
     let toolsSetting = toolsModel.toolsSetting;
-
-    //создаем массивы для фильтрации по брендам и категориям
-    const categories: string[] = Filter.createNameSet(catalogItems, 'category');
-    const brands: string[] = Filter.createNameSet(catalogItems, 'brand');
-    const [brandsInCategory, setBrandsInCategory] = useState(brands);
+    let viewItems: 'card' | 'list' = 'card';
+    let cardViewClass: 'active-view' | '' = 'active-view';
+    let listViewClass: 'active-view' | '' = '';
 
     // Проверяем есть ли в url строке квери параметры, если есть то записываем их в текучие параметры и рендерим
     // меняем объект с параметрами в соответствии
     const getCurrentParams = () => {
-        toolsModel.resetToolsSettings(toolsSetting);
         let isParam = searchParams.toString() !== '';
+        const settings = toolsModel.resetToolsSettings(toolsSetting);
+        toolsSetting = settings;
         if (isParam) {
             for (const key in toolsSetting) {
                 const objKey = key as keyof ItemsQueryOptions;
@@ -61,6 +60,29 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
                         toolsSetting.search = params;
                     }
                 }
+                if (objKey === 'range') {
+                    const range: RangeType = toolsSetting.range;
+                    for (const keyInRange in range) {
+                        const key = keyInRange as keyof RangeType;
+                        const param = searchParams.get(`${key}`);
+
+                        if (param !== null) {
+                            const values = param.split('-');
+                            const min = +values[0];
+                            const max = +values[1];
+                            range[key] = [min, max];
+                        }
+                    }
+                }
+            }
+            const view = searchParams.get('view') as 'card' | 'list';
+            if (view !== null) {
+                toolsSetting.itemsView = view;
+                if (view === 'list') {
+                    viewItems = 'list';
+                    cardViewClass = '';
+                    listViewClass = 'active-view';
+                }
             }
         }
     }
@@ -70,17 +92,45 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     const modifyItems: ModifyItemsType = toolsModel.modifyItemsByParams(catalogItems, toolsSetting);
     const [prods, setProds] = useState(modifyItems.items);
 
+    const [cardView, setCardView] = useState<'card' | 'list'>(viewItems);
+    const [cardViewActive, setCardViewActive] = useState<'active-view' | ''>(cardViewClass);
+    const [listViewActive, setListViewActive] = useState<'active-view' | ''>(listViewClass);
+
+    const changeViewToCardOnClick = () => {
+        setCardView('card');
+        setCardViewActive('active-view');
+        setListViewActive('');
+        toolsSetting.itemsView = 'card';
+        const url = toolsModel.modifyItemsByParams(catalogItems, toolsSetting);
+        setSearchParams(url.urlParams);
+    }
+
+    const changeViewToListOnClick = () => {
+        setCardView('list');
+        setCardViewActive('');
+        setListViewActive('active-view');
+        toolsSetting.itemsView = 'list';
+        const url = toolsModel.modifyItemsByParams(catalogItems, toolsSetting);
+        setSearchParams(url.urlParams);
+    }
+
     const itemsList: JSX.Element[] = prods.map((elem) =>
         <ItemCard
             item={elem}
+            view={cardView}
             state={props.state}
+            setView={setCardView}
             key={elem.id}
         />);
 
-    const setItemsFromTools = (items: IItem[], urlParam: ParamKeyValuePair[]) => {
+    const SetItemsFromTools = (items: IItem[], urlParam: ParamKeyValuePair[]) => {
         setProds(items);
         setSearchParams(urlParam);
     }
+
+    React.useEffect((): void => {
+        setSearchParams(modifyItems.urlParams);
+    }, [])
 
     return (
         <section className='catalog'>
@@ -102,12 +152,28 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
                     <span>from 100</span>
                 </div>
 
-                <Tools items={[...catalog.products]} setItems={setItemsFromTools} toolsSetting={toolsSetting} />
+                <Tools
+                    items={[...catalog.products]}
+                    setItems={SetItemsFromTools}
+                    toolsSetting={toolsSetting}
+                />
 
                 <section className='catalog__wrap__items'>
-                    <h3 className='catalog__wrap__items__title'>
+                    <div className='catalog__wrap__items__title'>
                         Products
-                    </h3>
+                        <div className='catalog__wrap__items__title__view'>
+                            <button
+                                className={cardViewActive}
+                                onClick={changeViewToCardOnClick}>
+                                Card
+                            </button>
+                            <button
+                                className={listViewActive}
+                                onClick={changeViewToListOnClick}>
+                                List
+                            </button>
+                        </div>
+                    </div>
 
                     <div className='catalog__wrap__items__items-wrap'>
                         {itemsList}

@@ -9,8 +9,15 @@ export type SortType = {
     stock: null | 'assent' | 'descent',
 }
 
+export type RangeType = {
+    rangePrice: [number, number] | null,
+    rangeStock: [number, number] | null,
+}
+
 export type ItemsQueryOptions = {
     filter: FilterType,
     sort: SortType,
     search: null | string,
+    range: RangeType,
+    itemsView?: 'card' | 'list',
 }

@@ -1,12 +1,13 @@
 import './Tools.scss';
 import { IItem } from '../../../core/interfaces/catalog.interfaces';
 import { toolsModel, ModifyItemsType } from '../../../core/model/toolsModel';
-import { ParamKeyValuePair } from 'react-router-dom';
+import { ParamKeyValuePair, useSearchParams } from 'react-router-dom';
 import React, { useState } from 'react';
 import { FilterType, ItemsQueryOptions, SortType } from '../../../core/types/tools.types';
 import { ToolsSearch } from '../tools-search/ToolsSearch';
+import { ToolsRangeSlider } from '../tools-range-slider/ToolsRangeSlider';
 
-interface IToolsProps {
+export interface IToolsProps {
     items: IItem[],
     toolsSetting: ItemsQueryOptions,
     setItems: (items: IItem[], urlParam: ParamKeyValuePair[]) => void;
@@ -22,7 +23,7 @@ type SelectViewType = {
 export const Tools = (props: IToolsProps) => {
     //инициализация
     // переемные
-    const toolsSettings = props.toolsSetting;
+    let toolsSettings: ItemsQueryOptions = props.toolsSetting;
     const allItems = props.items;
     const selectView: SelectViewType = {
         categories: [],
@@ -32,26 +33,29 @@ export const Tools = (props: IToolsProps) => {
     }
     let categorySelectValue = '...';
     let brandSelectValue = '...';
-    let isSettingsShow = false;
+    const minPrice = Math.min.apply(null, allItems.map(el => el.price));
+    const maxPrice = Math.max.apply(null, allItems.map(el => el.price));
+    const minInStock = Math.min.apply(null, allItems.map(el => el.stock));
+    const maxInStock = Math.max.apply(null, allItems.map(el => el.stock));
 
     //функции
-    const checkFilters = (settings: ItemsQueryOptions) => {
+    const checkFilters = (settings: ItemsQueryOptions, items: IItem[]) => {
         const filter: FilterType = settings.filter;
         const category = filter.category;
         if (category === null || category == '...') {
             categorySelectValue = '...';
-            selectView.brands = toolsModel.createSelectViewByToolsTitle('brand', allItems);
+            selectView.brands = toolsModel.createSelectViewByToolsTitle('brand', items);
         } else {
             categorySelectValue = category;
-            selectView.brands = toolsModel.updateBrandSet(allItems, category);
+            selectView.brands = toolsModel.updateBrandSet(items, category);
         }
         const brand = filter.brand;
         if (brand === null || brand === '...') {
             brandSelectValue = '...';
-            selectView.categories = toolsModel.createSelectViewByToolsTitle('category', allItems);
+            selectView.categories = toolsModel.createSelectViewByToolsTitle('category', items);
         } else {
             brandSelectValue = brand;
-            selectView.categories = toolsModel.updateCategorySet(allItems, brand);
+            selectView.categories = toolsModel.updateCategorySet(items, brand);
         }
     }
 
@@ -73,15 +77,20 @@ export const Tools = (props: IToolsProps) => {
 
     //проверяем пустые ли параметры, если нет
     //то подгоняем отображение под параметры
-    for (const key in toolsSettings) {
-        const keyInObj = key as keyof ItemsQueryOptions;
-        if (keyInObj === 'filter') {
-            checkFilters(toolsSettings);
-        }
-        if (keyInObj === 'sort') {
-            checkSort(toolsSettings);
+    const newView = () => {
+        const modify = toolsModel.modifyItemsByParams(allItems, toolsSettings);
+        for (const key in toolsSettings) {
+            const keyInObj = key as keyof ItemsQueryOptions;
+            if (keyInObj === 'filter') {
+                checkFilters(toolsSettings, modify.items);
+            }
+            if (keyInObj === 'sort') {
+                checkSort(toolsSettings);
+            }
         }
     }
+    newView();
+
 
     //устанавливаем состояние отображения фильтров по категории и бренду
     const [categories, setCategories] = useState(selectView.categories);
@@ -117,7 +126,8 @@ export const Tools = (props: IToolsProps) => {
         const value = elem.value;
         const itemObjectKey = elem.id as keyof FilterType;
         toolsSettings.filter[itemObjectKey] = value;
-        checkFilters(toolsSettings);
+        const modify = toolsModel.modifyItemsByParams(allItems, toolsSettings);
+        checkFilters(toolsSettings, modify.items);
         setBrands(selectView.brands);
         setCategories(selectView.categories);
         setItemsData();
@@ -140,33 +150,64 @@ export const Tools = (props: IToolsProps) => {
     const modifyItemsFromChild = (settings: ItemsQueryOptions) => {
         const modifyData: ModifyItemsType = toolsModel.modifyItemsByParams(allItems, settings);
         props.setItems(modifyData.items, modifyData.urlParams);
+        newView();
+        setBrands(selectView.brands);
+        setCategories(selectView.categories);
+        setPriceValue('select');
+        setStockValue('select');
+    }
+
+    const copySettingsOnClick = () => {
+        const param = window.location.href;
+        navigator.clipboard.writeText(param);
+    }
+
+    const [settings, setSettings] = useState(toolsSettings);
+    const resetToolsOnClick = () => {
+        const settings: ItemsQueryOptions = toolsModel.resetToolsSettings(toolsSettings);
+        toolsSettings = settings;
+        props.setItems(allItems, []);
+        newView();
+        setBrands(selectView.brands);
+        setCategories(selectView.categories);
+        setPriceValue('select');
+        setStockValue('select');
     }
 
     return (
         <section className='tools'>
-            <div className='tools__visible'>
-                <div className='tools__visible__show-button-wrap'>
-                    <button className='tools__visible__show-button-wrap__button'>
-                        Show filters
-                    </button>
+            <div
+                className='tools__visible'>
+                <div className='tools__visible__info'>
+                    <h4 className='tools__visible__info__title'>Tools</h4>
+                    <div className='tools__visible__info__settings'>
+                        <button
+                            onClick={copySettingsOnClick}
+                            className='tools__visible__info__setting__copy'>
+                            copy</button>
+                        <button
+                            onClick={resetToolsOnClick}
+                            className='tools__visible__info__setting__reset'>
+                            reset</button>
+                    </div>
                 </div>
                 <div className='tools__visible__search-wrap'>
                     <ToolsSearch toolsSetting={toolsSettings} modifyItems={modifyItemsFromChild} />
                 </div>
             </div>
-            <div className='tools__hidden'>
-                <div className='tools__hidden__select-tools'>
-                    <div className='tools__hidden__select-tools__tool'>
-                        <div className='tools__hidden__select-tools__tool__title'>
-                            <span className='tools__hidden__select-tools__tool__title__name'>
+            <div className='tools__selects-wrap'>
+                <div className='tools__selects-wrap__select-tools'>
+                    <div className='tools__selects-wrap__select-tools__tool'>
+                        <div className='tools__selects-wrap__select-tools__tool__title'>
+                            <span className='tools__selects-wrap__select-tools__tool__title__name'>
                                 Category
                             </span>
-                            <div className='tools__hidden__select-tools__tool__title__count'>
+                            <div className='tools__selects-wrap__select-tools__tool__title__count'>
                                 (<span>{categories.length}</span>)
                             </div>
                         </div>
                         <select
-                            className='tools__hidden__select-tools__tool__select filter-select'
+                            className='tools__selects-wrap__select-tools__tool__select filter-select'
                             id='category'
                             value={categorySelectValue}
                             onChange={filterItemsOnChange}>
@@ -174,17 +215,17 @@ export const Tools = (props: IToolsProps) => {
                             {categoriesFilter}
                         </select>
                     </div>
-                    <div className='tools__hidden__select-tools__tool'>
-                        <div className='tools__hidden__select-tools__tool__title'>
-                            <span className='tools__hidden__select-tools__tool__title__name'>
+                    <div className='tools__selects-wrap__select-tools__tool'>
+                        <div className='tools__selects-wrap__select-tools__tool__title'>
+                            <span className='tools__selects-wrap__select-tools__tool__title__name'>
                                 Brand
                             </span>
-                            <div className='tools__hidden__select-tools__tool__title__count'>
+                            <div className='tools__selects-wrap__select-tools__tool__title__count'>
                                 (<span>{brands.length}</span>)
                             </div>
                         </div>
                         <select
-                            className='tools__hidden__select-tools__tool__select filter-selects'
+                            className='tools__selects-wrap__select-tools__tool__select filter-selects'
                             id='brand'
                             value={brandSelectValue}
                             onChange={filterItemsOnChange}>
@@ -193,15 +234,15 @@ export const Tools = (props: IToolsProps) => {
                         </select>
                     </div>
                 </div>
-                <div className='tools__hidden__select-tools'>
-                    <div className='tools__hidden__select-tools__tool'>
-                        <div className='tools__hidden__select-tools__tool__title'>
-                            <span className='tools__hidden__select-tools__tool__title__name'>
+                <div className='tools__selects-wrap__select-tools'>
+                    <div className='tools__selects-wrap__select-tools__tool'>
+                        <div className='tools__selects-wrap__select-tools__tool__title'>
+                            <span className='tools__selects-wrap__select-tools__tool__title__name'>
                                 Sorn by Price
                             </span>
                         </div>
                         <select
-                            className='tools__hidden__select-tools__tool__select filter-select'
+                            className='tools__selects-wrap__select-tools__tool__select filter-select'
                             id='price'
                             value={priceValue}
                             onChange={sortItemsOnChange}>
@@ -210,14 +251,14 @@ export const Tools = (props: IToolsProps) => {
                             <option value='descent'>hight to low</option>
                         </select>
                     </div>
-                    <div className='tools__hidden__select-tools__tool'>
-                        <div className='tools__hidden__select-tools__tool__title'>
-                            <span className='tools__hidden__select-tools__tool__title__name'>
+                    <div className='tools__selects-wrap__select-tools__tool'>
+                        <div className='tools__selects-wrap__select-tools__tool__title'>
+                            <span className='tools__selects-wrap__select-tools__tool__title__name'>
                                 Sort by Stock
                             </span>
                         </div>
                         <select
-                            className='tools__hidden__select-tools__tool__select filter-selects'
+                            className='tools__selects-wrap__select-tools__tool__select filter-selects'
                             id='stock'
                             value={stockValue}
                             onChange={sortItemsOnChange}>
@@ -226,6 +267,27 @@ export const Tools = (props: IToolsProps) => {
                             <option value='descent'>hight to low</option>
                         </select>
                     </div>
+                </div>
+            </div>
+            <h4 className='tools__title'>Filtering by range</h4>
+            <div className='tools__range-sliders'>
+                <div className='tools__range-sliders__range'>
+                    <h4 className='tools__range-sliders__range__title'>Price</h4>
+                    <ToolsRangeSlider
+                        filterBy='rangePrice'
+                        min={minPrice}
+                        max={maxPrice}
+                        toolsSetting={toolsSettings}
+                        modifyItems={modifyItemsFromChild} />
+                </div>
+                <div className='tools__range-sliders__range'>
+                    <h4 className='tools__range-sliders__range__title'>Stock</h4>
+                    <ToolsRangeSlider
+                        filterBy='rangeStock'
+                        min={minInStock}
+                        max={maxInStock}
+                        toolsSetting={toolsSettings}
+                        modifyItems={modifyItemsFromChild} />
                 </div>
             </div>
         </section>

@@ -1,6 +1,6 @@
 import { ParamKeyValuePair } from "react-router-dom";
 import { IItem } from "../interfaces/catalog.interfaces";
-import { FilterType, ItemsQueryOptions, SortType } from "../types/tools.types";
+import { FilterType, ItemsQueryOptions, SortType, RangeType } from "../types/tools.types";
 
 export type ModifyItemsType = {
     items: IItem[],
@@ -21,12 +21,16 @@ class ToolsModel {
                 price: null,
                 stock: null,
             },
+            range: {
+                rangePrice: null,
+                rangeStock: null,
+            },
             search: null,
         };
     }
 
-    resetToolsSettings = (settings: ItemsQueryOptions) => {
-        settings = {
+    resetToolsSettings = (settings: ItemsQueryOptions): ItemsQueryOptions => {
+        return {
             filter: {
                 category: null,
                 brand: null,
@@ -35,6 +39,10 @@ class ToolsModel {
             sort: {
                 price: null,
                 stock: null,
+            },
+            range: {
+                rangePrice: null,
+                rangeStock: null,
             },
             search: null,
         };
@@ -87,6 +95,10 @@ class ToolsModel {
         }
     }
 
+    rangeItems = (itemObjectKey: keyof IItem, min: number, max: number, items: IItem[]): IItem[] => {
+        return items.filter(el => (el[itemObjectKey] >= min && el[itemObjectKey] < (max + 1)));
+    }
+
     modifyItemsByParams = (items: IItem[], setting: ItemsQueryOptions): ModifyItemsType => {
         const urlParams: ParamKeyValuePair[] = [];
         for (const objKey in setting) {
@@ -122,14 +134,36 @@ class ToolsModel {
                 const sort: SortType = setting.sort;
                 for (const subObjKey in sort) {
                     const subKey = subObjKey as keyof SortType;
-                    const keyAsItemsKet = subKey as keyof IItem;
+                    const keyAsItemsKey = subKey as keyof IItem;
                     const v = sort[subKey];
                     if (v !== null) {
-                        this.sortItems(v, keyAsItemsKet, items);
+                        this.sortItems(v, keyAsItemsKey, items);
                         urlParams.push([`${subKey}`, v]);
                     }
                 }
             }
+            if (key === 'range') {
+                const range: RangeType = setting.range;
+                for (const key in range) {
+                    const objKey = key as keyof RangeType;
+                    const v = range[objKey];
+                    if (v !== null) {
+                        const itemsKey = objKey === 'rangePrice' ? 'price' : 'stock';
+                        const min = v[0];
+                        const max = v[1];
+                        const rangeArr = this.rangeItems(itemsKey, min, max, items);
+
+                        items = rangeArr;
+                        const urlValue = `${min}-${max}`;
+                        urlParams.push([`${key}`, urlValue]);
+                    }
+                }
+            }
+        }
+        const view = setting.itemsView;
+        if (view !== undefined) {
+            const v = view;
+            urlParams.push([`view`, v]);
         }
 
         const modifyItems: ModifyItemsType = {

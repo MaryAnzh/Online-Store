@@ -198,12 +198,28 @@
             flex-direction: column;
 
             &__title {
+                display: flex;
+                align-items: flex-end;
                 font-family: 'Roboto', sans-serif;
                 font-style: normal;
                 font-weight: 700;
                 font-size: 36px;
                 line-height: 42px;
-                color: $item-card-font-color
+                color: $item-card-font-color;
+
+                &__view {
+                    margin-left: 20px;
+
+                    .active-view {
+                        background: gray;
+                        color: white;
+                    }
+
+                    button {
+                        margin-left: 10px;
+                        padding: 10px;
+                    }
+                }
             }
 
             &__items-wrap {
