@@ -79,14 +79,13 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     const modifyItems: ModifyItemsType = toolsModel.modifyItemsByParams(catalogItems, toolsSetting);
     const [prods, setProds] = useState(modifyItems.items);
 
-    const resetToolsSettings = () => {
-       
-    }
-
+    const [cardView, setCardView] = useState<'card' | 'list'>('card');
     const itemsList: JSX.Element[] = prods.map((elem) =>
         <ItemCard
             item={elem}
+            view={cardView}
             state={props.state}
+            setView={setCardView}
             key={elem.id}
         />);
 
@@ -123,13 +122,20 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
                     items={[...catalog.products]}
                     setItems={SetItemsFromTools}
                     toolsSetting={toolsSetting}
-                    reset={resetToolsSettings}
                 />
 
                 <section className='catalog__wrap__items'>
-                    <h3 className='catalog__wrap__items__title'>
+                    <div className='catalog__wrap__items__title'>
                         Products
-                    </h3>
+                        <div className='catalog__wrap__items__title__view'>
+                            <button onClick={() => setCardView('card')}>
+                                Card
+                            </button>
+                            <button onClick={() => setCardView('list')}>
+                                List
+                            </button>
+                        </div>
+                    </div>
 
                     <div className='catalog__wrap__items__items-wrap'>
                         {itemsList}

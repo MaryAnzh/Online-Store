@@ -11,7 +11,6 @@ export interface IToolsProps {
     items: IItem[],
     toolsSetting: ItemsQueryOptions,
     setItems: (items: IItem[], urlParam: ParamKeyValuePair[]) => void;
-    reset: () => void,
 }
 
 type SelectViewType = {

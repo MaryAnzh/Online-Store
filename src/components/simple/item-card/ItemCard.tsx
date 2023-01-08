@@ -1,4 +1,4 @@
-import React from 'react'
+import { SetStateAction, Dispatch } from 'react'
 import './ItemCard.scss'
 import { IItem } from '../../../core/interfaces/catalog.interfaces'
 import { ReactComponent as CartLogo } from '../../../assets/cart.svg'
@@ -10,6 +10,8 @@ import { observer } from 'mobx-react-lite'
 
 type ItemTypeProps = {
     item: IItem,
+    view: 'list' | 'card',
+    setView: Dispatch<SetStateAction<"card" | "list">>,
     state: ShopState
 }
 
@@ -21,15 +23,15 @@ export const ItemCard = observer((props: ItemTypeProps): JSX.Element => {
             ? props.state.dropItemFromCart(props.item.id)
             : props.state.increaseQuantityInCart(props.item, true)
     }
-
+    let prefix = props.view === 'card' ? 'item-card' : 'item-card-list'
     return (
         <div
             key={`products_${props.item.id}`}
-            className="item-card">
+            className={prefix}>
             <FlagLogo />
-            <div className='item-card__in-stock'>Stock: {props.item.stock}</div>
+            <div className={`${prefix}__in-stock`}>Stock: {props.item.stock}</div>
 
-            <div className="item-card__image-wrap">
+            <div className={`${prefix}__image-wrap`}>
                 <Link to={`/products/${props.item.id}`} className="item-card__image-wrap__link">
                     <img
                         className="item-card__image-wrap__link__image"
@@ -37,8 +39,8 @@ export const ItemCard = observer((props: ItemTypeProps): JSX.Element => {
                 </Link>
             </div>
             <Link to={`/products/${props.item.id}`}>
-                <div className="item-card__info">
-                    <h5 className="item-card__info__category">
+                <div className={`${prefix}__info`}>
+                    <h5 className={'${prefix}__info__category'}>
                         {props.item.category}
                     </h5>
                     <h4 className="item-card__info__title">
@@ -64,4 +66,6 @@ export const ItemCard = observer((props: ItemTypeProps): JSX.Element => {
             </div>
         </div>
     )
+
+
 })
