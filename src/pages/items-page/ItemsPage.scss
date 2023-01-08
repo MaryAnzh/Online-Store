@@ -210,6 +210,11 @@
                 &__view {
                     margin-left: 20px;
 
+                    .active-view {
+                        background: gray;
+                        color: white;
+                    }
+
                     button {
                         margin-left: 10px;
                         padding: 10px;

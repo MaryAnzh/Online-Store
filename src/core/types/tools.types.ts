@@ -19,4 +19,5 @@ export type ItemsQueryOptions = {
     sort: SortType,
     search: null | string,
     range: RangeType,
+    itemsView?: 'card' | 'list',
 }

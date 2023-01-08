@@ -160,6 +160,11 @@ class ToolsModel {
                 }
             }
         }
+        const view = setting.itemsView;
+        if (view !== undefined) {
+            const v = view;
+            urlParams.push([`view`, v]);
+        }
 
         const modifyItems: ModifyItemsType = {
             items: items,
