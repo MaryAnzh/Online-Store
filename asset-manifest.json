@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Online-Store/static/css/main.b5ac59d1.css",
-    "main.js": "/Online-Store/static/js/main.378426e7.js",
+    "main.css": "/Online-Store/static/css/main.bd833a46.css",
+    "main.js": "/Online-Store/static/js/main.af6573c9.js",
     "static/media/bg.png": "/Online-Store/static/media/bg.ddc9049c3c9abba09dfe.png",
     "static/media/union.png": "/Online-Store/static/media/union.571e991d176a0349aa6d.png",
     "static/media/mastercard.png": "/Online-Store/static/media/mastercard.03949330f44397b50c70.png",
@@ -10,11 +10,11 @@
     "index.html": "/Online-Store/index.html",
     "static/media/cart.svg": "/Online-Store/static/media/cart.ccaf69c79bc361514fbaef7ba45540ca.svg",
     "static/media/search.svg": "/Online-Store/static/media/search.1fdddfd15ea71fece8610dc48a3e8901.svg",
-    "main.b5ac59d1.css.map": "/Online-Store/static/css/main.b5ac59d1.css.map",
-    "main.378426e7.js.map": "/Online-Store/static/js/main.378426e7.js.map"
+    "main.bd833a46.css.map": "/Online-Store/static/css/main.bd833a46.css.map",
+    "main.af6573c9.js.map": "/Online-Store/static/js/main.af6573c9.js.map"
   },
   "entrypoints": [
-    "static/css/main.b5ac59d1.css",
-    "static/js/main.378426e7.js"
+    "static/css/main.bd833a46.css",
+    "static/js/main.af6573c9.js"
   ]
 }
