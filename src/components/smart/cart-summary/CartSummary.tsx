@@ -5,6 +5,7 @@ import {ItemBuyModal} from '../../../containers/item-buy-modal/ItemBuyModal'
 import {ActivatedPromo} from '../../simple/activated-promo/ActivatedPromo'
 import {ShopState} from '../../../core/state/ShopState'
 import {NavigateFunction, useNavigate} from 'react-router-dom'
+import {observer} from 'mobx-react-lite'
 
 
 interface ICartSummaryProps {
@@ -15,17 +16,16 @@ interface ICartSummaryProps {
 }
 
 
-export const CartSummary = (props: ICartSummaryProps): JSX.Element => {
+export const CartSummary = observer((props: ICartSummaryProps): JSX.Element => {
     const [promosActivated, setPromosActivated] = React.useState<Array<IPromoCode>>([])
     const [totalPriceWithDiscount, setTotalPriceWithDiscount] = React.useState<number>(props.totalPrice)
-    const [isModalShown, setIsModalShown] = React.useState<boolean>(false)
+    const isModalShown: boolean = props.state.cart.showModal
     const [inputedPromo, setInputedPromo] = React.useState<string>('')
     const [isAddPromoButtonShown, setIsAddPromoButtonShown] = React.useState<boolean>(false)
-
     const navigate: NavigateFunction = useNavigate()
 
-    const closeModal = (): void => setIsModalShown(false)
-    const openModal = (): void => setIsModalShown(true)
+    const closeModal = (): void => props.state.closeModal()
+    const openModal = (): void => props.state.openModal()
 
     React.useEffect((): void => {
         const totalDiscount: number = promosActivated.reduce((response, current) => response + current.discount, 0)
@@ -67,7 +67,7 @@ export const CartSummary = (props: ICartSummaryProps): JSX.Element => {
     }
 
     const confirmModal = (): void => {
-        window.alert('Thank you for purchase')
+        window.alert('Thank you for purchase. Press button — and page will be reloaded in 3-5 seconds')
 
         window.setTimeout((): void => {
             props.state.clearCart()
@@ -120,4 +120,4 @@ export const CartSummary = (props: ICartSummaryProps): JSX.Element => {
             {isModalShown && <ItemBuyModal closeCallback={closeModal} state={props.state} submitCallback={confirmModal}/>}
         </div>
     )
-}
+})

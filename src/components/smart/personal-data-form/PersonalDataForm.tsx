@@ -9,10 +9,10 @@ import unionPayImage from '../../../assets/union.png'
 import {
     CARD_DATE_DELIMITER,
     CARD_NUMBER_DELIMITER, formatCardDate,
-    formatCardNumber, INPUT_TYPE_FOR_TYPE, PATTERN_FOR_TYPE, verifyCard,
+    formatCardNumber, PATTERN_FOR_TYPE, verifyCard,
     verifyCardNumber, verifyDate
 } from '../../../core/utils/formUtils'
-import { validate } from 'is-it-email';
+import { validate } from 'is-it-email'
 
 
 
@@ -133,8 +133,6 @@ export const PersonalDataForm = (props: IPersonalDataFormProps): JSX.Element => 
         !isPhoneValid && setPhoneInvalid(true)
         !isCardValid && setShowInvalidTextInCard(true)
     }, [address, cardCvv, cardExpirationDate, cardNumber, email, name, phone, props])
-
-
 
 
     return (
