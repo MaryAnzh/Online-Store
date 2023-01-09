@@ -4,8 +4,10 @@ import { toolsModel, ModifyItemsType } from '../../../core/model/toolsModel';
 import { ParamKeyValuePair, useSearchParams } from 'react-router-dom';
 import React, { useState } from 'react';
 import { FilterType, ItemsQueryOptions, SortType } from '../../../core/types/tools.types';
-import { ToolsSearch } from '../tools-search/ToolsSearch';
+import { ReactComponent as SearchLogo } from '../../../assets/search.svg';
 import { ToolsRangeSlider } from '../tools-range-slider/ToolsRangeSlider';
+import { ReactComponent as CopyLogo } from '../../../assets/copy.svg';
+import { ReactComponent as CheckLogo } from '../../../assets/check.svg';
 
 export interface IToolsProps {
     items: IItem[],
@@ -21,8 +23,6 @@ type SelectViewType = {
 }
 
 export const Tools = (props: IToolsProps) => {
-    //инициализация
-    // переемные
     let toolsSettings: ItemsQueryOptions = props.toolsSetting;
     const allItems = props.items;
     const selectView: SelectViewType = {
@@ -37,8 +37,10 @@ export const Tools = (props: IToolsProps) => {
     const maxPrice = Math.max.apply(null, allItems.map(el => el.price));
     const minInStock = Math.min.apply(null, allItems.map(el => el.stock));
     const maxInStock = Math.max.apply(null, allItems.map(el => el.stock));
+    let isSettingsCopy = false;
+    let copyButtonLogo = <CopyLogo />
+    let currentInputValue = '';
 
-    //функции
     const checkFilters = (settings: ItemsQueryOptions, items: IItem[]) => {
         const filter: FilterType = settings.filter;
         const category = filter.category;
@@ -75,8 +77,18 @@ export const Tools = (props: IToolsProps) => {
         }
     }
 
-    //проверяем пустые ли параметры, если нет
-    //то подгоняем отображение под параметры
+    const CheckSearch = () => {
+        const search: string | null = toolsSettings.search;
+        console.log(`search = ${props.toolsSetting.search}`);
+        if (search !== null) {
+            currentInputValue = search;
+        } else {
+            currentInputValue = '';
+            console.log(`search = ${props.toolsSetting.search} отработал`);
+            console.log(currentInputValue);
+        }
+    }
+
     const newView = () => {
         const modify = toolsModel.modifyItemsByParams(allItems, toolsSettings);
         for (const key in toolsSettings) {
@@ -88,17 +100,16 @@ export const Tools = (props: IToolsProps) => {
                 checkSort(toolsSettings);
             }
         }
+        CheckSearch();
     }
     newView();
 
 
-    //устанавливаем состояние отображения фильтров по категории и бренду
     const [categories, setCategories] = useState(selectView.categories);
     const [brands, setBrands] = useState(selectView.brands);
     const [priceValue, setPriceValue] = useState(selectView.price);
     const [stockValue, setStockValue] = useState(selectView.stock);
 
-    // рендеринг списков
     const categoriesFilter: JSX.Element[] = categories.map((name) =>
         <option
             key={name}
@@ -116,9 +127,23 @@ export const Tools = (props: IToolsProps) => {
             </option>)
     });
 
+    const [copyView, setCoptView] = useState(copyButtonLogo);
+    const copySettingsOnClick = () => {
+        if (!isSettingsCopy) {
+            isSettingsCopy = true;
+            copyButtonLogo = <CheckLogo />;
+            setCoptView(copyButtonLogo);
+        }
+
+        const param = window.location.href;
+        navigator.clipboard.writeText(param);
+    }
+
     const setItemsData = () => {
         const modifyData: ModifyItemsType = toolsModel.modifyItemsByParams(allItems, toolsSettings);
         props.setItems(modifyData.items, modifyData.urlParams);
+        isSettingsCopy = false;
+        setCoptView(<CopyLogo />);
     }
 
     const filterItemsOnChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -155,14 +180,36 @@ export const Tools = (props: IToolsProps) => {
         setCategories(selectView.categories);
         setPriceValue('select');
         setStockValue('select');
+        setCoptView(<CopyLogo />);
+        isSettingsCopy = false;
     }
 
-    const copySettingsOnClick = () => {
-        const param = window.location.href;
-        navigator.clipboard.writeText(param);
-    }
+    let timerTime = 0;
+    let timer: NodeJS.Timer;
+    const [inputValue, setInputValue] = useState(currentInputValue);
 
-    const [settings, setSettings] = useState(toolsSettings);
+    const searchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        clearInterval(timer);
+        const value = e.target.value;
+        setInputValue(value);
+        timer = setInterval(() => {
+            if (timerTime < 1000) {
+                timerTime += 100;
+            } else {
+                timerTime = 0;
+                if (value.length > 2) {
+                    toolsSettings.search = value;
+                    modifyItemsFromChild(props.toolsSetting);
+                }
+                if (value === '') {
+                    toolsSettings.search = null;
+                    modifyItemsFromChild(props.toolsSetting);
+                }
+                clearInterval(timer);
+            }
+        }, 100);
+    }
+    const [settings, setSettings] = useState(false);
     const resetToolsOnClick = () => {
         const settings: ItemsQueryOptions = toolsModel.resetToolsSettings(toolsSettings);
         toolsSettings = settings;
@@ -172,6 +219,10 @@ export const Tools = (props: IToolsProps) => {
         setCategories(selectView.categories);
         setPriceValue('select');
         setStockValue('select');
+        setCoptView(<CopyLogo />);
+        isSettingsCopy = false;
+        setSettings(true);
+        setInputValue('');
     }
 
     return (
@@ -181,18 +232,31 @@ export const Tools = (props: IToolsProps) => {
                 <div className='tools__visible__info'>
                     <h4 className='tools__visible__info__title'>Tools</h4>
                     <div className='tools__visible__info__settings'>
-                        <button
+                        <div
                             onClick={copySettingsOnClick}
-                            className='tools__visible__info__setting__copy'>
-                            copy</button>
+                            className='tools__visible__info__settings__copy'>
+                            <span>copy</span>
+                            <div className='tools__visible__info__settings__copy__icon'>
+                                {copyView}
+                            </div>
+                        </div>
                         <button
                             onClick={resetToolsOnClick}
-                            className='tools__visible__info__setting__reset'>
-                            reset</button>
+                            className='tools__visible__info__settings__reset'>
+                            reset
+                        </button>
                     </div>
                 </div>
                 <div className='tools__visible__search-wrap'>
-                    <ToolsSearch toolsSetting={toolsSettings} modifyItems={modifyItemsFromChild} />
+                    <div className='tools-search'>
+                        <input
+                            className='tools-search__input'
+                            type='text'
+                            value={inputValue}
+                            placeholder='Enter more then 3 characters'
+                            onInput={searchInput} />
+                        <SearchLogo />
+                    </div>
                 </div>
             </div>
             <div className='tools__selects-wrap'>

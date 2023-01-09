@@ -106,9 +106,12 @@ class ToolsModel {
             if (key === 'search') {
                 const v = setting[key];
                 if (v !== null) {
-                    urlParams.push([`${key}`, v]);
-                    const searchItems = items.filter(el => el.brand.indexOf(v) > -1 || el.category.indexOf(v) > -1 || el.description.indexOf(v) > -1 || el.title.indexOf(v) > -1
-                        || el.price.toString() === v || el.stock.toString() === v);
+                    const nv = v.toLowerCase();
+
+                    urlParams.push([`${key}`, nv]);
+                    const searchItems = items.filter(el => el.brand.toLowerCase().indexOf(nv) > -1 || el.category.toLowerCase().indexOf(nv) > -1
+                        || el.description.toLowerCase().indexOf(nv) > -1 || el.title.toLowerCase().indexOf(nv) > -1
+                        || el.price.toString() === nv || el.stock.toString() === nv);
                     items = searchItems;
                 }
             }
@@ -149,8 +152,8 @@ class ToolsModel {
                     const v = range[objKey];
                     if (v !== null) {
                         const itemsKey = objKey === 'rangePrice' ? 'price' : 'stock';
-                        const min = v[0];
-                        const max = v[1];
+                        const min = v.minValue;
+                        const max = v.maxValue;
                         const rangeArr = this.rangeItems(itemsKey, min, max, items);
 
                         items = rangeArr;
@@ -160,6 +163,7 @@ class ToolsModel {
                 }
             }
         }
+
         const view = setting.itemsView;
         if (view !== undefined) {
             const v = view;

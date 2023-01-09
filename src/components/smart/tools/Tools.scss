@@ -36,6 +36,57 @@
                 display: flex;
                 justify-content: space-between;
 
+                &__copy {
+                    height: 20px;
+                    display: flex;
+                    align-items: flex-ends;
+
+                    span {
+                        transform: translateY(2px);
+                    }
+
+                    &__icon {
+                        width: 20px;
+                        height: 20px;
+                        margin-left: 10px;
+                        cursor: pointer;
+
+                        .copy-logo {
+                            .copy-logo__top {
+                                fill: none;
+                                stroke: $usual-text-color;
+                                stroke-miterlimit: 10;
+                            }
+
+                            .copy-logo__bottom {
+                                fill: none;
+                                stroke: $usual-text-color;
+                                stroke-linecap: round;
+                                stroke-linejoin: round;
+                                stroke-miterlimit: 10;
+                            }
+                        }
+
+                        .check-logo {
+                            .check-logo__path {
+                                fill: none;
+                                stroke: $contrast-color;
+                                stroke-width: 2;
+                                stroke-linecap: round;
+                                stroke-linejoin: round;
+                                stroke-miterlimit: 10;
+                            }
+
+                        }
+
+                        &:active {
+                            transform: scale(1.25);
+                        }
+                    }
+
+
+                }
+
                 button {
                     padding: 2px 5px;
                     font-size: 16px;
@@ -62,6 +113,39 @@
         &__search-wrap {
             max-width: 500px;
             width: 100%;
+
+            .tools-search {
+                width: 100%;
+                height: fit-content;
+                position: relative;
+                display: flex;
+                align-items: center;
+
+                &__input {
+                    width: 100%;
+                    font-size: 16px;
+                    padding: 5px;
+                    border: 1px solid $yellow-accent-color;
+                    border-radius: 7px;
+
+                    &:hover {
+                        box-shadow: 2px 2px 4px rgba($color: gray, $alpha: 0.2);
+                    }
+
+                    &:focus {
+                        box-shadow: 0 0 1px 3px rgba($color: $contrast-color, $alpha: 0.1);
+                        outline: none;
+                    }
+                }
+
+                svg {
+                    width: 20px;
+                    position: absolute;
+                    right: 10px;
+                    fill: rgba($color: $contrast-color, $alpha: 0.5);
+                    transition: .3s;
+                }
+            }
         }
     }
 

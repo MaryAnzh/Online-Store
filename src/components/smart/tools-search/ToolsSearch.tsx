@@ -1,5 +1,4 @@
 import './ToolsSearch.scss';
-import { IItem } from '../../../core/interfaces/catalog.interfaces';
 import { ItemsQueryOptions } from '../../../core/types/tools.types';
 import { ReactComponent as SearchLogo } from '../../../assets/search.svg';
 import React, { useState } from 'react';
@@ -10,13 +9,20 @@ type ToolsSearchProps = {
 }
 
 export const ToolsSearch = (props: ToolsSearchProps) => {
+    console.log('перезагрузка');
     let currentInputValue: string = '';
     const checkToolsSetting = () => {
         const search: string | null = props.toolsSetting.search;
+        console.log(`search = ${props.toolsSetting.search}`);
         if (search !== null) {
             currentInputValue = search;
+        } else {
+            currentInputValue = '';
+            console.log(`search = ${props.toolsSetting.search} отработал`);
+            console.log(currentInputValue);
         }
     }
+
     checkToolsSetting();
 
     let timerTime = 0;
@@ -47,13 +53,15 @@ export const ToolsSearch = (props: ToolsSearchProps) => {
 
     return (
         <div className='tools-search'>
-            <input
-                className='tools-search__input'
-                type='text'
-                value={inputValue}
-                placeholder='Enter more then 3 characters'
-                onInput={searchInput} />
-            <SearchLogo />
+            
+                <input
+                    className='tools-search__input'
+                    type='text'
+                    value={inputValue}
+                    placeholder='Enter more then 3 characters'
+                    onInput={searchInput} />
+                <SearchLogo />
+            
         </div>
     )
 

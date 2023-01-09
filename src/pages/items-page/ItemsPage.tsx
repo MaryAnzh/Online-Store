@@ -5,7 +5,7 @@ import './ItemsPage.scss'
 import { ItemCard } from '../../components/simple/item-card/ItemCard';
 import { IItem } from '../../core/interfaces/catalog.interfaces';
 import { ShopState } from '../../core/state/ShopState'
-import { FilterType, SortType, ItemsQueryOptions, RangeType } from '../../core/types/tools.types';
+import { FilterType, SortType, ItemsQueryOptions, RangeType, RangeToolType } from '../../core/types/tools.types';
 import { IToolsProps, Tools } from '../../components/smart/tools/Tools';
 import { toolsModel, ModifyItemsType } from '../../core/model/toolsModel';
 import { usage } from 'yargs';
@@ -24,9 +24,7 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     let viewItems: 'card' | 'list' = 'card';
     let cardViewClass: 'active-view' | '' = 'active-view';
     let listViewClass: 'active-view' | '' = '';
-
-    // Проверяем есть ли в url строке квери параметры, если есть то записываем их в текучие параметры и рендерим
-    // меняем объект с параметрами в соответствии
+    
     const getCurrentParams = () => {
         let isParam = searchParams.toString() !== '';
         const settings = toolsModel.resetToolsSettings(toolsSetting);
@@ -70,7 +68,11 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
                             const values = param.split('-');
                             const min = +values[0];
                             const max = +values[1];
-                            range[key] = [min, max];
+                            const rangeTools: RangeToolType = {
+                                minValue: min,
+                                maxValue: max,
+                            };
+                            range[key] = rangeTools;
                         }
                     }
                 }
@@ -88,7 +90,6 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     }
     getCurrentParams();
 
-    //сортируем.фильтруем товары
     const modifyItems: ModifyItemsType = toolsModel.modifyItemsByParams(catalogItems, toolsSetting);
     const [prods, setProds] = useState(modifyItems.items);
 
