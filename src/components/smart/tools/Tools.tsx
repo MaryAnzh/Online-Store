@@ -6,6 +6,8 @@ import React, { useState } from 'react';
 import { FilterType, ItemsQueryOptions, SortType } from '../../../core/types/tools.types';
 import { ToolsSearch } from '../tools-search/ToolsSearch';
 import { ToolsRangeSlider } from '../tools-range-slider/ToolsRangeSlider';
+import { ReactComponent as CopyLogo } from '../../../assets/copy.svg';
+import { ReactComponent as CheckLogo } from '../../../assets/check.svg';
 
 export interface IToolsProps {
     items: IItem[],
@@ -21,8 +23,6 @@ type SelectViewType = {
 }
 
 export const Tools = (props: IToolsProps) => {
-    //инициализация
-    // переемные
     let toolsSettings: ItemsQueryOptions = props.toolsSetting;
     const allItems = props.items;
     const selectView: SelectViewType = {
@@ -38,7 +38,6 @@ export const Tools = (props: IToolsProps) => {
     const minInStock = Math.min.apply(null, allItems.map(el => el.stock));
     const maxInStock = Math.max.apply(null, allItems.map(el => el.stock));
 
-    //функции
     const checkFilters = (settings: ItemsQueryOptions, items: IItem[]) => {
         const filter: FilterType = settings.filter;
         const category = filter.category;
@@ -75,8 +74,6 @@ export const Tools = (props: IToolsProps) => {
         }
     }
 
-    //проверяем пустые ли параметры, если нет
-    //то подгоняем отображение под параметры
     const newView = () => {
         const modify = toolsModel.modifyItemsByParams(allItems, toolsSettings);
         for (const key in toolsSettings) {
@@ -92,13 +89,11 @@ export const Tools = (props: IToolsProps) => {
     newView();
 
 
-    //устанавливаем состояние отображения фильтров по категории и бренду
     const [categories, setCategories] = useState(selectView.categories);
     const [brands, setBrands] = useState(selectView.brands);
     const [priceValue, setPriceValue] = useState(selectView.price);
     const [stockValue, setStockValue] = useState(selectView.stock);
 
-    // рендеринг списков
     const categoriesFilter: JSX.Element[] = categories.map((name) =>
         <option
             key={name}
@@ -157,7 +152,14 @@ export const Tools = (props: IToolsProps) => {
         setStockValue('select');
     }
 
+    let isSettingsCopy = false;
+    const [copyView, setCoptView] = useState(<CopyLogo />);
     const copySettingsOnClick = () => {
+        if (!isSettingsCopy) {
+            isSettingsCopy = true;
+            setCoptView(<CheckLogo />);
+        }
+
         const param = window.location.href;
         navigator.clipboard.writeText(param);
     }
@@ -181,14 +183,20 @@ export const Tools = (props: IToolsProps) => {
                 <div className='tools__visible__info'>
                     <h4 className='tools__visible__info__title'>Tools</h4>
                     <div className='tools__visible__info__settings'>
-                        <button
+                        <div
                             onClick={copySettingsOnClick}
-                            className='tools__visible__info__setting__copy'>
-                            copy</button>
+                            className='tools__visible__info__settings__copy'>
+                            <span>copy</span>
+                            <div className='tools__visible__info__settings__copy__icon'>
+                                {copyView}
+                            </div>
+
+                        </div>
                         <button
                             onClick={resetToolsOnClick}
-                            className='tools__visible__info__setting__reset'>
-                            reset</button>
+                            className='tools__visible__info__settings__reset'>
+                            reset
+                        </button>
                     </div>
                 </div>
                 <div className='tools__visible__search-wrap'>

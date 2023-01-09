@@ -24,9 +24,7 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     let viewItems: 'card' | 'list' = 'card';
     let cardViewClass: 'active-view' | '' = 'active-view';
     let listViewClass: 'active-view' | '' = '';
-
-    // Проверяем есть ли в url строке квери параметры, если есть то записываем их в текучие параметры и рендерим
-    // меняем объект с параметрами в соответствии
+    
     const getCurrentParams = () => {
         let isParam = searchParams.toString() !== '';
         const settings = toolsModel.resetToolsSettings(toolsSetting);
@@ -92,7 +90,6 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     }
     getCurrentParams();
 
-    //сортируем.фильтруем товары
     const modifyItems: ModifyItemsType = toolsModel.modifyItemsByParams(catalogItems, toolsSetting);
     const [prods, setProds] = useState(modifyItems.items);
 

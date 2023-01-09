@@ -100,7 +100,7 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
             }
 
             const minPos = 0;
-            const maxPos = currentRunnerRightPos - 10;
+            const maxPos = currentRunnerRightPos;
             let position = leftRunnerDrag.startRunnerPos + (e.clientX - leftRunnerDrag.cursorStartPos);
             if (position < minPos) {
                 position = minPos;

@@ -36,6 +36,57 @@
                 display: flex;
                 justify-content: space-between;
 
+                &__copy {
+                    height: 20px;
+                    display: flex;
+                    align-items: flex-ends;
+
+                    span {
+                        transform: translateY(2px);
+                    }
+
+                    &__icon {
+                        width: 20px;
+                        height: 20px;
+                        margin-left: 10px;
+                        cursor: pointer;
+
+                        .copy-logo {
+                            .copy-logo__top {
+                                fill: none;
+                                stroke: $usual-text-color;
+                                stroke-miterlimit: 10;
+                            }
+
+                            .copy-logo__bottom {
+                                fill: none;
+                                stroke: $usual-text-color;
+                                stroke-linecap: round;
+                                stroke-linejoin: round;
+                                stroke-miterlimit: 10;
+                            }
+                        }
+
+                        .check-logo {
+                            .check-logo__path {
+                                fill: none;
+                                stroke: $contrast-color;
+                                stroke-width: 2;
+                                stroke-linecap: round;
+                                stroke-linejoin: round;
+                                stroke-miterlimit: 10;
+                            }
+
+                        }
+
+                        &:active {
+                            transform: scale(1.25);
+                        }
+                    }
+
+
+                }
+
                 button {
                     padding: 2px 5px;
                     font-size: 16px;
