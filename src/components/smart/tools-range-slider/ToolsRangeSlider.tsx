@@ -31,16 +31,13 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
     const tool = props.toolsSetting.range[toolsName];
     let rangeSettings: RangeToolType = tool !== null
         ? tool : { minValue: min, maxValue: max };
+    let isDrag = false;
 
     const convertPXToValue = (px: number): number => {
         return Math.round(((sliderRange / 100) * (px / (sliderWidth / 100))) + +min);
     }
     const convertValueToPx = (value: number): number => {
         return Math.round(((value - +min) / (sliderRange / 100)) * (sliderWidth / 100));
-    }
-
-    const convertPXToValueWithCorrect = (px: number): number => {
-        return Math.round(((sliderRange / 100) * ((px + (runnerRadius * 2)) / (sliderWidth / 100))) + +min);
     }
 
     let currentRunnerLeftPos = convertValueToPx(min);
@@ -96,6 +93,7 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
 
     const runnerMouseMove = (e: MouseEvent) => {
         if (leftRunnerDrag.isMouseDown) {
+            isDrag = true;
             if (leftRunnerDrag.cursorStartPos === null) {
                 leftRunnerDrag.cursorStartPos = e.clientX;
                 leftRunnerDrag.isDrag = true;
@@ -121,6 +119,7 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
         }
 
         if (rightRunnerDrag.isMouseDown) {
+            isDrag = true;
             if (rightRunnerDrag.cursorStartPos === null) {
                 rightRunnerDrag.cursorStartPos = e.clientX;
                 rightRunnerDrag.isDrag = true;
@@ -146,13 +145,13 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
         }
     }
 
-    const runnerMouseUp = (e: MouseEvent) => {
+    const dragEnd = () => {
         if (changingRunner === 'left') {
             rangeSettings.minValue = convertPXToValue(leftRunnerDrag.currentRunnerPos);
         }
         if (changingRunner === 'right') {
             rangeSettings.maxValue = convertPXToValue(rightRunnerDrag.currentRunnerPos);
-          }
+        }
         if (rangeSettings.minValue === min && rangeSettings.maxValue === max) {
             props.toolsSetting.range[toolsName] = null;
         } else {
@@ -166,6 +165,19 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
         window.removeEventListener('mousemove', runnerMouseMove);
         window.removeEventListener('mouseup', runnerMouseUp);
     }
+
+    const runnerMouseUp = (e: MouseEvent) => {
+        if (isDrag) {
+            dragEnd();
+            isDrag = false;
+        }
+    }
+
+    const sliderMouseLeave = () => {
+        dragEnd();
+        isDrag = false;
+    }
+
 
     const runnerMouseDown = (e: React.MouseEvent) => {
         const elem = e.target as HTMLElement;
@@ -185,7 +197,9 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
     };
 
     return (
-        <div className='range-slider'>
+        <div
+            className='range-slider'
+            onMouseLeave={sliderMouseLeave}>
             <div className='range-slider__input'>
                 <div
                     className='range-slider__input__runner-left'
