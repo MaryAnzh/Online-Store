@@ -196,6 +196,22 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
         window.addEventListener('mouseup', runnerMouseUp);
     };
 
+    React.useEffect(() => {
+        if (props.toolsSetting.range[toolsName] === null) {
+            leftRunnerStyle = {
+                marginLeft: `${currentRunnerLeftPos}px`,
+            };
+            setLeftRunnerPosX(leftRunnerStyle);
+
+            rightRunnerStyle = {
+                marginLeft: `${currentRunnerRightPos}px`,
+            };
+            setRightRunnerPosX(rightRunnerStyle);
+            setMaxCount(max);
+            setMinCount(min);
+        }
+    }, [props.toolsSetting]);
+
     return (
         <div
             className='range-slider'
