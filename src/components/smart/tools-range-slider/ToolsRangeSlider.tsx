@@ -137,8 +137,6 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
             }
             rightRunnerDrag.currentRunnerPos = position;
             let num = convertPXToValue(position);
-            console.log('num');
-            console.log(num);
             setMaxCount(num);
             rightRunnerStyle = {
                 marginLeft: `${position}px`,
@@ -154,9 +152,7 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
         }
         if (changingRunner === 'right') {
             rangeSettings.maxValue = convertPXToValue(rightRunnerDrag.currentRunnerPos);
-            console.log(' rangeSettings.maxValue');
-            console.log(rangeSettings.maxValue);
-        }
+          }
         if (rangeSettings.minValue === min && rangeSettings.maxValue === max) {
             props.toolsSetting.range[toolsName] = null;
         } else {

@@ -106,8 +106,11 @@ class ToolsModel {
             if (key === 'search') {
                 const v = setting[key];
                 if (v !== null) {
+                    v.toLowerCase();
+
                     urlParams.push([`${key}`, v]);
-                    const searchItems = items.filter(el => el.brand.indexOf(v) > -1 || el.category.indexOf(v) > -1 || el.description.indexOf(v) > -1 || el.title.indexOf(v) > -1
+                    const searchItems = items.filter(el => el.brand.toLowerCase().indexOf(v) > -1 || el.category.toLowerCase().indexOf(v) > -1
+                        || el.description.toLowerCase().indexOf(v) > -1 || el.title.toLowerCase().indexOf(v) > -1
                         || el.price.toString() === v || el.stock.toString() === v);
                     items = searchItems;
                 }
