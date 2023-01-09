@@ -70,8 +70,8 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
     const rightRunnerDrag: ElemDragType = {
         isMouseDown: false,
         isDrag: false,
-        startRunnerPos: sliderWidth - runnerRadius * 2,
-        currentRunnerPos: sliderWidth - runnerRadius * 2,
+        startRunnerPos: sliderWidth,
+        currentRunnerPos: sliderWidth,
         cursorStartPos: null,
     }
 
@@ -100,7 +100,7 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
             }
 
             const minPos = 0;
-            const maxPos = currentRunnerRightPos;
+            const maxPos = currentRunnerRightPos - 10;
             let position = leftRunnerDrag.startRunnerPos + (e.clientX - leftRunnerDrag.cursorStartPos);
             if (position < minPos) {
                 position = minPos;

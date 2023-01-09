@@ -106,12 +106,12 @@ class ToolsModel {
             if (key === 'search') {
                 const v = setting[key];
                 if (v !== null) {
-                    v.toLowerCase();
+                    const nv = v.toLowerCase();
 
-                    urlParams.push([`${key}`, v]);
-                    const searchItems = items.filter(el => el.brand.toLowerCase().indexOf(v) > -1 || el.category.toLowerCase().indexOf(v) > -1
-                        || el.description.toLowerCase().indexOf(v) > -1 || el.title.toLowerCase().indexOf(v) > -1
-                        || el.price.toString() === v || el.stock.toString() === v);
+                    urlParams.push([`${key}`, nv]);
+                    const searchItems = items.filter(el => el.brand.toLowerCase().indexOf(nv) > -1 || el.category.toLowerCase().indexOf(nv) > -1
+                        || el.description.toLowerCase().indexOf(nv) > -1 || el.title.toLowerCase().indexOf(nv) > -1
+                        || el.price.toString() === nv || el.stock.toString() === nv);
                     items = searchItems;
                 }
             }
