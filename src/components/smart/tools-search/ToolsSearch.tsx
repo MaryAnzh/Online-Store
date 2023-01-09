@@ -56,7 +56,7 @@ export const ToolsSearch = (props: ToolsSearchProps) => {
             <input
                 className='tools-search__input'
                 type='text'
-                value={currentInputValue}
+                value={inputValue}
                 placeholder='Enter more then 3 characters'
                 onInput={searchInput} />
             <SearchLogo />
