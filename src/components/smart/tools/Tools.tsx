@@ -39,6 +39,8 @@ export const Tools = (props: IToolsProps) => {
     const maxInStock = Math.max.apply(null, allItems.map(el => el.stock));
     let isSettingsCopy = false;
     let copyButtonLogo = <CopyLogo />
+    const resetSToolsObject = toolsModel.resetToolsSettings(toolsSettings);
+    let resetSettings = false;
 
     const checkFilters = (settings: ItemsQueryOptions, items: IItem[]) => {
         const filter: FilterType = settings.filter;
@@ -170,7 +172,7 @@ export const Tools = (props: IToolsProps) => {
         isSettingsCopy = false;
     }
 
-    const [settings, setSettings] = useState(toolsSettings);
+    const [settings, setSettings] = useState(false);
     const resetToolsOnClick = () => {
         const settings: ItemsQueryOptions = toolsModel.resetToolsSettings(toolsSettings);
         toolsSettings = settings;
@@ -182,6 +184,7 @@ export const Tools = (props: IToolsProps) => {
         setStockValue('select');
         setCoptView(<CopyLogo />);
         isSettingsCopy = false;
+        setSettings(true);
     }
 
     return (
@@ -198,7 +201,6 @@ export const Tools = (props: IToolsProps) => {
                             <div className='tools__visible__info__settings__copy__icon'>
                                 {copyView}
                             </div>
-
                         </div>
                         <button
                             onClick={resetToolsOnClick}
@@ -208,7 +210,10 @@ export const Tools = (props: IToolsProps) => {
                     </div>
                 </div>
                 <div className='tools__visible__search-wrap'>
-                    <ToolsSearch toolsSetting={toolsSettings} modifyItems={modifyItemsFromChild} />
+                    {settings ?
+                        <ToolsSearch toolsSetting={resetSToolsObject} modifyItems={modifyItemsFromChild} />
+                        :
+                        <ToolsSearch toolsSetting={toolsSettings} modifyItems={modifyItemsFromChild} />}
                 </div>
             </div>
             <div className='tools__selects-wrap'>
