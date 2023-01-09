@@ -40,11 +40,11 @@ export const ItemCard = observer((props: ItemTypeProps): JSX.Element => {
             </div>
             <Link to={`/products-id/${props.item.id}`}>
                 <div className={`${prefix}__info`}>
-                    <h5 className={'${prefix}__info__category'}>
+                    <h5 className={`${prefix}__info__category`}>
                         {props.item.category}
                     </h5>
-                    <h4 className="item-card__info__title">
-                        {props.item.title}
+                    <h4 className={`${prefix}__info__title`}>
+                                  {props.item.title}
                     </h4>
                     <h5 className="item-card__info__brand">
                         Brand: <span>{props.item.brand}</span>
