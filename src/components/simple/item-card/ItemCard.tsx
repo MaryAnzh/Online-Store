@@ -32,13 +32,13 @@ export const ItemCard = observer((props: ItemTypeProps): JSX.Element => {
             <div className={`${prefix}__in-stock`}>Stock: {props.item.stock}</div>
 
             <div className={`${prefix}__image-wrap`}>
-                <Link to={`/products/${props.item.id}`} className="item-card__image-wrap__link">
+                <Link to={`/products-id/${props.item.id}`} className="item-card__image-wrap__link">
                     <img
                         className="item-card__image-wrap__link__image"
                         src={props.item.thumbnail} alt={props.item.title} />
                 </Link>
             </div>
-            <Link to={`/products/${props.item.id}`}>
+            <Link to={`/products-id/${props.item.id}`}>
                 <div className={`${prefix}__info`}>
                     <h5 className={'${prefix}__info__category'}>
                         {props.item.category}
