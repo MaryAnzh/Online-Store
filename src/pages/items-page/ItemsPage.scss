@@ -10,7 +10,6 @@
     }
 }
 
-
 .catalog {
     animation-timing-function: ease-in-out;
     animation-name: catalogAppears;
@@ -44,6 +43,7 @@
 
             @media (max-width: 730px) {
                 position: relative;
+                padding: 10px 15px;
 
                 &::before {
                     content: '';
@@ -69,6 +69,10 @@
                     font-weight: 700;
                     font-size: 3em;
                     line-height: 1.5em;
+
+                    @media (max-width: 500px) {
+                        font-size: 2em;
+                    }
                 }
 
                 &__text {
