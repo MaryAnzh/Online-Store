@@ -10,8 +10,13 @@ export type SortType = {
 }
 
 export type RangeType = {
-    rangePrice: [number, number] | null,
-    rangeStock: [number, number] | null,
+    rangePrice: RangeToolType | null,
+    rangeStock: RangeToolType | null,
+}
+
+export type RangeToolType = {
+    minValue: number,
+    maxValue: number,
 }
 
 export type ItemsQueryOptions = {

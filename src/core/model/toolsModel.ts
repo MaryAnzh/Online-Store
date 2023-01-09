@@ -149,8 +149,8 @@ class ToolsModel {
                     const v = range[objKey];
                     if (v !== null) {
                         const itemsKey = objKey === 'rangePrice' ? 'price' : 'stock';
-                        const min = v[0];
-                        const max = v[1];
+                        const min = v.minValue;
+                        const max = v.maxValue;
                         const rangeArr = this.rangeItems(itemsKey, min, max, items);
 
                         items = rangeArr;
@@ -160,6 +160,7 @@ class ToolsModel {
                 }
             }
         }
+
         const view = setting.itemsView;
         if (view !== undefined) {
             const v = view;

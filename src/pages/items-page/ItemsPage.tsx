@@ -5,7 +5,7 @@ import './ItemsPage.scss'
 import { ItemCard } from '../../components/simple/item-card/ItemCard';
 import { IItem } from '../../core/interfaces/catalog.interfaces';
 import { ShopState } from '../../core/state/ShopState'
-import { FilterType, SortType, ItemsQueryOptions, RangeType } from '../../core/types/tools.types';
+import { FilterType, SortType, ItemsQueryOptions, RangeType, RangeToolType } from '../../core/types/tools.types';
 import { IToolsProps, Tools } from '../../components/smart/tools/Tools';
 import { toolsModel, ModifyItemsType } from '../../core/model/toolsModel';
 import { usage } from 'yargs';
@@ -70,7 +70,11 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
                             const values = param.split('-');
                             const min = +values[0];
                             const max = +values[1];
-                            range[key] = [min, max];
+                            const rangeTools: RangeToolType = {
+                                minValue: min,
+                                maxValue: max,
+                            };
+                            range[key] = rangeTools;
                         }
                     }
                 }
