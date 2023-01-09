@@ -37,6 +37,8 @@ export const Tools = (props: IToolsProps) => {
     const maxPrice = Math.max.apply(null, allItems.map(el => el.price));
     const minInStock = Math.min.apply(null, allItems.map(el => el.stock));
     const maxInStock = Math.max.apply(null, allItems.map(el => el.stock));
+    let isSettingsCopy = false;
+    let copyButtonLogo = <CopyLogo />
 
     const checkFilters = (settings: ItemsQueryOptions, items: IItem[]) => {
         const filter: FilterType = settings.filter;
@@ -111,9 +113,23 @@ export const Tools = (props: IToolsProps) => {
             </option>)
     });
 
+    const [copyView, setCoptView] = useState(copyButtonLogo);
+    const copySettingsOnClick = () => {
+        if (!isSettingsCopy) {
+            isSettingsCopy = true;
+            copyButtonLogo = <CheckLogo />;
+            setCoptView(copyButtonLogo);
+        }
+
+        const param = window.location.href;
+        navigator.clipboard.writeText(param);
+    }
+
     const setItemsData = () => {
         const modifyData: ModifyItemsType = toolsModel.modifyItemsByParams(allItems, toolsSettings);
         props.setItems(modifyData.items, modifyData.urlParams);
+        isSettingsCopy = false;
+        setCoptView(<CopyLogo />);
     }
 
     const filterItemsOnChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -150,18 +166,8 @@ export const Tools = (props: IToolsProps) => {
         setCategories(selectView.categories);
         setPriceValue('select');
         setStockValue('select');
-    }
-
-    let isSettingsCopy = false;
-    const [copyView, setCoptView] = useState(<CopyLogo />);
-    const copySettingsOnClick = () => {
-        if (!isSettingsCopy) {
-            isSettingsCopy = true;
-            setCoptView(<CheckLogo />);
-        }
-
-        const param = window.location.href;
-        navigator.clipboard.writeText(param);
+        setCoptView(<CopyLogo />);
+        isSettingsCopy = false;
     }
 
     const [settings, setSettings] = useState(toolsSettings);
@@ -174,6 +180,8 @@ export const Tools = (props: IToolsProps) => {
         setCategories(selectView.categories);
         setPriceValue('select');
         setStockValue('select');
+        setCoptView(<CopyLogo />);
+        isSettingsCopy = false;
     }
 
     return (
