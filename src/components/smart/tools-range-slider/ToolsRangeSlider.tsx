@@ -77,6 +77,7 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
 
     let leftRunnerStyle = {
         marginLeft: `${currentRunnerLeftPos}px`,
+        zIndex: '1',
     };
     const [leftRunnerPosX, setLeftRunnerPosX] = useState(leftRunnerStyle);
 
@@ -91,6 +92,7 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
         dragObj.cursorStartPos = 0;
     }
 
+    let isLeftRunnerUnderRightRunner = false;
     const runnerMouseMove = (e: MouseEvent) => {
         if (leftRunnerDrag.isMouseDown) {
             isDrag = true;
@@ -109,9 +111,20 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
                 position = maxPos;
             }
             leftRunnerDrag.currentRunnerPos = position;
-            leftRunnerStyle = {
-                marginLeft: `${position}px`,
-            };
+
+            if (position >= (maxPos - runnerRadius * 2)) {
+                leftRunnerStyle = {
+                    marginLeft: `${position}px`,
+                    zIndex: '4',
+                };
+            } 
+            if(position < (maxPos - runnerRadius * 2)) {
+                leftRunnerStyle = {
+                    marginLeft: `${position}px`,
+                    zIndex: '1',
+                };
+            }
+
             setLeftRunnerPosX(leftRunnerStyle);
             let num = convertPXToValue(position);
             setMinCount(num);
@@ -200,6 +213,7 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
         if (props.toolsSetting.range[toolsName] === null) {
             leftRunnerStyle = {
                 marginLeft: `${currentRunnerLeftPos}px`,
+                zIndex: '1',
             };
             setLeftRunnerPosX(leftRunnerStyle);
 
@@ -214,8 +228,7 @@ export const ToolsRangeSlider = (props: RangeSliderType) => {
 
     return (
         <div
-            className='range-slider'
-            onMouseLeave={sliderMouseLeave}>
+            className='range-slider'>
             <div className='range-slider__input'>
                 <div
                     className='range-slider__input__runner-left'
