@@ -218,11 +218,19 @@
                     .active-view {
                         background: gray;
                         color: white;
+                        pointer-events: none;
                     }
 
                     button {
                         margin-left: 10px;
-                        padding: 10px;
+                        padding: 5px 10px;
+                        cursor: pointer;
+                        border-radius: 3px;
+                        transition: .3s;
+
+                        &:hover {
+                            box-shadow: 2px 2px 5px rgba($color: gray, $alpha: 0.3);
+                        }
                     }
                 }
             }
