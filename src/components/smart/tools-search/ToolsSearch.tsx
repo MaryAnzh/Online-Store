@@ -53,13 +53,15 @@ export const ToolsSearch = (props: ToolsSearchProps) => {
 
     return (
         <div className='tools-search'>
-            <input
-                className='tools-search__input'
-                type='text'
-                value={inputValue}
-                placeholder='Enter more then 3 characters'
-                onInput={searchInput} />
-            <SearchLogo />
+            
+                <input
+                    className='tools-search__input'
+                    type='text'
+                    value={inputValue}
+                    placeholder='Enter more then 3 characters'
+                    onInput={searchInput} />
+                <SearchLogo />
+            
         </div>
     )
 

@@ -4,7 +4,7 @@ import { toolsModel, ModifyItemsType } from '../../../core/model/toolsModel';
 import { ParamKeyValuePair, useSearchParams } from 'react-router-dom';
 import React, { useState } from 'react';
 import { FilterType, ItemsQueryOptions, SortType } from '../../../core/types/tools.types';
-import { ToolsSearch } from '../tools-search/ToolsSearch';
+import { ReactComponent as SearchLogo } from '../../../assets/search.svg';
 import { ToolsRangeSlider } from '../tools-range-slider/ToolsRangeSlider';
 import { ReactComponent as CopyLogo } from '../../../assets/copy.svg';
 import { ReactComponent as CheckLogo } from '../../../assets/check.svg';
@@ -39,8 +39,7 @@ export const Tools = (props: IToolsProps) => {
     const maxInStock = Math.max.apply(null, allItems.map(el => el.stock));
     let isSettingsCopy = false;
     let copyButtonLogo = <CopyLogo />
-    const resetSToolsObject = toolsModel.resetToolsSettings(toolsSettings);
-    let resetSettings = false;
+    let currentInputValue = '';
 
     const checkFilters = (settings: ItemsQueryOptions, items: IItem[]) => {
         const filter: FilterType = settings.filter;
@@ -78,6 +77,18 @@ export const Tools = (props: IToolsProps) => {
         }
     }
 
+    const CheckSearch = () => {
+        const search: string | null = toolsSettings.search;
+        console.log(`search = ${props.toolsSetting.search}`);
+        if (search !== null) {
+            currentInputValue = search;
+        } else {
+            currentInputValue = '';
+            console.log(`search = ${props.toolsSetting.search} отработал`);
+            console.log(currentInputValue);
+        }
+    }
+
     const newView = () => {
         const modify = toolsModel.modifyItemsByParams(allItems, toolsSettings);
         for (const key in toolsSettings) {
@@ -89,6 +100,7 @@ export const Tools = (props: IToolsProps) => {
                 checkSort(toolsSettings);
             }
         }
+        CheckSearch();
     }
     newView();
 
@@ -172,6 +184,31 @@ export const Tools = (props: IToolsProps) => {
         isSettingsCopy = false;
     }
 
+    let timerTime = 0;
+    let timer: NodeJS.Timer;
+    const [inputValue, setInputValue] = useState(currentInputValue);
+
+    const searchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        clearInterval(timer);
+        const value = e.target.value;
+        setInputValue(value);
+        timer = setInterval(() => {
+            if (timerTime < 1000) {
+                timerTime += 100;
+            } else {
+                timerTime = 0;
+                if (value.length > 2) {
+                    toolsSettings.search = value;
+                    modifyItemsFromChild(props.toolsSetting);
+                }
+                if (value === '') {
+                    toolsSettings.search = null;
+                    modifyItemsFromChild(props.toolsSetting);
+                }
+                clearInterval(timer);
+            }
+        }, 100);
+    }
     const [settings, setSettings] = useState(false);
     const resetToolsOnClick = () => {
         const settings: ItemsQueryOptions = toolsModel.resetToolsSettings(toolsSettings);
@@ -185,6 +222,7 @@ export const Tools = (props: IToolsProps) => {
         setCoptView(<CopyLogo />);
         isSettingsCopy = false;
         setSettings(true);
+        setInputValue('');
     }
 
     return (
@@ -210,10 +248,15 @@ export const Tools = (props: IToolsProps) => {
                     </div>
                 </div>
                 <div className='tools__visible__search-wrap'>
-                    {settings ?
-                        <ToolsSearch toolsSetting={resetSToolsObject} modifyItems={modifyItemsFromChild} />
-                        :
-                        <ToolsSearch toolsSetting={toolsSettings} modifyItems={modifyItemsFromChild} />}
+                    <div className='tools-search'>
+                        <input
+                            className='tools-search__input'
+                            type='text'
+                            value={inputValue}
+                            placeholder='Enter more then 3 characters'
+                            onInput={searchInput} />
+                        <SearchLogo />
+                    </div>
                 </div>
             </div>
             <div className='tools__selects-wrap'>
