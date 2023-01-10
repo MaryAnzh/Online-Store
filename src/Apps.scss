@@ -1,0 +1,37 @@
+@import 'style/utils/reset';
+@import 'style/utils/variable';
+
+html {
+    overflow-x: hidden;
+    margin-right: calc(-1 * (100vw - 100%));
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(180deg, rgba(245, 245, 245, 0) 1.04%, #F5F5F5 100%);
+
+}
+
+body * {
+    font-family: 'Roboto', sans-serif;
+}
+
+.wrapper {
+    width: 100vw;
+    min-height: 100vh;
+    height: fit-content;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__main {
+        width: 100%;
+        min-height: 86vh;
+        height: fit-content;
+        display: flex;
+        justify-content: center
+    }
+}
+
+@import './style/common/button';

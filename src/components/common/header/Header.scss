@@ -1,0 +1,112 @@
+@import '../../../style/utils/variable';
+
+.header {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+
+    &__wrapper {
+        width: 100%;
+        max-width: 1200px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        &__catalog {
+            width: 160px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            transition: .3s;
+
+            &__logo {
+                font-size: 2em;
+                font-weight: bold;
+                display: flex;
+                align-items: flex-end;
+                margin-right: 25px;
+            }
+
+            &__link {
+                font-family: 'SF Pro Display', sans-serif;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 1.2em;
+                line-height: 24px;
+                color: $main-font-color;
+                transition: .3s;
+
+                &:hover {
+                    color: $primary-blue;
+                }
+            }
+        }
+
+        &__cart {
+            padding: 8px 16px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border-radius: 2px;
+            border: 1px solid $primary-blue;
+            background: #FFFFFF;
+            cursor: pointer;
+            transition: .3s all;
+            color: $primary-blue;
+
+            &__icon {
+                width: 15px;
+                height: 17px;
+                display: flex;
+                align-items: center;
+                margin-right: 4px;
+
+                svg {
+                    width: 100%;
+                    fill: $primary-blue;
+                }
+            }
+
+            a {
+                font-family: 'SF Pro Display', sans-serif;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 1em;
+                line-height: 24px;
+                color: $contrast-color;
+            }
+
+            &__count {
+                color: $contrast-color;
+            }
+
+            &:hover {
+                background-color: $primary-blue;
+                color: white;
+
+                a {
+                    color: white;
+                }
+
+                svg {
+                    fill: white;
+                }
+
+                p {
+                    color: white;
+                }
+            }
+
+            &:active {
+                transform: scale(0.9);
+            }
+        }
+    }
+}
+
+.active {
+    color: red;
+}

@@ -1,0 +1,32 @@
+.cartItemsList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-right: 30px;
+  animation-duration: 0.2s;
+  animation-name: cartItemsListAppears;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes cartItemsListAppears {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@media (max-width: 768px) {
+  .cartItemsList {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 639px) {
+  .cartItemsList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+  }
+}

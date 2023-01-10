@@ -1,0 +1,82 @@
+@import "../../style/utils/variable";
+
+.wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, .4);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  overflow-y: auto;
+
+}
+
+.dialog {
+  margin: auto;
+  background-color: #FFF;
+  padding: 30px 35px 31px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  max-width: 780px;
+  width: 100%;
+
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in-out;
+  animation-name: modalAppears;
+
+  position: relative;
+
+
+}
+
+.close {
+  position: absolute;
+  right: 30px;
+  top: 10px;
+  outline: none;
+  background-color: transparent;
+  font-weight: 400;
+  color: $red-accent-color;
+  cursor: pointer;
+  font-size: 50px;
+
+}
+
+.title {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  color: #000000;
+
+  margin-bottom: 20px;
+}
+
+@keyframes modalAppears {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 790px) {
+  .dialog {
+    width: 95%;
+  }
+}

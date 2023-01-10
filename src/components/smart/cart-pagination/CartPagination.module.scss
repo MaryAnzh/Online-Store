@@ -1,0 +1,111 @@
+@import "../../../style/utils/variable";
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 15px;
+  width: 100%;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+.limit {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-right: 10px;
+  border-right: 1px solid rgba(0, 0, 0, .1);
+  margin-right: 15px;
+}
+
+.limitTitle {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 32px;
+  margin-right: 10px;
+  color: #8C8C8C;
+}
+.limitInput {
+  padding: 3px 15px;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  margin-right: 10px;
+  color: $primary-black;
+  outline: none;
+  background: #FFFFFF;
+  border: 1px solid #D9D9D9;
+  border-radius: 2px;
+}
+.page {
+  display: flex;
+  align-items: center;
+}
+.pageTitle {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 32px;
+  margin-right: 15px;
+  color: #8C8C8C;
+}
+.pageButton {
+  background-color: $primary-blue;
+  color: white;
+  border-radius: 7px;
+  width: 30px;
+  height: 30px;
+  font-weight: 700;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  transition: 0.2s all;
+  user-select: none;
+
+  &:active {
+    transform: scale(0.8);
+    border-radius: 100%;
+  }
+}
+.pageNumber {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-weight: 700;
+  font-size: 20px;
+  min-width: 35px;
+  text-align: center;
+  user-select: none;
+  font-family: 'SF Pro Display', sans-serif;
+}
+
+@media (max-width: 400px) {
+  .limit {
+    margin-right: 5px;
+  }
+
+  .limitInput {
+    margin-right: 3px;
+  }
+
+  .pageNumber {
+    margin-right: 2px;
+    margin-left: 2px;
+  }
+
+  .pageTitle {
+    margin-right: 7px;
+    font-size: 15px;
+  }
+
+  .limitTitle {
+    font-size: 15px;
+  }
+}

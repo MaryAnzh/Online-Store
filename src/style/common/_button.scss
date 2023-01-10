@@ -1,0 +1,35 @@
+@import "../utils/variable";
+
+.blue-button {
+    width: 163px;
+    height: 40px;
+    background: $primary-blue;
+    border-radius: 2px;
+
+    font-family: 'SF Pro Display', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: white;
+    cursor: pointer;
+    transition: .3s;
+    padding: 0px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+        width: 15px;
+        margin-right: 5px;
+        fill: white
+    }
+
+    &:hover {
+        background: $contrast-color-hover;
+    }
+
+    &:active {
+        transform: scale(0.8);
+    }
+}
