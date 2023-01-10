@@ -18,9 +18,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            transition: .3s;
 
             &__logo {
-                font-size: 30px;
+                font-size: 2em;
                 font-weight: bold;
                 display: flex;
                 align-items: flex-end;
@@ -103,8 +105,6 @@
             }
         }
     }
-
-
 }
 
 .active {

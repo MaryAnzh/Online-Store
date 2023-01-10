@@ -10,7 +10,6 @@
     }
 }
 
-
 .catalog {
     animation-timing-function: ease-in-out;
     animation-name: catalogAppears;
@@ -44,6 +43,7 @@
 
             @media (max-width: 730px) {
                 position: relative;
+                padding: 10px 15px;
 
                 &::before {
                     content: '';
@@ -60,6 +60,7 @@
             &__info {
                 max-width: 1050px;
                 width: 100%;
+                border-radius: 7px;
                 padding: 10px;
                 color: $main-font-color;
                 z-index: 2;
@@ -69,6 +70,10 @@
                     font-weight: 700;
                     font-size: 3em;
                     line-height: 1.5em;
+
+                    @media (max-width: 500px) {
+                        font-size: 2em;
+                    }
                 }
 
                 &__text {
@@ -213,11 +218,19 @@
                     .active-view {
                         background: gray;
                         color: white;
+                        pointer-events: none;
                     }
 
                     button {
                         margin-left: 10px;
-                        padding: 10px;
+                        padding: 5px 10px;
+                        cursor: pointer;
+                        border-radius: 3px;
+                        transition: .3s;
+
+                        &:hover {
+                            box-shadow: 2px 2px 5px rgba($color: gray, $alpha: 0.3);
+                        }
                     }
                 }
             }

@@ -165,14 +165,36 @@
 
     &__image-wrap {
         display: none;
-        // height: 80px;
-
-        // img {
-        //     height: 100%;
-        // }
     }
 
     &__info {
         width: 100%;
+        border-radius: 7px;
+
+        &__category {
+            font-size: 18px;
+            font-weight: 400;
+
+            &::before {
+                content: "Category: ";
+                font-size: 18px;
+                font-weight: 500;
+                padding-right: 10px;
+            }
+        }
+
+        &__title {
+            padding-bottom: 10px;
+            font-weight: 500;
+            font-size: 1.6em;
+            line-height: 32px;
+            font-family: 'Roboto', sans-serif;
+
+            &::first-letter {
+                text-transform: uppercase;
+            }
+        }
     }
+
+
 }

@@ -19,8 +19,6 @@ export const catalog: ICatalog = JSON.parse(`{
             "category": "smartphones",
             "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
             "images": [
-                "https://i.dummyjson.com/data/products/1/1.jpg",
-                "https://i.dummyjson.com/data/products/1/2.jpg",
                 "https://i.dummyjson.com/data/products/1/3.jpg",
                 "https://i.dummyjson.com/data/products/1/4.jpg",
                 "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
@@ -56,9 +54,11 @@ export const catalog: ICatalog = JSON.parse(`{
             "stock": 36,
             "brand": "Samsung",
             "category": "smartphones",
-            "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-            "images": [
-                "https://i.dummyjson.com/data/products/3/1.jpg"
+            "thumbnail": "https://github.com/MaryAnzh/Online-Store/blob/develop/src/assets/data-img/id3-01.png?raw=true",
+            "images": [                
+                "https://raw.githubusercontent.com/MaryAnzh/Online-Store/develop/src/assets/data-img/id3-02.png",
+                "https://github.com/MaryAnzh/Online-Store/blob/develop/src/assets/data-img/id3-01.png?raw=true"
+
             ]
         },
         {
