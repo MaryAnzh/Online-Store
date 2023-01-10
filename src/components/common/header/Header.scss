@@ -14,7 +14,7 @@
         align-items: flex-end;
 
         &__catalog {
-            width: 160px;
+            width: 220px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -45,6 +45,7 @@
         }
 
         &__cart {
+            width: fit-content;
             padding: 8px 16px;
             height: 40px;
             display: flex;
@@ -80,6 +81,7 @@
             }
 
             &__count {
+                width: max-content;
                 color: $contrast-color;
             }
 

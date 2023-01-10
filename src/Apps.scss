@@ -25,12 +25,14 @@ body * {
     flex-direction: column;
     justify-content: space-between;
 
+
     &__main {
         width: 100%;
         min-height: 86vh;
         height: fit-content;
         display: flex;
-        justify-content: center
+        flex-direction: column;
+        align-items: center;
     }
 }
 

@@ -24,7 +24,7 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     let viewItems: 'card' | 'list' = 'card';
     let cardViewClass: 'active-view' | '' = 'active-view';
     let listViewClass: 'active-view' | '' = '';
-    
+
     const getCurrentParams = () => {
         let isParam = searchParams.toString() !== '';
         const settings = toolsModel.resetToolsSettings(toolsSetting);
@@ -136,6 +136,8 @@ export const ItemsPage = (props: IItemsPageProps): JSX.Element => {
     return (
         <section className='catalog'>
             <div className='catalog__wrap'>
+                <a className="catalog__wrap__pr" href='https://github.com/MaryAnzh/Online-Store/pull/79' target={'_blank'}>PR Task Link: https://github.com/MaryAnzh/Online-Store/pull/79</a>
+
                 <section className='catalog__wrap__info-wrap'>
                     <div className='catalog__wrap__info-wrap__info'>
                         <h3 className='catalog__wrap__info-wrap__info__title'>
